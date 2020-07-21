@@ -1,4 +1,8 @@
-Field = {}
+local function toBoolean(value)
+  return value and true or false
+end
+
+local Field = {}
 
 function Field:new()
   self.__index = self
@@ -7,12 +11,14 @@ function Field:new()
   return setmetatable(field, self)
 end
 
-function Field:get(x, y)
-  local cell = {x = x, y = y}
-  return self.cells[cell]
+function Field:isContains(point)
+  local isContains =
+  	 self.cells[tostring(point)]
+  return toBoolean(isContains)
 end
 
-function Field:set(x, y)
-  local cell = {x = x, y = y}
-  self.cells[cell] = true
+function Field:set(point)
+  self.cells[tostring(point)] = true
 end
+
+return Field
