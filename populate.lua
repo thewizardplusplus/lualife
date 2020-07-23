@@ -23,4 +23,7 @@ end
 local function populate(field)
 end
 
-return populate
+return {
+  neighbors = neighbors,
+  populate = populate,
+}
