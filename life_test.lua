@@ -6,8 +6,7 @@ local luaunit = require(
 local Size = require(scriptPath .. 'size')
 local Point = require(scriptPath .. 'point')
 local Field = require(scriptPath .. 'field')
-local life =
-  require(scriptPath .. 'populate')
+local life = require(scriptPath .. 'life')
 
 TestNeighbors = {}
 
