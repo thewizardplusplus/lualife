@@ -21,4 +21,15 @@ function TestPoint:testToString()
   luaunit.assertEquals('(23, 42)', text)
 end
 
+function TestPoint:testTranslate()
+  local point = Point:new(5, 12)
+  local translatedPoint =
+    point:translate(Point:new(23, 42))
+
+  luaunit.assertEquals(
+    translatedPoint,
+    Point:new(28, 54)
+  )
+end
+
 os.exit(luaunit.run()) 

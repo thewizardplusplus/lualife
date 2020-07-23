@@ -15,4 +15,11 @@ function Point:__tostring()
   )
 end
 
+function Point:translate(point)
+  return Point:new(
+  	 self.x + point.x,
+  	 self.y + point.y
+  )
+end
+
 return Point
