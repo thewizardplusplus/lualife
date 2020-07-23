@@ -3,28 +3,31 @@ local scriptPath = scriptFile:match '.*/'
 local luaunit = require(
 	 scriptPath .. 'vendor/luaunit/luaunit'
 )
+local Size = require(scriptPath .. 'size')
 local Point = require(scriptPath .. 'point')
 local Field = require(scriptPath .. 'field')
 
 TestField = {}
 
 function TestField:testNew()
-  local field = Field:new()
+  local size = Size:new(23, 42)
+  local field = Field:new(size)
 
+  luaunit.assertEquals(field.size, size)
   luaunit.assertEquals(field.cells, {})
 end
 
-function TestField:testIsContains()
+function TestField:testContains()
   local field = Field:new()
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
   local point =
-  	 field:isContains(Point:new(2, 3))
+    field:contains(Point:new(2, 3))
   luaunit.assertEquals(point, true)
 
   local missedPoint =
-  	 field:isContains(Point:new(1, 2))
+    field:contains(Point:new(1, 2))
   luaunit.assertEquals(missedPoint, false)
 end
 

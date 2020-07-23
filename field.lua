@@ -4,17 +4,17 @@ end
 
 local Field = {}
 
-function Field:new()
+function Field:new(size)
   self.__index = self
 
-  local field = {cells = {}}
+  local field = {size = size, cells = {}}
   return setmetatable(field, self)
 end
 
-function Field:isContains(point)
-  local isContains =
+function Field:contains(point)
+  local contains =
   	 self.cells[tostring(point)]
-  return toBoolean(isContains)
+  return toBoolean(contains)
 end
 
 function Field:set(point)
