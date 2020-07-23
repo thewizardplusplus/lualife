@@ -19,6 +19,6 @@ function TestPoint:testToString()
   local text = tostring(point)
 
   luaunit.assertEquals('(23, 42)', text)
-end 
+end
 
 os.exit(luaunit.run()) 
