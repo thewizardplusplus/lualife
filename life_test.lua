@@ -45,7 +45,7 @@ function TestPopulate:testBlinker()
   )
 end
 
-function TestPopulate:testGlider()
+function TestPopulate:testGliderFull()
   local field = Field:new(Size:new(4, 4))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
@@ -62,6 +62,29 @@ function TestPopulate:testGlider()
   wantNextField:set(Point:new(1, 2))
   wantNextField:set(Point:new(2, 2))
   wantNextField:set(Point:new(1, 3))
+
+  luaunit.assertEquals(
+    nextField,
+    wantNextField
+  )
+end
+
+function TestPopulate:testGliderPartial()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(1, 0))
+  field:set(Point:new(2, 1))
+  field:set(Point:new(0, 2))
+  field:set(Point:new(1, 2))
+  field:set(Point:new(2, 2))
+
+  local nextField = life.populate(field)
+
+  local wantNextField =
+    Field:new(Size:new(3, 3))
+  wantNextField:set(Point:new(0, 1))
+  wantNextField:set(Point:new(2, 1))
+  wantNextField:set(Point:new(1, 2))
+  wantNextField:set(Point:new(2, 2))
 
   luaunit.assertEquals(
     nextField,

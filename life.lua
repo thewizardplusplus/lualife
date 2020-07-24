@@ -23,8 +23,8 @@ end
 
 local function populate(field)
   local nextField = Field:new(field.size)
-  for y = 0, field.size.height do
-    for x = 0, field.size.width do
+  for y = 0, field.size.height - 1 do
+    for x = 0, field.size.width - 1 do
       local point = Point:new(x, y)
       local neighbors =
         neighbors(field, point)
