@@ -1,13 +1,15 @@
-local Size = {}
+local scriptFile = arg[0]
+local scriptPath = scriptFile:match '.*/'
+local middleclass = require(
+	 scriptPath
+	   .. 'vendor/middleclass/middleclass'
+)
 
-function Size:new(width, height)
-  self.__index = self
+local Size = middleclass('Size')
 
-  local size = {
-    width = width,
-    height = height,
-  }
-  return setmetatable(size, self)
+function Size:initialize(width, height)
+  self.width = width
+  self.height = height
 end
 
 return Size

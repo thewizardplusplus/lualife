@@ -1,10 +1,15 @@
-local Point = {}
+local scriptFile = arg[0]
+local scriptPath = scriptFile:match '.*/'
+local middleclass = require(
+	 scriptPath
+	   .. 'vendor/middleclass/middleclass'
+)
 
-function Point:new(x, y)
-  self.__index = self
+local Point = middleclass('Point')
 
-  local point = {x = x, y = y}
-  return setmetatable(point, self)
+function Point:initialize(x, y)
+  self.x = x
+  self.y = y
 end
 
 function Point:__tostring()

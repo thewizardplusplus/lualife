@@ -1,14 +1,19 @@
+local scriptFile = arg[0]
+local scriptPath = scriptFile:match '.*/'
+local middleclass = require(
+	 scriptPath
+	   .. 'vendor/middleclass/middleclass'
+)
+
 local function toBoolean(value)
   return value and true or false
 end
 
-local Field = {}
+local Field = middleclass('Field')
 
-function Field:new(size)
-  self.__index = self
-
-  local field = {size = size, cells = {}}
-  return setmetatable(field, self)
+function Field:initialize(size)
+  self.size = size
+  self.cells = {}
 end
 
 function Field:contains(point)
