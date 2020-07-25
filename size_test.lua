@@ -1,13 +1,15 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
+local script_file = arg[0]
+local script_path = script_file:match(".*/")
+
 local luaunit = require(
-	 scriptPath .. 'vendor/luaunit/luaunit'
+	 script_path .. "vendor/luaunit/luaunit"
 )
-local Size = require(scriptPath .. 'size')
+
+local Size = require(script_path .. "size")
 
 TestSize = {}
 
-function TestSize:testNew()
+function TestSize.test_new()
   local size = Size:new(23, 42)
 
   luaunit.assertEquals(size.width, 23)

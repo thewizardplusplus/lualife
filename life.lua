@@ -1,47 +1,51 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
-local Point = require(scriptPath .. 'point')
-local Field = require(scriptPath .. 'field')
+local script_file = arg[0]
+local script_path = script_file:match(".*/")
 
-local function neighbors(field, point)
+local Point = require(
+  script_path .. "point"
+)
+local Field = require(
+  script_path .. "field"
+)
+
+local life = {}
+
+function life.neighbors(field, point)
   local neighbors = 0
   for dy = -1, 1 do
     for dx = -1, 1 do
-      local translatedPoint =
+      local translated_point =
         	point:translate(Point:new(dx, dy))
-      local central = dx == 0 and dy == 0
       local alive =
-        field:contains(translatedPoint)
-      if not central and alive then
+        field:contains(translated_point)
+      local central = dx == 0 and dy == 0
+      if alive and not central then
         neighbors = neighbors + 1
       end
     end
   end
-  
+
   return neighbors
 end
 
-local function populate(field)
-  local nextField = Field:new(field.size)
+function life.populate(field)
+  local next_field = Field:new(field.size)
   for y = 0, field.size.height - 1 do
     for x = 0, field.size.width - 1 do
       local point = Point:new(x, y)
       local neighbors =
-        neighbors(field, point)
+        life.neighbors(field, point)
       local alive = field:contains(point)
       if
         neighbors == 3
         or (neighbors == 2 and alive)
       then
-        nextField:set(point)
+        next_field:set(point)
       end
     end
   end
 
-  return nextField
+  return next_field
 end
 
-return {
-  neighbors = neighbors,
-  populate = populate,
-}
+return life

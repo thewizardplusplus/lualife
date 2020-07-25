@@ -1,12 +1,24 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
-local luaunit = require(
-	 scriptPath .. 'vendor/luaunit/luaunit'
+local script_file = arg[0]
+local script_path = script_file:match(
+  ".*/"
 )
-local Size = require(scriptPath .. 'size')
-local Point = require(scriptPath .. 'point')
-local Field = require(scriptPath .. 'field')
-local life = require(scriptPath .. 'life')
+
+local luaunit = require(
+	 script_path .. "vendor/luaunit/luaunit"
+)
+
+local Size = require(
+  script_path .. "size"
+)
+local Point = require(
+  script_path .. "point"
+)
+local Field = require(
+  script_path .. "field"
+)
+local life = require(
+  script_path .. "life"
+)
 
 TestNeighbors = {}
 
@@ -25,27 +37,27 @@ end
 
 TestPopulate = {}
 
-function TestPopulate:testBlinker()
+function TestPopulate:test_blinker()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
   field:set(Point:new(2, 1))
 
-  local nextField = life.populate(field)
+  local next_field = life.populate(field)
 
-  local wantNextField =
+  local want_next_field =
     Field:new(Size:new(3, 3))
-  wantNextField:set(Point:new(1, 0))
-  wantNextField:set(Point:new(1, 1))
-  wantNextField:set(Point:new(1, 2))
+  want_next_field:set(Point:new(1, 0))
+  want_next_field:set(Point:new(1, 1))
+  want_next_field:set(Point:new(1, 2))
 
   luaunit.assertEquals(
-    nextField,
-    wantNextField
+    next_field,
+    want_next_field
   )
 end
 
-function TestPopulate:testGliderFull()
+function TestPopulate:test_glider_full()
   local field = Field:new(Size:new(4, 4))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
@@ -53,23 +65,23 @@ function TestPopulate:testGliderFull()
   field:set(Point:new(1, 2))
   field:set(Point:new(2, 2))
 
-  local nextField = life.populate(field)
+  local next_field = life.populate(field)
 
-  local wantNextField =
+  local want_next_field =
     Field:new(Size:new(4, 4))
-  wantNextField:set(Point:new(0, 1))
-  wantNextField:set(Point:new(2, 1))
-  wantNextField:set(Point:new(1, 2))
-  wantNextField:set(Point:new(2, 2))
-  wantNextField:set(Point:new(1, 3))
+  want_next_field:set(Point:new(0, 1))
+  want_next_field:set(Point:new(2, 1))
+  want_next_field:set(Point:new(1, 2))
+  want_next_field:set(Point:new(2, 2))
+  want_next_field:set(Point:new(1, 3))
 
   luaunit.assertEquals(
-    nextField,
-    wantNextField
+    next_field,
+    want_next_field
   )
 end
 
-function TestPopulate:testGliderPartial()
+function TestPopulate:test_glider_partial()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
@@ -77,18 +89,18 @@ function TestPopulate:testGliderPartial()
   field:set(Point:new(1, 2))
   field:set(Point:new(2, 2))
 
-  local nextField = life.populate(field)
+  local next_field = life.populate(field)
 
-  local wantNextField =
+  local want_next_field =
     Field:new(Size:new(3, 3))
-  wantNextField:set(Point:new(0, 1))
-  wantNextField:set(Point:new(2, 1))
-  wantNextField:set(Point:new(1, 2))
-  wantNextField:set(Point:new(2, 2))
+  want_next_field:set(Point:new(0, 1))
+  want_next_field:set(Point:new(2, 1))
+  want_next_field:set(Point:new(1, 2))
+  want_next_field:set(Point:new(2, 2))
 
   luaunit.assertEquals(
-    nextField,
-    wantNextField
+    next_field,
+    want_next_field
   )
 end
 

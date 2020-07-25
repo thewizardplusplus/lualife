@@ -1,15 +1,21 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
+local script_file = arg[0]
+local script_path = script_file:match(".*/")
+
 local luaunit = require(
-	 scriptPath .. 'vendor/luaunit/luaunit'
+	 script_path .. "vendor/luaunit/luaunit"
 )
-local Size = require(scriptPath .. 'size')
-local Point = require(scriptPath .. 'point')
-local Field = require(scriptPath .. 'field')
+
+local Size = require(script_path .. "size")
+local Point = require(
+  script_path .. "point"
+)
+local Field = require(
+  script_path .. "field"
+)
 
 TestField = {}
 
-function TestField:testNew()
+function TestField:test_new()
   local size = Size:new(23, 42)
   local field = Field:new(size)
 
@@ -17,7 +23,7 @@ function TestField:testNew()
   luaunit.assertEquals(field.cells, {})
 end
 
-function TestField:testContains()
+function TestField:test_contains()
   local field = Field:new()
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
@@ -26,19 +32,19 @@ function TestField:testContains()
     field:contains(Point:new(2, 3))
   luaunit.assertEquals(point, true)
 
-  local missedPoint =
+  local missed_point =
     field:contains(Point:new(1, 2))
-  luaunit.assertEquals(missedPoint, false)
+  luaunit.assertEquals(missed_point, false)
 end
 
-function TestField:testSet()
+function TestField:test_set()
   local field = Field:new()
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
   luaunit.assertEquals(field.cells, {
-  	 ['(2, 3)'] = true,
-  	 ['(4, 2)'] = true,
+  	 ["(2, 3)"] = true,
+  	 ["(4, 2)"] = true,
   })
 end
 

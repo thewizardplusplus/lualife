@@ -1,11 +1,12 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
+local script_file = arg[0]
+local script_path = script_file:match(".*/")
+
 local middleclass = require(
-	 scriptPath
-	   .. 'vendor/middleclass/middleclass'
+	 script_path
+	   .. "vendor/middleclass/middleclass"
 )
 
-local Point = middleclass('Point')
+local Point = middleclass("Point")
 
 function Point:initialize(x, y)
   self.x = x
@@ -14,7 +15,7 @@ end
 
 function Point:__tostring()
   return string.format(
-  	 '(%d, %d)',
+  	 "(%d, %d)",
   	 self.x,
   	 self.y
   )

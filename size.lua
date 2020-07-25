@@ -1,11 +1,12 @@
-local scriptFile = arg[0]
-local scriptPath = scriptFile:match '.*/'
+local script_file = arg[0]
+local script_path = script_file:match(".*/")
+
 local middleclass = require(
-	 scriptPath
-	   .. 'vendor/middleclass/middleclass'
+	 script_path
+	   .. "vendor/middleclass/middleclass"
 )
 
-local Size = middleclass('Size')
+local Size = middleclass("Size")
 
 function Size:initialize(width, height)
   self.width = width
