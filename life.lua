@@ -11,6 +11,9 @@ local Field = require(
 local life = {}
 
 function life.neighbors(field, point)
+  assert(field:isInstanceOf(Field))
+  assert(point:isInstanceOf(Point))
+
   local neighbors = 0
   for dy = -1, 1 do
     for dx = -1, 1 do
@@ -29,6 +32,8 @@ function life.neighbors(field, point)
 end
 
 function life.populate(field)
+  assert(field:isInstanceOf(Field))
+
   local next_field = Field:new(field.size)
   for y = 0, field.size.height - 1 do
     for x = 0, field.size.width - 1 do

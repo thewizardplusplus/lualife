@@ -9,6 +9,9 @@ local middleclass = require(
 local Point = middleclass("Point")
 
 function Point:initialize(x, y)
+  assert(type(x) == "number")
+  assert(type(y) == "number")
+
   self.x = x
   self.y = y
 end
@@ -22,6 +25,8 @@ function Point:__tostring()
 end
 
 function Point:translate(point)
+  assert(point:isInstanceOf(Point))
+
   return Point:new(
   	 self.x + point.x,
   	 self.y + point.y

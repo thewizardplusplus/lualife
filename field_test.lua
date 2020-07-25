@@ -24,7 +24,8 @@ function TestField:test_new()
 end
 
 function TestField:test_contains()
-  local field = Field:new()
+  local size = Size:new(23, 42)
+  local field = Field:new(size)
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
@@ -38,7 +39,8 @@ function TestField:test_contains()
 end
 
 function TestField:test_set()
-  local field = Field:new()
+  local size = Size:new(23, 42)
+  local field = Field:new(size)
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
