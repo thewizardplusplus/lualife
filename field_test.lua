@@ -48,6 +48,4 @@ function TestField:test_set()
   	 ["(2, 3)"] = true,
   	 ["(4, 2)"] = true,
   })
-end
-
-os.exit(luaunit.run()) 
+end 

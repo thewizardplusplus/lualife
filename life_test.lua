@@ -102,6 +102,4 @@ function TestPopulate:test_glider_partial()
     next_field,
     want_next_field
   )
-end
-
-os.exit(luaunit.run()) 
+end 

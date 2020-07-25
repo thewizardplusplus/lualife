@@ -14,6 +14,4 @@ function TestSize.test_new()
 
   luaunit.assertEquals(size.width, 23)
   luaunit.assertEquals(size.height, 42)
-end
-
-os.exit(luaunit.run()) 
+end 

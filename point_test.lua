@@ -34,6 +34,4 @@ function TestPoint:test_translate()
     translated_point,
     Point:new(28, 54)
   )
-end
-
-os.exit(luaunit.run()) 
+end 
