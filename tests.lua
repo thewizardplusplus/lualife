@@ -1,9 +1,11 @@
 local script_file = arg[0]
 local script_path = script_file:match(".*/")
+package.path =
+  package.path .. ";"
+  .. script_path .. "?.lua"
 
-local luaunit = require(
-	 script_path .. "vendor/luaunit/luaunit"
-)
+local luaunit =
+  require("vendor.luaunit.luaunit")
 
 for _, module in ipairs({
   "size",

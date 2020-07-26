@@ -1,10 +1,5 @@
-local script_file = arg[0]
-local script_path = script_file:match(".*/")
-
-local middleclass = require(
-	 script_path
-	   .. "vendor/middleclass/middleclass"
-)
+local middleclass =
+  require("vendor.middleclass.middleclass")
 
 local Point = middleclass("Point")
 

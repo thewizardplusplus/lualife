@@ -1,13 +1,6 @@
-local script_file = arg[0]
-local script_path = script_file:match(".*/")
-
-local luaunit = require(
-	 script_path .. "vendor/luaunit/luaunit"
-)
-
-local Point = require(
-  script_path .. "point"
-)
+local luaunit =
+  require("vendor.luaunit.luaunit")
+local Point = require("point")
 
 TestPoint = {}
 

@@ -1,15 +1,7 @@
-local script_file = arg[0]
-local script_path = script_file:match(".*/")
-
-local middleclass = require(
-	 script_path
-	   .. "vendor/middleclass/middleclass"
-)
-
-local Size = require(script_path .. "size")
-local Point = require(
-  script_path .. "point"
-)
+local middleclass =
+  require("vendor.middleclass.middleclass")
+local Size = require("size")
+local Point = require("point")
 
 local function to_boolean(value)
   return value and true or false

@@ -1,12 +1,5 @@
-local script_file = arg[0]
-local script_path = script_file:match(".*/")
-
-local Point = require(
-  script_path .. "point"
-)
-local Field = require(
-  script_path .. "field"
-)
+local Point = require("point")
+local Field = require("field")
 
 local life = {}
 
