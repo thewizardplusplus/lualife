@@ -10,10 +10,8 @@ function life.neighbors(field, point)
   local neighbors = 0
   for dy = -1, 1 do
     for dx = -1, 1 do
-      local translated_point =
-        	point:translate(Point:new(dx, dy))
-      local alive =
-        field:contains(translated_point)
+      local translated_point =	point:translate(Point:new(dx, dy))
+      local alive = field:contains(translated_point)
       local central = dx == 0 and dy == 0
       if alive and not central then
         neighbors = neighbors + 1
@@ -31,13 +29,9 @@ function life.populate(field)
   for y = 0, field.size.height - 1 do
     for x = 0, field.size.width - 1 do
       local point = Point:new(x, y)
-      local neighbors =
-        life.neighbors(field, point)
+      local neighbors = life.neighbors(field, point)
       local alive = field:contains(point)
-      if
-        neighbors == 3
-        or (neighbors == 2 and alive)
-      then
+      if neighbors == 3 or (neighbors == 2 and alive) then
         next_field:set(point)
       end
     end

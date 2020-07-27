@@ -19,11 +19,7 @@ end
 
 function TestPoint:test_translate()
   local point = Point:new(5, 12)
-  local translated_point =
-    point:translate(Point:new(23, 42))
+  local translated_point = point:translate(Point:new(23, 42))
 
-  luaunit.assertEquals(
-    translated_point,
-    Point:new(28, 54)
-  )
+  luaunit.assertEquals(translated_point, Point:new(28, 54))
 end 

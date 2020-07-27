@@ -13,8 +13,7 @@ function TestNeighbors:test()
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
 
-  local neighbors =
-    life.neighbors(field, Point:new(1, 1))
+  local neighbors = life.neighbors(field, Point:new(1, 1))
 
   luaunit.assertEquals(neighbors, 3)
 end
@@ -29,16 +28,12 @@ function TestPopulate:test_blinker()
 
   local next_field = life.populate(field)
 
-  local want_next_field =
-    Field:new(Size:new(3, 3))
+  local want_next_field = Field:new(Size:new(3, 3))
   want_next_field:set(Point:new(1, 0))
   want_next_field:set(Point:new(1, 1))
   want_next_field:set(Point:new(1, 2))
 
-  luaunit.assertEquals(
-    next_field,
-    want_next_field
-  )
+  luaunit.assertEquals(next_field, want_next_field)
 end
 
 function TestPopulate:test_glider_full()
@@ -51,18 +46,14 @@ function TestPopulate:test_glider_full()
 
   local next_field = life.populate(field)
 
-  local want_next_field =
-    Field:new(Size:new(4, 4))
+  local want_next_field = Field:new(Size:new(4, 4))
   want_next_field:set(Point:new(0, 1))
   want_next_field:set(Point:new(2, 1))
   want_next_field:set(Point:new(1, 2))
   want_next_field:set(Point:new(2, 2))
   want_next_field:set(Point:new(1, 3))
 
-  luaunit.assertEquals(
-    next_field,
-    want_next_field
-  )
+  luaunit.assertEquals(next_field, want_next_field)
 end
 
 function TestPopulate:test_glider_partial()
@@ -75,15 +66,11 @@ function TestPopulate:test_glider_partial()
 
   local next_field = life.populate(field)
 
-  local want_next_field =
-    Field:new(Size:new(3, 3))
+  local want_next_field = Field:new(Size:new(3, 3))
   want_next_field:set(Point:new(0, 1))
   want_next_field:set(Point:new(2, 1))
   want_next_field:set(Point:new(1, 2))
   want_next_field:set(Point:new(2, 2))
 
-  luaunit.assertEquals(
-    next_field,
-    want_next_field
-  )
+  luaunit.assertEquals(next_field, want_next_field)
 end 

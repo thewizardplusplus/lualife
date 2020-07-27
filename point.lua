@@ -11,20 +11,13 @@ function Point:initialize(x, y)
 end
 
 function Point:__tostring()
-  return string.format(
-  	 "(%d, %d)",
-  	 self.x,
-  	 self.y
-  )
+  return string.format("(%d, %d)", self.x, self.y)
 end
 
 function Point:translate(point)
   assert(point:isInstanceOf(Point))
 
-  return Point:new(
-  	 self.x + point.x,
-  	 self.y + point.y
-  )
+  return Point:new(self.x + point.x, self.y + point.y)
 end
 
 return Point
