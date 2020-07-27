@@ -8,21 +8,36 @@ TestField = {}
 function TestField:test_new()
   local size = Size:new(23, 42)
   local field = Field:new(size)
+  
+  luaunit.assertTrue(field:isInstanceOf(Field))
 
-  luaunit.assertEquals(field.size, size)
+  luaunit.assertTrue(field.size:isInstanceOf(Size))
+  luaunit.assertIs(field.size, size)
+
+  luaunit.assertIsTable(field.cells)
   luaunit.assertEquals(field.cells, {})
 end
 
-function TestField:test_contains()
+function TestField:test_contains_false()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
-  local point = field:contains(Point:new(2, 3))
-  luaunit.assertEquals(point, true)
+  local contains = field:contains(Point:new(1, 2))
+  
+  luaunit.assertIsBoolean(contains)
+  luaunit.assertFalse(contains)
+end
 
-  local missed_point = field:contains(Point:new(1, 2))
-  luaunit.assertEquals(missed_point, false)
+function TestField:test_contains_true()
+  local field = Field:new(Size:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(4, 2))
+
+  local contains = field:contains(Point:new(2, 3))
+  
+  luaunit.assertIsBoolean(contains)
+  luaunit.assertTrue(contains)
 end
 
 function TestField:test_set()
