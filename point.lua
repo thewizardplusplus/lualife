@@ -1,4 +1,4 @@
-local middleclass = require("lualife.vendor.middleclass.middleclass")
+local middleclass = require("middleclass")
 
 local Point = middleclass("Point")
 

@@ -1,4 +1,4 @@
-local luaunit = require("lualife.vendor.luaunit.luaunit")
+local luaunit = require("luaunit")
 
 for _, module in ipairs({
   "size",
