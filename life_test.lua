@@ -1,9 +1,8 @@
-local luaunit =
-  require("vendor.luaunit.luaunit")
-local Size = require("size")
-local Point = require("point")
-local Field = require("field")
-local life = require("life")
+local luaunit = require("lualife.vendor.luaunit.luaunit")
+local Size = require("lualife.size")
+local Point = require("lualife.point")
+local Field = require("lualife.field")
+local life = require("lualife.life")
 
 TestNeighbors = {}
 

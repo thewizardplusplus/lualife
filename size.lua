@@ -1,5 +1,4 @@
-local middleclass =
-  require("vendor.middleclass.middleclass")
+local middleclass = require("lualife.vendor.middleclass.middleclass")
 
 local Size = middleclass("Size")
 

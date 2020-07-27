@@ -1,6 +1,5 @@
-local luaunit =
-  require("vendor.luaunit.luaunit")
-local Size = require("size")
+local luaunit = require("lualife.vendor.luaunit.luaunit")
+local Size = require("lualife.size")
 
 TestSize = {}
 

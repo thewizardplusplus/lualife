@@ -1,11 +1,4 @@
-local script_file = arg[0]
-local script_path = script_file:match(".*/")
-package.path =
-  package.path .. ";"
-  .. script_path .. "?.lua"
-
-local luaunit =
-  require("vendor.luaunit.luaunit")
+local luaunit = require("lualife.vendor.luaunit.luaunit")
 
 for _, module in ipairs({
   "size",
@@ -13,7 +6,7 @@ for _, module in ipairs({
   "field",
   "life",
 }) do
-  require(script_path .. module .. "_test")
+  require("lualife." .. module .. "_test")
 end
 
 os.exit(luaunit.run())

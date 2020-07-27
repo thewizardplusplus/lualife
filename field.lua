@@ -1,7 +1,6 @@
-local middleclass =
-  require("vendor.middleclass.middleclass")
-local Size = require("size")
-local Point = require("point")
+local middleclass = require("lualife.vendor.middleclass.middleclass")
+local Size = require("lualife.size")
+local Point = require("lualife.point")
 
 local function to_boolean(value)
   return value and true or false
