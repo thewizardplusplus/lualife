@@ -9,7 +9,7 @@ local life = {}
 ---
 -- @tparam Field field
 -- @tparam Point point
--- @return number
+-- @treturn int
 function life.neighbors(field, point)
   assert(field:isInstanceOf(Field))
   assert(point:isInstanceOf(Point))
@@ -31,7 +31,7 @@ end
 
 ---
 -- @tparam Field field
--- @return Field
+-- @treturn Field
 function life.populate(field)
   assert(field:isInstanceOf(Field))
 

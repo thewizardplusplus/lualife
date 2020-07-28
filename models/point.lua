@@ -17,14 +17,14 @@ function Point:initialize(x, y)
 end
 
 ---
--- @return string
+-- @treturn string
 function Point:__tostring()
   return string.format("(%d, %d)", self.x, self.y)
 end
 
 ---
 -- @tparam Point point
--- @return Point
+-- @treturn Point
 function Point:translate(point)
   assert(point:isInstanceOf(Point))
 

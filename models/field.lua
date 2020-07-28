@@ -22,7 +22,7 @@ end
 
 ---
 -- @tparam Point point
--- @return boolean
+-- @treturn bool
 function Field:contains(point)
   assert(point:isInstanceOf(Point))
 
