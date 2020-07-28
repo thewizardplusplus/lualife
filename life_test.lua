@@ -6,7 +6,7 @@ local life = require("lualife.life")
 
 TestNeighbors = {}
 
-function TestNeighbors:test()
+function TestNeighbors.test()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 0))
   field:set(Point:new(1, 0))
@@ -21,7 +21,7 @@ end
 
 TestPopulate = {}
 
-function TestPopulate:test_blinker()
+function TestPopulate.test_blinker()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
@@ -38,7 +38,7 @@ function TestPopulate:test_blinker()
   luaunit.assert_equals(next_field, want_next_field)
 end
 
-function TestPopulate:test_glider_full()
+function TestPopulate.test_glider_full()
   local field = Field:new(Size:new(4, 4))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
@@ -59,7 +59,7 @@ function TestPopulate:test_glider_full()
   luaunit.assert_equals(next_field, want_next_field)
 end
 
-function TestPopulate:test_glider_partial()
+function TestPopulate.test_glider_partial()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))

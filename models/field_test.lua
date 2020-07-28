@@ -5,7 +5,7 @@ local Field = require("lualife.models.field")
 
 TestField = {}
 
-function TestField:test_new()
+function TestField.test_new()
   local size = Size:new(23, 42)
   local field = Field:new(size)
 
@@ -18,7 +18,7 @@ function TestField:test_new()
   luaunit.assert_equals(field.cells, {})
 end
 
-function TestField:test_contains_false()
+function TestField.test_contains_false()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
@@ -29,7 +29,7 @@ function TestField:test_contains_false()
   luaunit.assert_false(contains)
 end
 
-function TestField:test_contains_true()
+function TestField.test_contains_true()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
@@ -40,7 +40,7 @@ function TestField:test_contains_true()
   luaunit.assert_true(contains)
 end
 
-function TestField:test_set()
+function TestField.test_set()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))

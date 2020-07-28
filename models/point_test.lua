@@ -3,7 +3,7 @@ local Point = require("lualife.models.point")
 
 TestPoint = {}
 
-function TestPoint:test_new()
+function TestPoint.test_new()
   local point = Point:new(23, 42)
 
   luaunit.assert_true(point:isInstanceOf(Point))
@@ -15,7 +15,7 @@ function TestPoint:test_new()
   luaunit.assert_equals(point.y, 42)
 end
 
-function TestPoint:test_tostring()
+function TestPoint.test_tostring()
   local point = Point:new(23, 42)
   local text = tostring(point)
 
@@ -23,7 +23,7 @@ function TestPoint:test_tostring()
   luaunit.assert_equals(text, "(23, 42)")
 end
 
-function TestPoint:test_translate()
+function TestPoint.test_translate()
   local point = Point:new(5, 12)
   local translated_point = point:translate(Point:new(23, 42))
 
