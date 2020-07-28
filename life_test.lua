@@ -77,4 +77,4 @@ function TestPopulate:test_glider_partial()
 
   luaunit.assert_true(next_field:isInstanceOf(Field))
   luaunit.assert_equals(next_field, want_next_field)
-end 
+end

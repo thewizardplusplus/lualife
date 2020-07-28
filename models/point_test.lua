@@ -5,7 +5,7 @@ TestPoint = {}
 
 function TestPoint:test_new()
   local point = Point:new(23, 42)
-  
+
   luaunit.assert_true(point:isInstanceOf(Point))
 
   luaunit.assert_is_number(point.x)
@@ -29,4 +29,4 @@ function TestPoint:test_translate()
 
   luaunit.assert_true(translated_point:isInstanceOf(Point))
   luaunit.assert_equals(translated_point, Point:new(28, 54))
-end 
+end

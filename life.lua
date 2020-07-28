@@ -14,7 +14,7 @@ function life.neighbors(field, point)
   local neighbors = 0
   for dy = -1, 1 do
     for dx = -1, 1 do
-      local translated_point =	point:translate(Point:new(dx, dy))
+      local translated_point = point:translate(Point:new(dx, dy))
       local alive = field:contains(translated_point)
       local central = dx == 0 and dy == 0
       if alive and not central then
