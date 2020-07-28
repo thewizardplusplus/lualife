@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local Point = require("lualife.point")
+local Point = require("lualife.models.point")
 
 TestPoint = {}
 

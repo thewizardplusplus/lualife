@@ -1,7 +1,7 @@
 local luaunit = require("luaunit")
-local Size = require("lualife.size")
-local Point = require("lualife.point")
-local Field = require("lualife.field")
+local Size = require("lualife.models.size")
+local Point = require("lualife.models.point")
+local Field = require("lualife.models.field")
 
 TestField = {}
 

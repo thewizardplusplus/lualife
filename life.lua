@@ -1,5 +1,5 @@
-local Point = require("lualife.point")
-local Field = require("lualife.field")
+local Point = require("lualife.models.point")
+local Field = require("lualife.models.field")
 
 local life = {}
 

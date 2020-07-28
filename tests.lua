@@ -1,9 +1,9 @@
 local luaunit = require("luaunit")
 
 for _, module in ipairs({
-  "size",
-  "point",
-  "field",
+  "models.size",
+  "models.point",
+  "models.field",
   "life",
 }) do
   require("lualife." .. module .. "_test")

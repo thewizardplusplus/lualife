@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local Size = require("lualife.size")
+local Size = require("lualife.models.size")
 
 TestSize = {}
 
