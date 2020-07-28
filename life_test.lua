@@ -15,8 +15,8 @@ function TestNeighbors:test()
 
   local neighbors = life.neighbors(field, Point:new(1, 1))
 
-  luaunit.assertIsNumber(neighbors)
-  luaunit.assertEquals(neighbors, 3)
+  luaunit.assert_is_number(neighbors)
+  luaunit.assert_equals(neighbors, 3)
 end
 
 TestPopulate = {}
@@ -34,8 +34,8 @@ function TestPopulate:test_blinker()
   want_next_field:set(Point:new(1, 1))
   want_next_field:set(Point:new(1, 2))
 
-  luaunit.assertTrue(next_field:isInstanceOf(Field))
-  luaunit.assertEquals(next_field, want_next_field)
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
 end
 
 function TestPopulate:test_glider_full()
@@ -55,8 +55,8 @@ function TestPopulate:test_glider_full()
   want_next_field:set(Point:new(2, 2))
   want_next_field:set(Point:new(1, 3))
 
-  luaunit.assertTrue(next_field:isInstanceOf(Field))
-  luaunit.assertEquals(next_field, want_next_field)
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
 end
 
 function TestPopulate:test_glider_partial()
@@ -75,6 +75,6 @@ function TestPopulate:test_glider_partial()
   want_next_field:set(Point:new(1, 2))
   want_next_field:set(Point:new(2, 2))
 
-  luaunit.assertTrue(next_field:isInstanceOf(Field))
-  luaunit.assertEquals(next_field, want_next_field)
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
 end 
