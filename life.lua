@@ -3,6 +3,10 @@ local Field = require("lualife.models.field")
 
 local life = {}
 
+---
+-- @param field Field
+-- @param point Point
+-- @return number
 function life.neighbors(field, point)
   assert(field:isInstanceOf(Field))
   assert(point:isInstanceOf(Point))
@@ -22,6 +26,9 @@ function life.neighbors(field, point)
   return neighbors
 end
 
+---
+-- @param field Field
+-- @return Field
 function life.populate(field)
   assert(field:isInstanceOf(Field))
 

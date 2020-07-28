@@ -8,6 +8,8 @@ end
 
 local Field = middleclass("Field")
 
+---
+-- @param size Size
 function Field:initialize(size)
   assert(size:isInstanceOf(Size))
 
@@ -15,6 +17,9 @@ function Field:initialize(size)
   self.cells = {}
 end
 
+---
+-- @param point Point
+-- @return boolean
 function Field:contains(point)
   assert(point:isInstanceOf(Point))
 
@@ -22,6 +27,8 @@ function Field:contains(point)
   return to_boolean(contains)
 end
 
+---
+-- @param point Point
 function Field:set(point)
   assert(point:isInstanceOf(Point))
 
