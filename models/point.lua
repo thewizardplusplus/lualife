@@ -6,8 +6,8 @@ local middleclass = require("middleclass")
 local Point = middleclass("Point")
 
 ---
--- @param x number
--- @param y number
+-- @tparam int x
+-- @tparam int y
 function Point:initialize(x, y)
   assert(type(x) == "number")
   assert(type(y) == "number")
@@ -23,7 +23,7 @@ function Point:__tostring()
 end
 
 ---
--- @param point Point
+-- @tparam Point point
 -- @return Point
 function Point:translate(point)
   assert(point:isInstanceOf(Point))
