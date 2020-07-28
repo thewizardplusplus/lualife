@@ -4,6 +4,7 @@ local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local life = require("lualife.life")
 
+-- luacheck: globals TestNeighbors
 TestNeighbors = {}
 
 function TestNeighbors.test()
@@ -19,6 +20,7 @@ function TestNeighbors.test()
   luaunit.assert_equals(neighbors, 3)
 end
 
+-- luacheck: globals TestPopulate
 TestPopulate = {}
 
 function TestPopulate.test_blinker()

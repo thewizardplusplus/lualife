@@ -3,6 +3,7 @@ local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
+-- luacheck: globals TestField
 TestField = {}
 
 function TestField.test_new()

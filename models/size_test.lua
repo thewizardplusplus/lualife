@@ -1,6 +1,7 @@
 local luaunit = require("luaunit")
 local Size = require("lualife.models.size")
 
+-- luacheck: globals TestSize
 TestSize = {}
 
 function TestSize.test_new()

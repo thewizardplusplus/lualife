@@ -1,6 +1,7 @@
 local luaunit = require("luaunit")
 local Point = require("lualife.models.point")
 
+-- luacheck: globals TestPoint
 TestPoint = {}
 
 function TestPoint.test_new()
