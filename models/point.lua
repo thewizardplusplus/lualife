@@ -6,8 +6,10 @@ local middleclass = require("middleclass")
 local Point = middleclass("Point")
 
 ---
+-- @function new
 -- @tparam int x
 -- @tparam int y
+-- @treturn Point
 function Point:initialize(x, y)
   assert(type(x) == "number")
   assert(type(y) == "number")

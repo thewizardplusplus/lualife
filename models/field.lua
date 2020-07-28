@@ -12,7 +12,9 @@ end
 local Field = middleclass("Field")
 
 ---
+-- @function new
 -- @tparam Size size
+-- @treturn Field
 function Field:initialize(size)
   assert(size:isInstanceOf(Size))
 
