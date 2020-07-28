@@ -1,3 +1,6 @@
+---
+-- @classmod Field
+
 local middleclass = require("middleclass")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")

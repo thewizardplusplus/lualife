@@ -1,3 +1,6 @@
+---
+-- @classmod Point
+
 local middleclass = require("middleclass")
 
 local Point = middleclass("Point")

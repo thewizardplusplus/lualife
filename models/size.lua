@@ -1,3 +1,6 @@
+---
+-- @classmod Size
+
 local middleclass = require("middleclass")
 
 local Size = middleclass("Size")

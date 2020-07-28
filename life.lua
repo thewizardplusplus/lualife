@@ -1,3 +1,6 @@
+---
+-- @module life
+
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
