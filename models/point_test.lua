@@ -31,3 +31,11 @@ function TestPoint.test_translate()
   luaunit.assert_true(translated_point:isInstanceOf(Point))
   luaunit.assert_equals(translated_point, Point:new(28, 54))
 end
+
+function TestPoint.test_scale()
+  local point = Point:new(5, 12)
+  local scaled_point = point:scale(Point:new(23, 42))
+
+  luaunit.assert_true(scaled_point:isInstanceOf(Point))
+  luaunit.assert_equals(scaled_point, Point:new(115, 504))
+end
