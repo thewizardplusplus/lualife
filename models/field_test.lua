@@ -51,3 +51,46 @@ function TestField.test_set()
     ["(4, 2)"] = true,
   })
 end
+
+function TestField.test_map_point()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(0, 1))
+  field:set(Point:new(1, 1))
+  field:set(Point:new(2, 1))
+
+  local next_field = field:map(function(point, contains)
+    return point.x <= field.size.width / 2
+      and point.y <= field.size.height / 2
+  end)
+
+  local want_next_field = Field:new(Size:new(3, 3))
+  want_next_field:set(Point:new(0, 0))
+  want_next_field:set(Point:new(1, 0))
+  want_next_field:set(Point:new(0, 1))
+  want_next_field:set(Point:new(1, 1))
+
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
+end
+
+function TestField.test_map_contains()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(0, 1))
+  field:set(Point:new(1, 1))
+  field:set(Point:new(2, 1))
+
+  local next_field = field:map(function(point, contains)
+    return not contains
+  end)
+
+  local want_next_field = Field:new(Size:new(3, 3))
+  want_next_field:set(Point:new(0, 0))
+  want_next_field:set(Point:new(1, 0))
+  want_next_field:set(Point:new(2, 0))
+  want_next_field:set(Point:new(0, 2))
+  want_next_field:set(Point:new(1, 2))
+  want_next_field:set(Point:new(2, 2))
+
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
+end
