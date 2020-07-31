@@ -5,6 +5,7 @@ for _, module in ipairs({
   "models.point",
   "models.field",
   "life",
+  "random",
 }) do
   require("lualife." .. module .. "_test")
 end
