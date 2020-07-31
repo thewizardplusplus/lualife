@@ -42,15 +42,13 @@ local life = require("lualife.life")
 local function print_field(field)
   assert(field:isInstanceOf(Field))
 
-  for y = 0, field.size.height - 1 do
-    for x = 0, field.size.width - 1 do
-      local point = Point:new(x, y)
-      local alive = field:contains(point)
-      io.write(alive and "O" or ".")
-    end
+  field:map(function(point, contains)
+    io.write(contains and "O" or ".")
 
-    io.write("\n")
-  end
+    if point.x == field.size.width - 1 then
+      io.write("\n")
+    end
+  end)
 end
 
 local function sleep(seconds)
