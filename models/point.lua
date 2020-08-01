@@ -34,12 +34,12 @@ function Point:translate(point)
 end
 
 ---
--- @tparam Point point
+-- @tparam number factor
 -- @treturn Point
-function Point:scale(point)
-  assert(point:isInstanceOf(Point))
+function Point:scale(factor)
+  assert(type(factor) == "number")
 
-  return Point:new(self.x * point.x, self.y * point.y)
+  return Point:new(self.x * factor, self.y * factor)
 end
 
 return Point

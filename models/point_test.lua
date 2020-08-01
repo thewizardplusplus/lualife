@@ -34,8 +34,8 @@ end
 
 function TestPoint.test_scale()
   local point = Point:new(5, 12)
-  local scaled_point = point:scale(Point:new(23, 42))
+  local scaled_point = point:scale(23)
 
   luaunit.assert_true(scaled_point:isInstanceOf(Point))
-  luaunit.assert_equals(scaled_point, Point:new(115, 504))
+  luaunit.assert_equals(scaled_point, Point:new(115, 276))
 end
