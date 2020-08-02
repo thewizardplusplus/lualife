@@ -1,6 +1,6 @@
 rockspec_format = "3.0"
 package = "lualife"
-version = "1.0-1"
+version = "1.1-1"
 description = {
   license = "MIT",
   maintainer = "thewizardplusplus <thewizardplusplus@yandex.ru>",
@@ -8,7 +8,7 @@ description = {
 }
 source = {
   url = "git+https://github.com/thewizardplusplus/lualife.git",
-  tag = "v1.0",
+  tag = "v1.1",
 }
 dependencies = {
   "lua >= 5.2, < 5.4",
@@ -20,6 +20,8 @@ test_dependencies = {
 build = {
   type = "builtin",
   modules = {
+    ["random"] = "random.lua",
+    ["random_test"] = "random_test.lua",
     ["life"] = "life.lua",
     ["life_test"] = "life_test.lua",
     ["models.size"] = "models/size.lua",
