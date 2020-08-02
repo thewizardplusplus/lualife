@@ -74,7 +74,6 @@ end
 
 ```lua
 local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local random = require("lualife.random")
 local life = require("lualife.life")

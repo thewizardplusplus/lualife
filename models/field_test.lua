@@ -58,7 +58,7 @@ function TestField.test_map_point()
   field:set(Point:new(1, 1))
   field:set(Point:new(2, 1))
 
-  local next_field = field:map(function(point, contains)
+  local next_field = field:map(function(point)
     return point.x <= field.size.width / 2
       and point.y <= field.size.height / 2
   end)
@@ -79,7 +79,7 @@ function TestField.test_map_contains()
   field:set(Point:new(1, 1))
   field:set(Point:new(2, 1))
 
-  local next_field = field:map(function(point, contains)
+  local next_field = field:map(function(_, contains)
     return not contains
   end)
 

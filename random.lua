@@ -16,7 +16,7 @@ function random.generate(size, filling)
 
   return Field
     :new(size)
-    :map(function(point, contains)
+    :map(function()
       return math.random() < filling
     end)
 end
