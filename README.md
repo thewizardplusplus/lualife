@@ -8,9 +8,13 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
   - size;
   - point:
     - supporting of translation;
+    - supporting of scaling;
     - supporting of textual representation;
   - field:
     - storing only of set cells;
+    - supporting of mapping;
+- generating of random field:
+  - customizable filling factor;
 - populating of a field according to [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) rules:
   - using of the naive algorithm with iterating and copying of a whole field.
 
