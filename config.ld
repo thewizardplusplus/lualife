@@ -1,13 +1,10 @@
 project = "lualife"
 file = {
+  "random.lua",
   "life.lua",
-  "models",
-
-  exclude = {
-    "models/size_test.lua",
-    "models/point_test.lua",
-    "models/field_test.lua",
-  },
+  "models/size.lua",
+  "models/point.lua",
+  "models/field.lua",
 }
 topics = {
   "README.md",

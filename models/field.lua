@@ -41,7 +41,7 @@ function Field:set(point)
 end
 
 ---
--- @tparam func operation
+-- @param operation func(point: Point, contains: bool): bool
 -- @treturn Field
 function Field:map(operation)
   assert(type(operation) == "function")

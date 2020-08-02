@@ -19,7 +19,7 @@ function Point:initialize(x, y)
 end
 
 ---
--- @treturn string
+-- @treturn string e.g. "(23, 42)"
 function Point:__tostring()
   return string.format("(%g, %g)", self.x, self.y)
 end

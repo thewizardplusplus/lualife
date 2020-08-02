@@ -8,7 +8,7 @@ local random = {}
 
 ---
 -- @tparam Size size
--- @tparam number filling
+-- @tparam number filling [0, 1]
 -- @treturn Field
 function random.generate(size, filling)
   assert(size:isInstanceOf(Size))
