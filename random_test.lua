@@ -3,10 +3,10 @@ local Size = require("lualife.models.size")
 local Field = require("lualife.models.field")
 local random = require("lualife.random")
 
--- luacheck: globals TestGenerate
-TestGenerate = {}
+-- luacheck: globals TestRandom
+TestRandom = {}
 
-function TestGenerate.test_small_filling()
+function TestRandom.test_generate_small_filling()
   math.randomseed(1)
 
   local size = Size:new(3, 3)
@@ -23,7 +23,7 @@ function TestGenerate.test_small_filling()
   })
 end
 
-function TestGenerate.test_large_filling()
+function TestRandom.test_generate_large_filling()
   math.randomseed(1)
 
   local size = Size:new(3, 3)
@@ -47,7 +47,7 @@ function TestGenerate.test_large_filling()
   })
 end
 
-function TestGenerate.test_generate_with_limit()
+function TestRandom.test_generate_with_limit()
   math.randomseed(1)
 
   local size = Size:new(3, 3)
