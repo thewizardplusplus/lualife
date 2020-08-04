@@ -46,3 +46,28 @@ function TestGenerate.test_large_filling()
     ["(2, 2)"] = true,
   })
 end
+
+function TestGenerate.test_generate_with_limit()
+  math.randomseed(1)
+
+  local size = Size:new(3, 3)
+  local field = random.generate_with_limit(size, 0.5, 9)
+
+  luaunit.assert_true(field:isInstanceOf(Field))
+
+  luaunit.assert_true(field.size:isInstanceOf(Size))
+  luaunit.assert_is(field.size, size)
+
+  luaunit.assert_is_table(field.cells)
+  luaunit.assert_equals(field.cells, {
+    ["(0, 0)"] = true,
+    ["(1, 0)"] = true,
+    ["(2, 0)"] = true,
+    ["(0, 1)"] = true,
+    ["(1, 1)"] = true,
+    ["(2, 1)"] = true,
+    ["(0, 2)"] = true,
+    ["(1, 2)"] = true,
+    ["(2, 2)"] = true,
+  })
+end
