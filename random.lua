@@ -34,15 +34,22 @@ end
 -- @tparam Size size
 -- @tparam number filling [0, 1]
 -- @tparam int minimal_count
+-- @tparam int maximal_count
 -- @treturn Field
-function random.generate_with_limit(size, filling, minimal_count)
+function random.generate_with_limits(
+  size,
+  filling,
+  minimal_count,
+  maximal_count
+)
   assert(size:isInstanceOf(Size))
   assert(type(filling) == "number")
   assert(type(minimal_count) == "number")
+  assert(type(maximal_count) == "number")
 
   local field = Field:new(size)
   local count = 0
-  while count < minimal_count do
+  while count < minimal_count or count > maximal_count do
     field = random.generate(size, filling)
     count = length(field.cells)
   end
