@@ -33,8 +33,8 @@ end
 ---
 -- @tparam Size size
 -- @tparam number filling [0, 1]
--- @tparam int minimal_count
--- @tparam int maximal_count
+-- @tparam int minimal_count [0, size.width * size.height]
+-- @tparam int maximal_count [0, size.width * size.height]
 -- @treturn Field
 function random.generate_with_limits(
   size,

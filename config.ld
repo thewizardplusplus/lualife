@@ -1,6 +1,7 @@
 project = "lualife"
 file = {
   "random.lua",
+  "sets.lua",
   "life.lua",
   "models/size.lua",
   "models/point.lua",
