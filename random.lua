@@ -5,12 +5,12 @@ local Size = require("lualife.models.size")
 local Field = require("lualife.models.field")
 
 local function length(table)
-  local length = 0
+  local count = 0
   for _ in pairs(table) do
-    length = length + 1
+    count = count + 1
   end
 
-  return length
+  return count
 end
 
 local random = {}

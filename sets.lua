@@ -22,8 +22,8 @@ function sets.union(base, additional, offset)
       return true
     end
 
-    local offsetted_point = point:translate(inverted_offset)
-    return additional:contains(offsetted_point)
+    local shifted_point = point:translate(inverted_offset)
+    return additional:contains(shifted_point)
   end)
 end
 
