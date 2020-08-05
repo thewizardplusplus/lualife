@@ -42,6 +42,42 @@ $ luarocks make
 
 ## Examples
 
+`lualife.sets.union()`:
+
+```lua
+local Size = require("lualife.models.size")
+local Point = require("lualife.models.point")
+local Field = require("lualife.models.field")
+local sets = require("lualife.sets")
+
+local function print_field(field)
+  assert(field:isInstanceOf(Field))
+
+  field:map(function(point, contains)
+    io.write(contains and "O" or ".")
+
+    if point.x == field.size.width - 1 then
+      io.write("\n")
+    end
+  end)
+end
+
+local glider = Field:new(Size:new(3, 3))
+glider:set(Point:new(1, 0))
+glider:set(Point:new(2, 1))
+glider:set(Point:new(0, 2))
+glider:set(Point:new(1, 2))
+glider:set(Point:new(2, 2))
+
+local blinker = Field:new(Size:new(3, 3))
+blinker:set(Point:new(1, 0))
+blinker:set(Point:new(1, 1))
+blinker:set(Point:new(1, 2))
+
+local unioned_field = sets.union(glider, blinker, Point:new(-1, 0))
+print_field(unioned_field)
+```
+
 `lualife.life.populate()`:
 
 ```lua
