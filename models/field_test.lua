@@ -19,6 +19,25 @@ function TestField.test_new()
   luaunit.assert_equals(field.cells, {})
 end
 
+function TestField.test_count_empty()
+  local field = Field:new(Size:new(23, 42))
+  local count = field:count()
+
+  luaunit.assert_is_number(count)
+  luaunit.assert_equals(count, 0)
+end
+
+function TestField.test_count_nonempty()
+  local field = Field:new(Size:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(4, 2))
+
+  local count = field:count()
+
+  luaunit.assert_is_number(count)
+  luaunit.assert_equals(count, 2)
+end
+
 function TestField.test_contains_false()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
