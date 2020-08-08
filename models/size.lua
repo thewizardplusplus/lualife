@@ -18,4 +18,18 @@ function Size:initialize(width, height)
   self.height = height
 end
 
+---
+-- @tparam Size size
+-- @tparam Point offset
+-- @treturn bool
+function Size:contains(other, offset)
+  assert(other:isInstanceOf(Size))
+  assert(offset:isInstanceOf(Point))
+
+  return offset.x >= 0
+    and offset.x <= self.width - other.width
+    and offset.y >= 0
+    and offset.y <= self.height - other.height
+end
+
 return Size
