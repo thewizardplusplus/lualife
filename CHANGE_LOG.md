@@ -2,7 +2,7 @@
 
 ## [v1.2](https://github.com/thewizardplusplus/lualife/tree/v1.2) (2020-08-05)
 
-- generating of random field:
+- generating of a random field:
   - limiting by a cell count:
     - lower limit;
     - upper limit;
@@ -18,7 +18,7 @@
     - supporting of scaling;
   - field:
     - supporting of mapping;
-- generating of random field:
+- generating of a random field:
   - customizable filling factor.
 
 ## [v1.0](https://github.com/thewizardplusplus/lualife/tree/v1.0) (2020-07-28)

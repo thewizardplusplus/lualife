@@ -13,7 +13,7 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
   - field:
     - storing only of set cells;
     - supporting of mapping;
-- generating of random field:
+- generating of a random field:
   - customizable filling factor;
   - limiting by a cell count:
     - lower limit;
