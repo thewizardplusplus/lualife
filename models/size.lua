@@ -2,6 +2,7 @@
 -- @classmod Size
 
 local middleclass = require("middleclass")
+local Point = require("lualife.models.point")
 
 local Size = middleclass("Size")
 
@@ -19,7 +20,7 @@ function Size:initialize(width, height)
 end
 
 ---
--- @tparam Size size
+-- @tparam Size other
 -- @tparam Point offset
 -- @treturn bool
 function Size:contains(other, offset)
