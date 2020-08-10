@@ -66,3 +66,19 @@ function TestSets.test_complement()
   luaunit.assert_true(complemented_field:isInstanceOf(Field))
   luaunit.assert_equals(complemented_field, want_complemented_field)
 end
+
+function TestSets.test_intersection()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(0, 0))
+  field:set(Point:new(1, 0))
+  field:set(Point:new(0, 1))
+  field:set(Point:new(1, 1))
+
+  local intersected_field = sets.intersection(field, field, Point:new(1, 1))
+
+  local want_intersected_field = Field:new(Size:new(3, 3))
+  want_intersected_field:set(Point:new(1, 1))
+
+  luaunit.assert_true(intersected_field:isInstanceOf(Field))
+  luaunit.assert_equals(intersected_field, want_intersected_field)
+end
