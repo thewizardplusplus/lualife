@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.3](https://github.com/thewizardplusplus/lualife/tree/v1.3) (2020-08-10)
+
+- models:
+  - size:
+    - supporting of checking if an other size with offset fits inside;
+  - field:
+    - supporting of counting of set cells;
+- operations with fields as with sets:
+  - complement of fields:
+    - supporting an offset for the second operand;
+  - intersection of fields:
+    - supporting an offset for the second operand.
+
 ## [v1.2](https://github.com/thewizardplusplus/lualife/tree/v1.2) (2020-08-05)
 
 - generating of a random field:
