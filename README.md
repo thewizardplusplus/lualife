@@ -49,7 +49,7 @@ $ luarocks make
 
 ## Examples
 
-`lualife.sets.union()`:
+`lualife.sets`:
 
 ```lua
 local Size = require("lualife.models.size")
@@ -67,6 +67,8 @@ local function print_field(field)
       io.write("\n")
     end
   end)
+
+  io.write("\n")
 end
 
 local glider = Field:new(Size:new(3, 3))
@@ -83,6 +85,12 @@ blinker:set(Point:new(1, 2))
 
 local unioned_field = sets.union(glider, blinker, Point:new(-1, 0))
 print_field(unioned_field)
+
+local complemented_field = sets.complement(glider, blinker, Point:new(-1, 0))
+print_field(complemented_field)
+
+local intersected_field = sets.intersection(glider, blinker, Point:new(-1, 0))
+print_field(intersected_field)
 ```
 
 `lualife.life.populate()`:
