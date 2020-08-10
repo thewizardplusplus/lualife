@@ -5,13 +5,16 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
 ## Features
 
 - models:
-  - size;
+  - size:
+    - supporting of checking if an other size with offset fits inside;
   - point:
     - supporting of translation;
     - supporting of scaling;
     - supporting of textual representation;
   - field:
     - storing only of set cells;
+    - supporting of counting of set cells;
+    - supporting of checking if a cell is set;
     - supporting of mapping;
 - generating of a random field:
   - customizable filling factor;
@@ -22,6 +25,10 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
   - union of fields:
     - supporting an offset for the second operand;
     - restricting of the result size by the size of the first operand;
+  - complement of fields:
+    - supporting an offset for the second operand;
+  - intersection of fields:
+    - supporting an offset for the second operand;
 - populating of a field according to [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) rules:
   - using of the naive algorithm with iterating and copying of a whole field.
 
