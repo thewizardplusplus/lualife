@@ -21,10 +21,7 @@ function TestSize.test_contains_false_top_left()
   local size_one = Size:new(10, 10)
   local size_two = Size:new(3, 3)
 
-  local contains = size_one:contains(
-    size_two,
-    Point:new(-1, -1)
-  )
+  local contains = size_one:contains(size_two, Point:new(-1, -1))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_false(contains)
@@ -34,10 +31,7 @@ function TestSize.test_contains_false_bottom_right()
   local size_one = Size:new(10, 10)
   local size_two = Size:new(3, 3)
 
-  local contains = size_one:contains(
-    size_two,
-    Point:new(8, 8)
-  )
+  local contains = size_one:contains(size_two, Point:new(8, 8))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_false(contains)
@@ -47,10 +41,7 @@ function TestSize.test_contains_true_top_left()
   local size_one = Size:new(10, 10)
   local size_two = Size:new(3, 3)
 
-  local contains = size_one:contains(
-    size_two,
-    Point:new(0, 0)
-  )
+  local contains = size_one:contains(size_two, Point:new(0, 0))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_true(contains)
@@ -60,10 +51,7 @@ function TestSize.test_contains_true_bottom_right()
   local size_one = Size:new(10, 10)
   local size_two = Size:new(3, 3)
 
-  local contains = size_one:contains(
-    size_two,
-    Point:new(7, 7)
-  )
+  local contains = size_one:contains(size_two, Point:new(7, 7))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_true(contains)
