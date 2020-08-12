@@ -11,6 +11,10 @@ local matrix = {}
 function matrix.rotate(field)
   assert(field:isInstanceOf(Field))
 
+  if field.size.width ~= field.size.height then
+    error("rotation of the non-square matrix")
+  end
+
   return field
 end
 
