@@ -3,6 +3,7 @@ local luaunit = require("luaunit")
 for _, module in ipairs({
   "random",
   "sets",
+  "matrix" ,
   "life",
   "models.size",
   "models.point",
