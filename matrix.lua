@@ -1,6 +1,7 @@
 ---
 -- @module matrix
 
+local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
 local matrix = {}
@@ -36,6 +37,14 @@ function matrix.rotate(field)
       if field:contains(top_left) then
         rotated_field:set(top_right)
       end
+    end
+  end
+
+  if field.size.width % 2 ~= 0 then
+    local x = math.floor(field.size.width / 2)
+    local center = Point:new(x, x)
+    if field:contains(center) then
+      rotated_field:set(center)
     end
   end
 
