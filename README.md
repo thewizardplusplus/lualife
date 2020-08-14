@@ -29,6 +29,8 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
     - supporting an offset for the second operand;
   - intersection of fields:
     - supporting an offset for the second operand;
+- operations with fields as with matrices:
+  - rotating of a field clockwise;
 - populating of a field according to [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) rules:
   - using of the naive algorithm with iterating and copying of a whole field.
 
