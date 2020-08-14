@@ -48,7 +48,7 @@ function PlacedField:map(mapper)
   assert(type(mapper) == "function")
 
   return Field.map(self, function(point)
-    local global_point = point:translate(self.offset)
+    local global_point = self:to_global(point)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
@@ -62,6 +62,15 @@ function PlacedField:to_local(point)
 
   local inverted_offset = self.offset:scale(-1)
   return point:translate(inverted_offset)
+end
+
+---
+-- @tparam Point point
+-- @treturn Point
+function PlacedField:to_global(point)
+  assert(point:isInstanceOf(Point))
+
+  return point:translate(self.offset)
 end
 
 return PlacedField
