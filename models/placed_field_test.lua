@@ -22,3 +22,25 @@ function TestPlacedField.test_new()
   luaunit.assert_is_table(field.cells)
   luaunit.assert_equals(field.cells, {})
 end
+
+function TestPlacedField.test_contains_false()
+  local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(4, 2))
+
+  local contains = field:contains(Point:new(24, 44))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_false(contains)
+end
+
+function TestPlacedField.test_contains_true()
+  local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(4, 2))
+
+  local contains = field:contains(Point:new(25, 45))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_true(contains)
+end

@@ -22,4 +22,15 @@ function PlacedField:initialize(size, offset)
   self.offset = offset
 end
 
+---
+-- @tparam Point point
+-- @treturn bool
+function PlacedField:contains(point)
+  assert(point:isInstanceOf(Point))
+
+  local inverted_offset = self.offset:scale(-1)
+  local local_point = point:translate(inverted_offset)
+  return Field.contains(self, local_point)
+end
+
 return PlacedField
