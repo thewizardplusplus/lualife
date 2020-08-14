@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.4](https://github.com/thewizardplusplus/lualife/tree/v1.4) (2020-08-14)
+
+- operations with fields as with matrices:
+  - rotating of a field clockwise.
+
 ## [v1.3](https://github.com/thewizardplusplus/lualife/tree/v1.3) (2020-08-10)
 
 - models:
