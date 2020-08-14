@@ -4,10 +4,10 @@ local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local life = require("lualife.life")
 
--- luacheck: globals TestNeighbors
-TestNeighbors = {}
+-- luacheck: globals TestLife
+TestLife = {}
 
-function TestNeighbors.test()
+function TestLife.test_neighbors()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 0))
   field:set(Point:new(1, 0))
@@ -20,10 +20,7 @@ function TestNeighbors.test()
   luaunit.assert_equals(neighbors, 3)
 end
 
--- luacheck: globals TestPopulate
-TestPopulate = {}
-
-function TestPopulate.test_blinker()
+function TestLife.test_populate_blinker()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
@@ -40,7 +37,7 @@ function TestPopulate.test_blinker()
   luaunit.assert_equals(next_field, want_next_field)
 end
 
-function TestPopulate.test_glider_full()
+function TestLife.test_populate_glider_full()
   local field = Field:new(Size:new(4, 4))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
@@ -61,7 +58,7 @@ function TestPopulate.test_glider_full()
   luaunit.assert_equals(next_field, want_next_field)
 end
 
-function TestPopulate.test_glider_partial()
+function TestLife.test_populate_glider_partial()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(1, 0))
   field:set(Point:new(2, 1))
