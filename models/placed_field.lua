@@ -33,4 +33,14 @@ function PlacedField:contains(point)
   return Field.contains(self, local_point)
 end
 
+---
+-- @tparam Point point
+function PlacedField:set(point)
+  assert(point:isInstanceOf(Point))
+
+  local inverted_offset = self.offset:scale(-1)
+  local local_point = point:translate(inverted_offset)
+  Field.set(self, local_point)
+end
+
 return PlacedField
