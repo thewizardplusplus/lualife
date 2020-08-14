@@ -43,4 +43,17 @@ function PlacedField:set(point)
   Field.set(self, local_point)
 end
 
+---
+-- @param mapper func(point: Point, contains: bool): bool
+-- @treturn Field
+function PlacedField:map(mapper)
+  assert(type(mapper) == "function")
+
+  return Field.map(self, function(point)
+    local global_point = point:translate(self.offset)
+    local contains = self:contains(global_point)
+    return mapper(global_point, contains)
+  end)
+end
+
 return PlacedField

@@ -1,6 +1,7 @@
 local luaunit = require("luaunit")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
+local Field = require("lualife.models.field")
 local PlacedField = require("lualife.models.placed_field")
 
 -- luacheck: globals TestPlacedField
@@ -54,4 +55,47 @@ function TestPlacedField.test_set()
     ["(2, 3)"] = true,
     ["(4, 2)"] = true,
   })
+end
+
+function TestPlacedField.test_map_point()
+  local field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  field:set(Point:new(23, 43))
+  field:set(Point:new(24, 43))
+  field:set(Point:new(25, 43))
+
+  local next_field = field:map(function(point)
+    return point.x <= field.size.width / 2 + 23
+      and point.y <= field.size.height / 2 + 42
+  end)
+
+  local want_next_field = Field:new(Size:new(3, 3))
+  want_next_field:set(Point:new(0, 0))
+  want_next_field:set(Point:new(1, 0))
+  want_next_field:set(Point:new(0, 1))
+  want_next_field:set(Point:new(1, 1))
+
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
+end
+
+function TestPlacedField.test_map_contains()
+  local field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  field:set(Point:new(23, 43))
+  field:set(Point:new(24, 43))
+  field:set(Point:new(25, 43))
+
+  local next_field = field:map(function(_, contains)
+    return not contains
+  end)
+
+  local want_next_field = Field:new(Size:new(3, 3))
+  want_next_field:set(Point:new(0, 0))
+  want_next_field:set(Point:new(1, 0))
+  want_next_field:set(Point:new(2, 0))
+  want_next_field:set(Point:new(0, 2))
+  want_next_field:set(Point:new(1, 2))
+  want_next_field:set(Point:new(2, 2))
+
+  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
 end
