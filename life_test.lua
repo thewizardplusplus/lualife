@@ -2,6 +2,7 @@ local luaunit = require("luaunit")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
+local PlacedField = require("lualife.models.placed_field")
 local life = require("lualife.life")
 
 -- luacheck: globals TestLife
@@ -75,5 +76,22 @@ function TestLife.test_populate_glider_partial()
   want_next_field:set(Point:new(2, 2))
 
   luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_equals(next_field, want_next_field)
+end
+
+function TestLife.test_populate_placed()
+  local field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  field:set(Point:new(23, 43))
+  field:set(Point:new(24, 43))
+  field:set(Point:new(25, 43))
+
+  local next_field = life.populate(field)
+
+  local want_next_field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  want_next_field:set(Point:new(24, 42))
+  want_next_field:set(Point:new(24, 43))
+  want_next_field:set(Point:new(24, 44))
+
+  luaunit.assert_true(next_field:isInstanceOf(PlacedField))
   luaunit.assert_equals(next_field, want_next_field)
 end
