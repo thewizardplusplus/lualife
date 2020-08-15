@@ -7,6 +7,44 @@ local PlacedField = require("lualife.models.placed_field")
 -- luacheck: globals TestPlacedField
 TestPlacedField = {}
 
+function TestPlacedField.test_place_full()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(0, 0))
+  field:set(Point:new(1, 0))
+  field:set(Point:new(0, 1))
+  field:set(Point:new(1, 1))
+
+  local placed_field = PlacedField:place(field, Point:new(23, 42))
+
+  local want_placed_field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  want_placed_field:set(Point:new(23, 42))
+  want_placed_field:set(Point:new(24, 42))
+  want_placed_field:set(Point:new(23, 43))
+  want_placed_field:set(Point:new(24, 43))
+
+  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_equals(placed_field, want_placed_field)
+end
+
+function TestPlacedField.test_place_partial()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Point:new(0, 0))
+  field:set(Point:new(1, 0))
+  field:set(Point:new(0, 1))
+  field:set(Point:new(1, 1))
+
+  local placed_field = PlacedField:place(field)
+
+  local want_placed_field = PlacedField:new(Size:new(3, 3))
+  want_placed_field:set(Point:new(0, 0))
+  want_placed_field:set(Point:new(1, 0))
+  want_placed_field:set(Point:new(0, 1))
+  want_placed_field:set(Point:new(1, 1))
+
+  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_equals(placed_field, want_placed_field)
+end
+
 function TestPlacedField.test_new_full()
   local size = Size:new(5, 12)
   local offset = Point:new(23, 42)
