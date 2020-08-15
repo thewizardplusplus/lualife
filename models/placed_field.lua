@@ -11,9 +11,11 @@ local PlacedField = middleclass("PlacedField", Field)
 ---
 -- @function new
 -- @tparam Size size
--- @tparam Point offset
+-- @tparam Point[opt] offset
 -- @treturn PlacedField
 function PlacedField:initialize(size, offset)
+  offset = offset or Point:new(0, 0)
+
   assert(size:isInstanceOf(Size))
   assert(offset:isInstanceOf(Point))
 
