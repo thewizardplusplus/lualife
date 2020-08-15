@@ -65,11 +65,12 @@ end
 function PlacedField:map(mapper)
   assert(type(mapper) == "function")
 
-  return Field.map(self, function(point)
+  local field = Field.map(self, function(point)
     local global_point = self:to_global(point)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
+  return PlacedField:place(field, self.offset)
 end
 
 ---
