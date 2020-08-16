@@ -20,26 +20,26 @@ function random.generate(sample, filling)
 end
 
 ---
--- @tparam Size size
+-- @tparam Field sample
 -- @tparam number filling [0, 1]
 -- @tparam int minimal_count [0, size.width * size.height]
 -- @tparam int maximal_count [0, size.width * size.height]
 -- @treturn Field
 function random.generate_with_limits(
-  size,
+  sample,
   filling,
   minimal_count,
   maximal_count
 )
-  assert(size:isInstanceOf(Size))
+  assert(sample:isInstanceOf(Field))
   assert(type(filling) == "number")
   assert(type(minimal_count) == "number")
   assert(type(maximal_count) == "number")
 
-  local field = Field:new(size)
-  while field:count() < minimal_count or field:count() > maximal_count do
-    field = random.generate(field, filling)
-  end
+  local field = nil
+  repeat
+    field = random.generate(sample, filling)
+  until field:count() >= minimal_count and field:count() <= maximal_count
 
   return field
 end
