@@ -44,6 +44,15 @@ function Field:contains(point)
 end
 
 ---
+-- @tparam Field other
+-- @treturn bool
+function Field:fits(other)
+  assert(other:isInstanceOf(Field))
+
+  return self.size:fits(other.size)
+end
+
+---
 -- @tparam Point point
 function Field:set(point)
   assert(point:isInstanceOf(Point))

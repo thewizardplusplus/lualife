@@ -60,6 +60,26 @@ function TestField.test_contains_true()
   luaunit.assert_true(contains)
 end
 
+function TestField.test_fits_false()
+  local field_one = Field:new(Size:new(30, 30))
+  local field_two = Field:new(Size:new(10, 10))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_false(fits)
+end
+
+function TestField.test_fits_true()
+  local field_one = Field:new(Size:new(3, 3))
+  local field_two = Field:new(Size:new(10, 10))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
+end
+
 function TestField.test_set()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
