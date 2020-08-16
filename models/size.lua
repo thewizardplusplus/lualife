@@ -21,14 +21,16 @@ end
 
 ---
 -- @tparam Size other
--- @tparam Point offset
+-- @tparam Point[opt] offset default: (0, 0)
 -- @treturn bool
-function Size:contains(other, offset)
+function Size:fits(other, offset)
+  offset = offset or Point:new(0, 0)
+
   assert(other:isInstanceOf(Size))
   assert(offset:isInstanceOf(Point))
 
-  return offset.x >= 0 and offset.x <= self.width - other.width
-    and offset.y >= 0 and offset.y <= self.height - other.height
+  return offset.x >= 0 and offset.x <= other.width - self.width
+    and offset.y >= 0 and offset.y <= other.height - self.height
 end
 
 return Size

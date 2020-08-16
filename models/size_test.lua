@@ -17,42 +17,52 @@ function TestSize.test_new()
   luaunit.assert_equals(size.height, 42)
 end
 
-function TestSize.test_contains_false_top_left()
-  local size_one = Size:new(10, 10)
-  local size_two = Size:new(3, 3)
+function TestSize.test_fits_false_top_left()
+  local size_one = Size:new(3, 3)
+  local size_two = Size:new(10, 10)
 
-  local contains = size_one:contains(size_two, Point:new(-1, -1))
+  local fits = size_one:fits(size_two, Point:new(-1, -1))
 
-  luaunit.assert_is_boolean(contains)
-  luaunit.assert_false(contains)
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_false(fits)
 end
 
-function TestSize.test_contains_false_bottom_right()
-  local size_one = Size:new(10, 10)
-  local size_two = Size:new(3, 3)
+function TestSize.test_fits_false_bottom_right()
+  local size_one = Size:new(3, 3)
+  local size_two = Size:new(10, 10)
 
-  local contains = size_one:contains(size_two, Point:new(8, 8))
+  local fits = size_one:fits(size_two, Point:new(8, 8))
 
-  luaunit.assert_is_boolean(contains)
-  luaunit.assert_false(contains)
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_false(fits)
 end
 
-function TestSize.test_contains_true_top_left()
-  local size_one = Size:new(10, 10)
-  local size_two = Size:new(3, 3)
+function TestSize.test_fits_true_top_left_full()
+  local size_one = Size:new(3, 3)
+  local size_two = Size:new(10, 10)
 
-  local contains = size_one:contains(size_two, Point:new(0, 0))
+  local fits = size_one:fits(size_two, Point:new(0, 0))
 
-  luaunit.assert_is_boolean(contains)
-  luaunit.assert_true(contains)
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
 end
 
-function TestSize.test_contains_true_bottom_right()
-  local size_one = Size:new(10, 10)
-  local size_two = Size:new(3, 3)
+function TestSize.test_fits_true_top_left_partial()
+  local size_one = Size:new(3, 3)
+  local size_two = Size:new(10, 10)
 
-  local contains = size_one:contains(size_two, Point:new(7, 7))
+  local fits = size_one:fits(size_two)
 
-  luaunit.assert_is_boolean(contains)
-  luaunit.assert_true(contains)
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
+end
+
+function TestSize.test_fits_true_bottom_right()
+  local size_one = Size:new(3, 3)
+  local size_two = Size:new(10, 10)
+
+  local fits = size_one:fits(size_two, Point:new(7, 7))
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
 end
