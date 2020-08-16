@@ -22,21 +22,13 @@ end
 ---
 -- @tparam Field base
 -- @tparam Field additional
--- @tparam Point offset
 -- @treturn Field
-function sets.complement(base, additional, offset)
+function sets.complement(base, additional)
   assert(base:isInstanceOf(Field))
   assert(additional:isInstanceOf(Field))
-  assert(offset:isInstanceOf(Point))
 
-  local inverted_offset = offset:scale(-1)
   return base:map(function(point, contains)
-    if not contains then
-      return false
-    end
-
-    local shifted_point = point:translate(inverted_offset)
-    return not additional:contains(shifted_point)
+    return contains and not additional:contains(point)
   end)
 end
 
