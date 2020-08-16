@@ -7,18 +7,16 @@ local Field = require("lualife.models.field")
 local random = {}
 
 ---
--- @tparam Size size
+-- @tparam Field sample
 -- @tparam number filling [0, 1]
 -- @treturn Field
-function random.generate(size, filling)
-  assert(size:isInstanceOf(Size))
+function random.generate(sample, filling)
+  assert(sample:isInstanceOf(Field))
   assert(type(filling) == "number")
 
-  return Field
-    :new(size)
-    :map(function()
-      return math.random() < filling
-    end)
+  return sample:map(function()
+    return math.random() < filling
+  end)
 end
 
 ---
@@ -40,7 +38,7 @@ function random.generate_with_limits(
 
   local field = Field:new(size)
   while field:count() < minimal_count or field:count() > maximal_count do
-    field = random.generate(size, filling)
+    field = random.generate(field, filling)
   end
 
   return field
