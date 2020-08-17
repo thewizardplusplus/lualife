@@ -45,6 +45,25 @@ function TestPlacedField.test_place_partial()
   luaunit.assert_equals(placed_field, want_placed_field)
 end
 
+function TestPlacedField.test_place_placed()
+  local field = PlacedField:new(Size:new(3, 3), Point:new(5, 12))
+  field:set(Point:new(5, 12))
+  field:set(Point:new(6, 12))
+  field:set(Point:new(5, 13))
+  field:set(Point:new(6, 13))
+
+  local placed_field = PlacedField:place(field, Point:new(23, 42))
+
+  local want_placed_field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
+  want_placed_field:set(Point:new(23, 42))
+  want_placed_field:set(Point:new(24, 42))
+  want_placed_field:set(Point:new(23, 43))
+  want_placed_field:set(Point:new(24, 43))
+
+  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_equals(placed_field, want_placed_field)
+end
+
 function TestPlacedField.test_new_full()
   local size = Size:new(5, 12)
   local offset = Point:new(23, 42)
