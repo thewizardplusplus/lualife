@@ -12,7 +12,7 @@ local PlacedField = middleclass("PlacedField", Field)
 -- @tparam Field field
 -- @tparam Point[opt] offset default: (0, 0)
 -- @treturn PlacedField
-function PlacedField.static:place(field, offset)
+function PlacedField.static.place(field, offset)
   offset = offset or Point:new(0, 0)
 
   assert(field:isInstanceOf(Field))
@@ -80,7 +80,7 @@ function PlacedField:map(mapper)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
-  return PlacedField:place(field, self.offset)
+  return PlacedField.place(field, self.offset)
 end
 
 ---

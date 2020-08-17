@@ -1,7 +1,6 @@
 ---
 -- @module sets
 
-local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
 local sets = {}

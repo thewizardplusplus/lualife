@@ -1,7 +1,6 @@
 ---
 -- @module random
 
-local Size = require("lualife.models.size")
 local Field = require("lualife.models.field")
 
 local random = {}
@@ -36,7 +35,7 @@ function random.generate_with_limits(
   assert(type(minimal_count) == "number")
   assert(type(maximal_count) == "number")
 
-  local field = nil
+  local field
   repeat
     field = random.generate(sample, filling)
   until field:count() >= minimal_count and field:count() <= maximal_count

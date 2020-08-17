@@ -14,7 +14,7 @@ function TestPlacedField.test_place_full()
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
 
-  local placed_field = PlacedField:place(field, Point:new(23, 42))
+  local placed_field = PlacedField.place(field, Point:new(23, 42))
 
   local want_placed_field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
   want_placed_field:set(Point:new(23, 42))
@@ -33,7 +33,7 @@ function TestPlacedField.test_place_partial()
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
 
-  local placed_field = PlacedField:place(field)
+  local placed_field = PlacedField.place(field)
 
   local want_placed_field = PlacedField:new(Size:new(3, 3))
   want_placed_field:set(Point:new(0, 0))
@@ -52,7 +52,7 @@ function TestPlacedField.test_place_placed()
   field:set(Point:new(5, 13))
   field:set(Point:new(6, 13))
 
-  local placed_field = PlacedField:place(field, Point:new(23, 42))
+  local placed_field = PlacedField.place(field, Point:new(23, 42))
 
   local want_placed_field = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
   want_placed_field:set(Point:new(23, 42))
