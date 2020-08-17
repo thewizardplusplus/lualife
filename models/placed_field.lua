@@ -56,8 +56,7 @@ end
 function PlacedField:fits(other)
   assert(other:isInstanceOf(PlacedField))
 
-  local inverted_other_offset = other.offset:scale(-1)
-  local offsets_difference = self.offset:translate(inverted_other_offset)
+  local offsets_difference = self.offset:translate(other:inverted_offset())
   return self.size:fits(other.size, offsets_difference)
 end
 
@@ -85,13 +84,18 @@ function PlacedField:map(mapper)
 end
 
 ---
+-- @treturn Point
+function PlacedField:inverted_offset()
+  return self.offset:scale(-1)
+end
+
+---
 -- @tparam Point point
 -- @treturn Point
 function PlacedField:to_local(point)
   assert(point:isInstanceOf(Point))
 
-  local inverted_offset = self.offset:scale(-1)
-  return point:translate(inverted_offset)
+  return point:translate(self:inverted_offset())
 end
 
 ---
