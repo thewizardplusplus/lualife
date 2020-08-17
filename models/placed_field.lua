@@ -51,6 +51,17 @@ function PlacedField:contains(point)
 end
 
 ---
+-- @tparam PlacedField other
+-- @treturn bool
+function PlacedField:fits(other)
+  assert(other:isInstanceOf(PlacedField))
+
+  local inverted_other_offset = other.offset:scale(-1)
+  local offsets_difference = self.offset:translate(inverted_other_offset)
+  return self.size:fits(other.size, offsets_difference)
+end
+
+---
 -- @tparam Point point
 function PlacedField:set(point)
   assert(point:isInstanceOf(Point))
@@ -61,7 +72,7 @@ end
 
 ---
 -- @param mapper func(point: Point, contains: bool): bool
--- @treturn Field
+-- @treturn PlacedField
 function PlacedField:map(mapper)
   assert(type(mapper) == "function")
 

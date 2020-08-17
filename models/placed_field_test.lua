@@ -100,6 +100,46 @@ function TestPlacedField.test_contains_true()
   luaunit.assert_true(contains)
 end
 
+function TestPlacedField.test_fits_false_top_left()
+  local field_one = PlacedField:new(Size:new(3, 3), Point:new(1, 1))
+  local field_two = PlacedField:new(Size:new(10, 10), Point:new(2, 2))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_false(fits)
+end
+
+function TestPlacedField.test_fits_false_bottom_right()
+  local field_one = PlacedField:new(Size:new(3, 3), Point:new(10, 10))
+  local field_two = PlacedField:new(Size:new(10, 10), Point:new(2, 2))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_false(fits)
+end
+
+function TestPlacedField.test_fits_true_top_left()
+  local field_one = PlacedField:new(Size:new(3, 3), Point:new(2, 2))
+  local field_two = PlacedField:new(Size:new(10, 10), Point:new(2, 2))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
+end
+
+function TestPlacedField.test_fits_true_bottom_right()
+  local field_one = PlacedField:new(Size:new(3, 3), Point:new(9, 9))
+  local field_two = PlacedField:new(Size:new(10, 10), Point:new(2, 2))
+
+  local fits = field_one:fits(field_two)
+
+  luaunit.assert_is_boolean(fits)
+  luaunit.assert_true(fits)
+end
+
 function TestPlacedField.test_set()
   local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
   field:set(Point:new(25, 45))
