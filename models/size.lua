@@ -20,6 +20,16 @@ function Size:initialize(width, height)
 end
 
 ---
+-- @tparam Point point
+-- @treturn bool
+function Size:_contains(point)
+  assert(point:isInstanceOf(Point))
+
+  return point.x >= 0 and point.x <= self.width - 1
+    and point.y >= 0 and point.y <= self.height - 1
+end
+
+---
 -- @tparam Size other
 -- @tparam[opt=(0 0)] Point offset
 -- @treturn bool

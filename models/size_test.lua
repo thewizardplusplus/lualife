@@ -17,6 +17,38 @@ function TestSize.test_new()
   luaunit.assert_equals(size.height, 42)
 end
 
+function TestSize.test_contains_false_top_left()
+  local size = Size:new(23, 42)
+  local contains = size:_contains(Point:new(-1, -1))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_false(contains)
+end
+
+function TestSize.test_contains_false_bottom_right()
+  local size = Size:new(23, 42)
+  local contains = size:_contains(Point:new(23, 42))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_false(contains)
+end
+
+function TestSize.test_contains_true_top_left()
+  local size = Size:new(23, 42)
+  local contains = size:_contains(Point:new(0, 0))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_true(contains)
+end
+
+function TestSize.test_contains_true_bottom_right()
+  local size = Size:new(23, 42)
+  local contains = size:_contains(Point:new(22, 41))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_true(contains)
+end
+
 function TestSize.test_fits_false_top_left()
   local size_one = Size:new(3, 3)
   local size_two = Size:new(10, 10)
