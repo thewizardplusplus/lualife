@@ -9,8 +9,10 @@ local Field = require("lualife.models.field")
 local PlacedField = middleclass("PlacedField", Field)
 
 ---
+-- @function place
+-- @static
 -- @tparam Field field
--- @tparam Point[opt] offset default: (0, 0)
+-- @tparam[opt=(0 0)] Point offset
 -- @treturn PlacedField
 function PlacedField.static.place(field, offset)
   offset = offset or Point:new(0, 0)
@@ -27,7 +29,7 @@ end
 ---
 -- @function new
 -- @tparam Size size
--- @tparam Point[opt] offset default: (0, 0)
+-- @tparam[opt=(0 0)] Point offset
 -- @treturn PlacedField
 function PlacedField:initialize(size, offset)
   offset = offset or Point:new(0, 0)
@@ -39,6 +41,10 @@ function PlacedField:initialize(size, offset)
 
   self.offset = offset
 end
+
+---
+-- @function count
+-- @treturn int [0, self.size.width * self.size.height]
 
 ---
 -- @tparam Point point

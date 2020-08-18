@@ -21,8 +21,8 @@ end
 ---
 -- @tparam Field sample
 -- @tparam number filling [0, 1]
--- @tparam int minimal_count [0, size.width * size.height]
--- @tparam int maximal_count [0, size.width * size.height]
+-- @tparam int minimal_count [0, sample.size.width * sample.size.height]
+-- @tparam int maximal_count [0, sample.size.width * sample.size.height]
 -- @treturn Field
 function random.generate_with_limits(
   sample,

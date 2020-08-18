@@ -21,7 +21,7 @@ end
 
 ---
 -- @tparam Size other
--- @tparam Point[opt] offset default: (0, 0)
+-- @tparam[opt=(0 0)] Point offset
 -- @treturn bool
 function Size:fits(other, offset)
   offset = offset or Point:new(0, 0)
