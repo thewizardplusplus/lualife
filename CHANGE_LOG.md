@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5](https://github.com/thewizardplusplus/lualife/tree/v1.5) (2020-08-18)
+
+- models:
+  - field:
+    - supporting of checking if an other field fits inside;
+  - placed field:
+    - extends the field model;
+    - storing a field offset;
+    - working with cells taking into account the field offset;
+    - supporting of checking if an other field with offset fits inside;
+    - supporting of copying the existing field with setting an offset.
+
 ## [v1.4](https://github.com/thewizardplusplus/lualife/tree/v1.4) (2020-08-14)
 
 - operations with fields as with matrices:
