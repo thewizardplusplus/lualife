@@ -80,7 +80,7 @@ function TestField.test_fits_true()
   luaunit.assert_true(fits)
 end
 
-function TestField.test_set()
+function TestField.test_set_inside()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
@@ -88,6 +88,16 @@ function TestField.test_set()
   luaunit.assert_equals(field._cells, {
     ["(2, 3)"] = true,
     ["(4, 2)"] = true,
+  })
+end
+
+function TestField.test_set_outside()
+  local field = Field:new(Size:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(100, 100))
+
+  luaunit.assert_equals(field._cells, {
+    ["(2, 3)"] = true,
   })
 end
 

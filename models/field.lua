@@ -57,7 +57,9 @@ end
 function Field:set(point)
   assert(point:isInstanceOf(Point))
 
-  self._cells[tostring(point)] = true
+  if self.size:_contains(point) then
+    self._cells[tostring(point)] = true
+  end
 end
 
 ---
