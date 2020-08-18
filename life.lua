@@ -10,7 +10,7 @@ local life = {}
 -- @tparam Field field
 -- @tparam Point point
 -- @treturn int [0, 8]
-function life.neighbors(field, point)
+function life._neighbors(field, point)
   assert(field:isInstanceOf(Field))
   assert(point:isInstanceOf(Point))
 
@@ -36,7 +36,7 @@ function life.populate(field)
   assert(field:isInstanceOf(Field))
 
   return field:map(function(point, contains)
-    local neighbors = life.neighbors(field, point)
+    local neighbors = life._neighbors(field, point)
     return neighbors == 3 or (neighbors == 2 and contains)
   end)
 end

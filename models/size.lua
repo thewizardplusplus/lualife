@@ -23,7 +23,7 @@ end
 -- @tparam Size other
 -- @tparam[opt=(0 0)] Point offset
 -- @treturn bool
-function Size:fits(other, offset)
+function Size:_fits(other, offset)
   offset = offset or Point:new(0, 0)
 
   assert(other:isInstanceOf(Size))

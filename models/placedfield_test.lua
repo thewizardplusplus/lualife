@@ -77,8 +77,8 @@ function TestPlacedField.test_new_full()
   luaunit.assert_true(field.offset:isInstanceOf(Point))
   luaunit.assert_is(field.offset, offset)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {})
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {})
 end
 
 function TestPlacedField.test_new_partial()
@@ -93,8 +93,8 @@ function TestPlacedField.test_new_partial()
   luaunit.assert_true(field.offset:isInstanceOf(Point))
   luaunit.assert_equals(field.offset, Point:new(0, 0))
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {})
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {})
 end
 
 function TestPlacedField.test_contains_false()
@@ -164,7 +164,7 @@ function TestPlacedField.test_set()
   field:set(Point:new(25, 45))
   field:set(Point:new(27, 44))
 
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_equals(field._cells, {
     ["(2, 3)"] = true,
     ["(4, 2)"] = true,
   })

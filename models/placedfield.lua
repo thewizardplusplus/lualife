@@ -21,7 +21,7 @@ function PlacedField.static.place(field, offset)
   assert(offset:isInstanceOf(Point))
 
   local placed_field = PlacedField:new(field.size, offset)
-  placed_field.cells = field.cells
+  placed_field._cells = field._cells
 
   return placed_field
 end
@@ -52,7 +52,7 @@ end
 function PlacedField:contains(point)
   assert(point:isInstanceOf(Point))
 
-  local local_point = self:to_local(point)
+  local local_point = self:_to_local(point)
   return Field.contains(self, local_point)
 end
 
@@ -62,8 +62,8 @@ end
 function PlacedField:fits(other)
   assert(other:isInstanceOf(PlacedField))
 
-  local offsets_difference = self.offset:translate(other:inverted_offset())
-  return self.size:fits(other.size, offsets_difference)
+  local offsets_difference = self.offset:translate(other:_inverted_offset())
+  return self.size:_fits(other.size, offsets_difference)
 end
 
 ---
@@ -71,7 +71,7 @@ end
 function PlacedField:set(point)
   assert(point:isInstanceOf(Point))
 
-  local local_point = self:to_local(point)
+  local local_point = self:_to_local(point)
   Field.set(self, local_point)
 end
 
@@ -82,7 +82,7 @@ function PlacedField:map(mapper)
   assert(type(mapper) == "function")
 
   local field = Field.map(self, function(point)
-    local global_point = self:to_global(point)
+    local global_point = self:_to_global(point)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
@@ -91,23 +91,23 @@ end
 
 ---
 -- @treturn Point
-function PlacedField:inverted_offset()
+function PlacedField:_inverted_offset()
   return self.offset:scale(-1)
 end
 
 ---
 -- @tparam Point point
 -- @treturn Point
-function PlacedField:to_local(point)
+function PlacedField:_to_local(point)
   assert(point:isInstanceOf(Point))
 
-  return point:translate(self:inverted_offset())
+  return point:translate(self:_inverted_offset())
 end
 
 ---
 -- @tparam Point point
 -- @treturn Point
-function PlacedField:to_global(point)
+function PlacedField:_to_global(point)
   assert(point:isInstanceOf(Point))
 
   return point:translate(self.offset)

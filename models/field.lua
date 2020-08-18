@@ -19,14 +19,14 @@ function Field:initialize(size)
   assert(size:isInstanceOf(Size))
 
   self.size = size
-  self.cells = {}
+  self._cells = {}
 end
 
 ---
 -- @treturn int [0, self.size.width * self.size.height]
 function Field:count()
   local count = 0
-  for _ in pairs(self.cells) do
+  for _ in pairs(self._cells) do
     count = count + 1
   end
 
@@ -39,7 +39,7 @@ end
 function Field:contains(point)
   assert(point:isInstanceOf(Point))
 
-  local contains = self.cells[tostring(point)]
+  local contains = self._cells[tostring(point)]
   return to_boolean(contains)
 end
 
@@ -49,7 +49,7 @@ end
 function Field:fits(other)
   assert(other:isInstanceOf(Field))
 
-  return self.size:fits(other.size)
+  return self.size:_fits(other.size)
 end
 
 ---
@@ -57,7 +57,7 @@ end
 function Field:set(point)
   assert(point:isInstanceOf(Point))
 
-  self.cells[tostring(point)] = true
+  self._cells[tostring(point)] = true
 end
 
 ---

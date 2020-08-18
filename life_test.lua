@@ -15,7 +15,7 @@ function TestLife.test_neighbors()
   field:set(Point:new(0, 1))
   field:set(Point:new(1, 1))
 
-  local neighbors = life.neighbors(field, Point:new(1, 1))
+  local neighbors = life._neighbors(field, Point:new(1, 1))
 
   luaunit.assert_is_number(neighbors)
   luaunit.assert_equals(neighbors, 3)

@@ -19,8 +19,8 @@ function TestRandom.test_generate_small()
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(1, 1)"] = true,
   })
 end
@@ -36,8 +36,8 @@ function TestRandom.test_generate_large()
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(0, 0)"] = true,
     ["(1, 0)"] = true,
     ["(2, 0)"] = true,
@@ -63,8 +63,8 @@ function TestRandom.test_generate_placed()
   luaunit.assert_true(field.offset:isInstanceOf(Point))
   luaunit.assert_is(field.offset, sample.offset)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(0, 0)"] = true,
     ["(1, 0)"] = true,
     ["(2, 0)"] = true,
@@ -87,8 +87,8 @@ function TestRandom.test_generate_with_limits_small()
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(1, 1)"] = true,
   })
 end
@@ -104,8 +104,8 @@ function TestRandom.test_generate_with_limits_large()
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(0, 0)"] = true,
     ["(2, 0)"] = true,
     ["(0, 1)"] = true,
@@ -131,8 +131,8 @@ function TestRandom.test_generate_with_limits_placed()
   luaunit.assert_true(field.offset:isInstanceOf(Point))
   luaunit.assert_is(field.offset, sample.offset)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
     ["(0, 0)"] = true,
     ["(2, 0)"] = true,
     ["(0, 1)"] = true,

@@ -15,8 +15,8 @@ function TestField.test_new()
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, size)
 
-  luaunit.assert_is_table(field.cells)
-  luaunit.assert_equals(field.cells, {})
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {})
 end
 
 function TestField.test_count_empty()
@@ -85,7 +85,7 @@ function TestField.test_set()
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
-  luaunit.assert_equals(field.cells, {
+  luaunit.assert_equals(field._cells, {
     ["(2, 3)"] = true,
     ["(4, 2)"] = true,
   })
