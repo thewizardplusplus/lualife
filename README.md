@@ -15,7 +15,14 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
     - storing only of set cells;
     - supporting of counting of set cells;
     - supporting of checking if a cell is set;
+    - supporting of checking if an other field fits inside;
     - supporting of mapping;
+  - placed field:
+    - extends the field model;
+    - storing a field offset;
+    - working with cells taking into account the field offset;
+    - supporting of checking if an other field with offset fits inside;
+    - supporting of copying the existing field with setting an offset;
 - generating of a random field:
   - customizable filling factor;
   - limiting by a cell count:
