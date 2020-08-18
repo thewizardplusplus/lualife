@@ -33,7 +33,9 @@ function matrix.rotate(field)
       local top_left = Point:new(x, y):translate(offset)
       local top_right = Point:new(last_index - y, x):translate(offset)
       local bottom_left = Point:new(y, last_index - x):translate(offset)
-      local bottom_right = Point:new(last_index - x, last_index - y):translate(offset)
+      local bottom_right = Point
+        :new(last_index - x, last_index - y)
+        :translate(offset)
 
       if field:contains(bottom_left) then
         rotated_field:set(top_left)
