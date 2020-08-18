@@ -56,16 +56,16 @@ $ luarocks make
 ```lua
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
-local Field = require("lualife.models.field")
+local PlacedField = require("lualife.models.placed_field")
 local sets = require("lualife.sets")
 
 local function print_field(field)
-  assert(field:isInstanceOf(Field))
+  assert(field:isInstanceOf(PlacedField))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
 
-    if point.x == field.size.width - 1 then
+    if point.x - field.offset.x == field.size.width - 1 then
       io.write("\n")
     end
   end)
@@ -73,25 +73,25 @@ local function print_field(field)
   io.write("\n")
 end
 
-local glider = Field:new(Size:new(3, 3))
-glider:set(Point:new(1, 0))
-glider:set(Point:new(2, 1))
-glider:set(Point:new(0, 2))
-glider:set(Point:new(1, 2))
-glider:set(Point:new(2, 2))
+local glider = PlacedField:new(Size:new(3, 3), Point:new(2, 2))
+glider:set(Point:new(3, 2))
+glider:set(Point:new(4, 3))
+glider:set(Point:new(2, 4))
+glider:set(Point:new(3, 4))
+glider:set(Point:new(4, 4))
 
-local blinker = Field:new(Size:new(3, 3))
-blinker:set(Point:new(1, 0))
-blinker:set(Point:new(1, 1))
-blinker:set(Point:new(1, 2))
+local blinker = PlacedField:new(Size:new(3, 3), Point:new(1, 2))
+blinker:set(Point:new(2, 2))
+blinker:set(Point:new(2, 3))
+blinker:set(Point:new(2, 4))
 
-local unioned_field = sets.union(glider, blinker, Point:new(-1, 0))
+local unioned_field = sets.union(glider, blinker)
 print_field(unioned_field)
 
-local complemented_field = sets.complement(glider, blinker, Point:new(-1, 0))
+local complemented_field = sets.complement(glider, blinker)
 print_field(complemented_field)
 
-local intersected_field = sets.intersection(glider, blinker, Point:new(-1, 0))
+local intersected_field = sets.intersection(glider, blinker)
 print_field(intersected_field)
 ```
 
@@ -194,7 +194,8 @@ end
 
 math.randomseed(os.time())
 
-local field = random.generate(Size:new(10, 10), 0.5)
+local sample = Field:new(Size:new(10, 10))
+local field = random.generate(sample, 0.5)
 while true do
   field = life.populate(field)
   print_field(field)
