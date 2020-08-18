@@ -39,8 +39,8 @@ end
 function Field:contains(point)
   assert(point:isInstanceOf(Point))
 
-  local contains = self._cells[tostring(point)]
-  return to_boolean(contains)
+  return self.size:_contains(point)
+    and to_boolean(self._cells[tostring(point)])
 end
 
 ---

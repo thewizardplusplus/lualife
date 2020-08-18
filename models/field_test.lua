@@ -38,12 +38,25 @@ function TestField.test_count_nonempty()
   luaunit.assert_equals(count, 2)
 end
 
-function TestField.test_contains_false()
+function TestField.test_contains_false_inside()
   local field = Field:new(Size:new(23, 42))
   field:set(Point:new(2, 3))
   field:set(Point:new(4, 2))
 
   local contains = field:contains(Point:new(1, 2))
+
+  luaunit.assert_is_boolean(contains)
+  luaunit.assert_false(contains)
+end
+
+function TestField.test_contains_false_outside()
+  local field = Field:new(Size:new(23, 42))
+  field._cells = {
+    ["(2, 3)"] = true,
+    ["(100, 100)"] = true,
+  }
+
+  local contains = field:contains(Point:new(100, 100))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_false(contains)
