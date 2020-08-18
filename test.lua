@@ -8,7 +8,7 @@ for _, module in ipairs({
   "models.size",
   "models.point",
   "models.field",
-  "models.placed_field",
+  "models.placedfield",
 }) do
   require("lualife." .. module .. "_test")
 end

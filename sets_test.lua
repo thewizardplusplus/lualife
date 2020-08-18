@@ -2,7 +2,7 @@ local luaunit = require("luaunit")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
-local PlacedField = require("lualife.models.placed_field")
+local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 -- luacheck: globals TestSets
