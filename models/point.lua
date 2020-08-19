@@ -2,6 +2,7 @@
 -- @classmod Point
 
 local middleclass = require("middleclass")
+local inspect = require("inspect")
 
 local Point = middleclass("Point")
 
@@ -24,9 +25,9 @@ function Point:initialize(x, y)
 end
 
 ---
--- @treturn string e.g. "(23, 42)"
+-- @treturn string e.g. "{ 23, 42 }"
 function Point:__tostring()
-  return string.format("(%g, %g)", self.x, self.y)
+  return inspect({self.x, self.y})
 end
 
 ---

@@ -52,8 +52,8 @@ end
 function TestField.test_contains_false_outside()
   local field = Field:new(Size:new(23, 42))
   field._cells = {
-    ["(2, 3)"] = true,
-    ["(100, 100)"] = true,
+    ["{ 2, 3 }"] = true,
+    ["{ 100, 100 }"] = true,
   }
 
   local contains = field:contains(Point:new(100, 100))
@@ -99,8 +99,8 @@ function TestField.test_set_inside()
   field:set(Point:new(4, 2))
 
   luaunit.assert_equals(field._cells, {
-    ["(2, 3)"] = true,
-    ["(4, 2)"] = true,
+    ["{ 2, 3 }"] = true,
+    ["{ 4, 2 }"] = true,
   })
 end
 
@@ -110,7 +110,7 @@ function TestField.test_set_outside()
   field:set(Point:new(100, 100))
 
   luaunit.assert_equals(field._cells, {
-    ["(2, 3)"] = true,
+    ["{ 2, 3 }"] = true,
   })
 end
 

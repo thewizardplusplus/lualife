@@ -21,7 +21,7 @@ function TestPoint.test_tostring_integer()
   local text = tostring(point)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "(23, 42)")
+  luaunit.assert_equals(text, "{ 23, 42 }")
 end
 
 function TestPoint.test_tostring_real()
@@ -29,7 +29,7 @@ function TestPoint.test_tostring_real()
   local text = tostring(point)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "(2.3, 4.2)")
+  luaunit.assert_equals(text, "{ 2.3, 4.2 }")
 end
 
 function TestPoint.test_translate()
