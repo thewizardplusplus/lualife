@@ -17,6 +17,14 @@ function TestSize.test_new()
   luaunit.assert_equals(size.height, 42)
 end
 
+function TestSize.test_tostring()
+  local size = Size:new(23, 42)
+  local text = tostring(size)
+
+  luaunit.assert_is_string(text)
+  luaunit.assert_equals(text, "{ 23, 42 }")
+end
+
 function TestSize.test_contains_false_top_left()
   local size = Size:new(23, 42)
   local contains = size:_contains(Point:new(-1, -1))

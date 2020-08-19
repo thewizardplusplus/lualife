@@ -2,6 +2,7 @@
 -- @classmod Size
 
 local middleclass = require("middleclass")
+local inspect = require("inspect")
 local Point = require("lualife.models.point")
 
 local Size = middleclass("Size")
@@ -22,6 +23,12 @@ function Size:initialize(width, height)
 
   self.width = width
   self.height = height
+end
+
+---
+-- @treturn string e.g. "{ 23, 42 }"
+function Size:__tostring()
+  return inspect({self.width, self.height})
 end
 
 ---
