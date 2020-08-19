@@ -1,6 +1,6 @@
 rockspec_format = "3.0"
 package = "lualife"
-version = "1.5-1"
+version = "1.5.1-1"
 description = {
   license = "MIT",
   maintainer = "thewizardplusplus <thewizardplusplus@yandex.ru>",
@@ -8,7 +8,7 @@ description = {
 }
 source = {
   url = "git+https://github.com/thewizardplusplus/lualife.git",
-  tag = "v1.5",
+  tag = "v1.5.1",
 }
 dependencies = {
   "lua >= 5.2, < 5.4",
@@ -34,8 +34,8 @@ build = {
     ["models.point_test"] = "models/point_test.lua",
     ["models.field"] = "models/field.lua",
     ["models.field_test"] = "models/field_test.lua",
-    ["models.placed_field"] = "models/placed_field.lua",
-    ["models.placed_field_test"] = "models/placed_field_test.lua",
+    ["models.placedfield"] = "models/placedfield.lua",
+    ["models.placedfield_test"] = "models/placedfield_test.lua",
   },
   copy_directories = {
     "doc",
