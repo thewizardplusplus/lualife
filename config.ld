@@ -7,7 +7,7 @@ file = {
   "models/size.lua",
   "models/point.lua",
   "models/field.lua",
-  "models/placed_field.lua",
+  "models/placedfield.lua",
 }
 topics = {
   "README.md",

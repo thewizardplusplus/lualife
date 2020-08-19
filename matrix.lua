@@ -9,6 +9,7 @@ local matrix = {}
 ---
 -- @tparam Field field
 -- @treturn Field
+-- @raise * "rotation of the non-square matrix"
 function matrix.rotate(field)
   assert(field:isInstanceOf(Field))
 

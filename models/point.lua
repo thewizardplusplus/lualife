@@ -6,6 +6,11 @@ local middleclass = require("middleclass")
 local Point = middleclass("Point")
 
 ---
+-- @table instance
+-- @tfield number x
+-- @tfield number y
+
+---
 -- @function new
 -- @tparam number x
 -- @tparam number y

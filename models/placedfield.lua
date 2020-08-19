@@ -9,6 +9,13 @@ local Field = require("lualife.models.field")
 local PlacedField = middleclass("PlacedField", Field)
 
 ---
+-- @table instance
+-- @tfield Size size
+-- @tfield Point offset
+-- @tfield tab _cells
+--   map[string, bool]; key - stringified Point, value - always true
+
+---
 -- @function place
 -- @static
 -- @tparam Field field
@@ -76,7 +83,7 @@ function PlacedField:set(point)
 end
 
 ---
--- @param mapper func(point: Point, contains: bool): bool
+-- @tparam func mapper func(point: Point, contains: bool): bool
 -- @treturn PlacedField
 function PlacedField:map(mapper)
   assert(type(mapper) == "function")

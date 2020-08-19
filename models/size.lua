@@ -7,6 +7,11 @@ local Point = require("lualife.models.point")
 local Size = middleclass("Size")
 
 ---
+-- @table instance
+-- @tfield int width [0, ∞)
+-- @tfield int height [0, ∞)
+
+---
 -- @function new
 -- @tparam int width [0, ∞)
 -- @tparam int height [0, ∞)

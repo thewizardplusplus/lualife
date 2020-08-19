@@ -5,11 +5,19 @@ local middleclass = require("middleclass")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 
+-- @tparam any value
+-- @treturn bool
 local function to_boolean(value)
   return value and true or false
 end
 
 local Field = middleclass("Field")
+
+---
+-- @table instance
+-- @tfield Size size
+-- @tfield tab _cells
+--   map[string, bool]; key - stringified Point, value - always true
 
 ---
 -- @function new
@@ -63,7 +71,7 @@ function Field:set(point)
 end
 
 ---
--- @param mapper func(point: Point, contains: bool): bool
+-- @tparam func mapper func(point: Point, contains: bool): bool
 -- @treturn Field
 function Field:map(mapper)
   assert(type(mapper) == "function")
