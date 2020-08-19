@@ -9,6 +9,9 @@ file = {
   "models/field.lua",
   "models/placedfield.lua",
 }
+examples = {
+  "examples",
+}
 topics = {
   "README.md",
   "LICENSE.txt",
