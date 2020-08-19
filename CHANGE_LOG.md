@@ -1,5 +1,23 @@
 # Change Log
 
+## [v1.5.1](https://github.com/thewizardplusplus/lualife/tree/v1.5.1) (2020-08-19)
+
+- models:
+  - size:
+    - supporting of checking if a point is inside;
+  - field:
+    - ignore outside points:
+      - on checking if a cell is set;
+      - on storing a set cell;
+- refactoring:
+  - mark private class members of models:
+    - properties;
+    - methods;
+  - extract examples to separate files;
+- documentation:
+  - describe properties of models;
+  - add examples as separate pages.
+
 ## [v1.5](https://github.com/thewizardplusplus/lualife/tree/v1.5) (2020-08-18)
 
 - models:
