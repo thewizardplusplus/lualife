@@ -6,15 +6,18 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
 
 - models:
   - size:
+    - supporting of checking if a point is inside;
     - supporting of checking if an other size with offset fits inside;
   - point:
     - supporting of translation;
     - supporting of scaling;
     - supporting of textual representation;
   - field:
-    - storing only of set cells;
+    - storing only of set cells:
+      - ignore outside points;
     - supporting of counting of set cells;
-    - supporting of checking if a cell is set;
+    - supporting of checking if a cell is set:
+      - ignore outside points;
     - supporting of checking if an other field fits inside;
     - supporting of mapping;
   - placed field:
