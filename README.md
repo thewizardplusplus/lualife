@@ -63,7 +63,7 @@ $ luarocks make
 ```lua
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
-local PlacedField = require("lualife.models.placed_field")
+local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 local function print_field(field)
