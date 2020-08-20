@@ -19,6 +19,31 @@ function TestField.test_new()
   luaunit.assert_equals(field._cells, {})
 end
 
+function TestField.test_tostring_empty()
+  local field = Field:new(Size:new(23, 42))
+  local text = tostring(field)
+
+  luaunit.assert_is_string(text)
+  luaunit.assert_equals(
+    text,
+    "{cells = {},size = { 23, 42 }}"
+  )
+end
+
+function TestField.test_tostring_nonempty()
+  local field = Field:new(Size:new(23, 42))
+  field:set(Point:new(2, 3))
+  field:set(Point:new(4, 2))
+
+  local text = tostring(field)
+
+  luaunit.assert_is_string(text)
+  luaunit.assert_equals(
+    text,
+    "{cells = { { 4, 2 }, { 2, 3 } },size = { 23, 42 }}"
+  )
+end
+
 function TestField.test_count_empty()
   local field = Field:new(Size:new(23, 42))
   local count = field:count()

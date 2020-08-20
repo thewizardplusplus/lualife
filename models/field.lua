@@ -2,6 +2,7 @@
 -- @classmod Field
 
 local middleclass = require("middleclass")
+local inspect = require("inspect")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 
@@ -28,6 +29,29 @@ function Field:initialize(size)
 
   self.size = size
   self._cells = {}
+end
+
+---
+-- @treturn string
+--   e.g. "{cells = { { 4, 2 }, { 2, 3 } },size = { 23, 42 }}"
+function Field:__tostring()
+  local cells = {}
+  self:map(function(point, contains)
+    if contains then
+      table.insert(cells, {point.x, point.y})
+    end
+  end)
+
+  return inspect(
+    {
+      size = {self.size.width, self.size.height},
+      cells = cells,
+    },
+    {
+      indent = "",
+      newline = "",
+    }
+  )
 end
 
 ---
