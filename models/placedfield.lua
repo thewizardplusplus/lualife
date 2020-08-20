@@ -2,6 +2,7 @@
 -- @classmod PlacedField
 
 local middleclass = require("middleclass")
+local inspect = require("inspect")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
@@ -47,6 +48,30 @@ function PlacedField:initialize(size, offset)
   Field.initialize(self, size)
 
   self.offset = offset
+end
+
+---
+-- @treturn string
+--   e.g. "{cells = { { 27, 44 }, { 25, 45 } },offset = { 23, 42 },size = { 5, 12 }}"
+function PlacedField:__tostring()
+  local cells = {}
+  self:map(function(point, contains)
+    if contains then
+      table.insert(cells, {point.x, point.y})
+    end
+  end)
+
+  return inspect(
+    {
+      size = {self.size.width, self.size.height},
+      offset = {self.offset.x, self.offset.y},
+      cells = cells,
+    },
+    {
+      indent = "",
+      newline = "",
+    }
+  )
 end
 
 ---

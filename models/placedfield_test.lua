@@ -97,6 +97,31 @@ function TestPlacedField.test_new_partial()
   luaunit.assert_equals(field._cells, {})
 end
 
+function TestPlacedField.test_tostring_empty()
+  local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
+  local text = tostring(field)
+
+  luaunit.assert_is_string(text)
+  luaunit.assert_equals(
+    text,
+    "{cells = {},offset = { 23, 42 },size = { 5, 12 }}"
+  )
+end
+
+function TestPlacedField.test_tostring_nonempty()
+  local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
+  field:set(Point:new(25, 45))
+  field:set(Point:new(27, 44))
+
+  local text = tostring(field)
+
+  luaunit.assert_is_string(text)
+  luaunit.assert_equals(
+    text,
+    "{cells = { { 27, 44 }, { 25, 45 } },offset = { 23, 42 },size = { 5, 12 }}"
+  )
+end
+
 function TestPlacedField.test_contains_false()
   local field = PlacedField:new(Size:new(5, 12), Point:new(23, 42))
   field:set(Point:new(25, 45))
