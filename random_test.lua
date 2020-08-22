@@ -21,7 +21,7 @@ function TestRandom.test_generate_small()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 1, 1 }"] = true,
+    ["{x = 1,y = 1}"] = true,
   })
 end
 
@@ -38,14 +38,14 @@ function TestRandom.test_generate_large()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 0, 0 }"] = true,
-    ["{ 1, 0 }"] = true,
-    ["{ 2, 0 }"] = true,
-    ["{ 1, 1 }"] = true,
-    ["{ 2, 1 }"] = true,
-    ["{ 0, 2 }"] = true,
-    ["{ 1, 2 }"] = true,
-    ["{ 2, 2 }"] = true,
+    ["{x = 0,y = 0}"] = true,
+    ["{x = 1,y = 0}"] = true,
+    ["{x = 2,y = 0}"] = true,
+    ["{x = 1,y = 1}"] = true,
+    ["{x = 2,y = 1}"] = true,
+    ["{x = 0,y = 2}"] = true,
+    ["{x = 1,y = 2}"] = true,
+    ["{x = 2,y = 2}"] = true,
   })
 end
 
@@ -65,14 +65,14 @@ function TestRandom.test_generate_placed()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 0, 0 }"] = true,
-    ["{ 1, 0 }"] = true,
-    ["{ 2, 0 }"] = true,
-    ["{ 1, 1 }"] = true,
-    ["{ 2, 1 }"] = true,
-    ["{ 0, 2 }"] = true,
-    ["{ 1, 2 }"] = true,
-    ["{ 2, 2 }"] = true,
+    ["{x = 0,y = 0}"] = true,
+    ["{x = 1,y = 0}"] = true,
+    ["{x = 2,y = 0}"] = true,
+    ["{x = 1,y = 1}"] = true,
+    ["{x = 2,y = 1}"] = true,
+    ["{x = 0,y = 2}"] = true,
+    ["{x = 1,y = 2}"] = true,
+    ["{x = 2,y = 2}"] = true,
   })
 end
 
@@ -89,7 +89,7 @@ function TestRandom.test_generate_with_limits_small()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 1, 1 }"] = true,
+    ["{x = 1,y = 1}"] = true,
   })
 end
 
@@ -106,14 +106,14 @@ function TestRandom.test_generate_with_limits_large()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 0, 0 }"] = true,
-    ["{ 2, 0 }"] = true,
-    ["{ 0, 1 }"] = true,
-    ["{ 1, 1 }"] = true,
-    ["{ 2, 1 }"] = true,
-    ["{ 0, 2 }"] = true,
-    ["{ 1, 2 }"] = true,
-    ["{ 2, 2 }"] = true,
+    ["{x = 0,y = 0}"] = true,
+    ["{x = 2,y = 0}"] = true,
+    ["{x = 0,y = 1}"] = true,
+    ["{x = 1,y = 1}"] = true,
+    ["{x = 2,y = 1}"] = true,
+    ["{x = 0,y = 2}"] = true,
+    ["{x = 1,y = 2}"] = true,
+    ["{x = 2,y = 2}"] = true,
   })
 end
 
@@ -133,13 +133,13 @@ function TestRandom.test_generate_with_limits_placed()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
-    ["{ 0, 0 }"] = true,
-    ["{ 2, 0 }"] = true,
-    ["{ 0, 1 }"] = true,
-    ["{ 1, 1 }"] = true,
-    ["{ 2, 1 }"] = true,
-    ["{ 0, 2 }"] = true,
-    ["{ 1, 2 }"] = true,
-    ["{ 2, 2 }"] = true,
+    ["{x = 0,y = 0}"] = true,
+    ["{x = 2,y = 0}"] = true,
+    ["{x = 0,y = 1}"] = true,
+    ["{x = 1,y = 1}"] = true,
+    ["{x = 2,y = 1}"] = true,
+    ["{x = 0,y = 2}"] = true,
+    ["{x = 1,y = 2}"] = true,
+    ["{x = 2,y = 2}"] = true,
   })
 end

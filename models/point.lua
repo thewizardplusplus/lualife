@@ -3,8 +3,10 @@
 
 local middleclass = require("middleclass")
 local inspect = require("inspect")
+local Stringifiable = require("lualife.models.stringifiable")
 
 local Point = middleclass("Point")
+Point:include(Stringifiable)
 
 ---
 -- @table instance
@@ -24,10 +26,12 @@ function Point:initialize(x, y)
   self.y = y
 end
 
----
--- @treturn string e.g. "{ 23, 42 }"
-function Point:__tostring()
-  return inspect({self.x, self.y})
+-- @treturn tab
+function Point:__data()
+  return {
+    x = self.x,
+    y = self.y,
+  }
 end
 
 ---

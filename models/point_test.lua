@@ -16,20 +16,12 @@ function TestPoint.test_new()
   luaunit.assert_equals(point.y, 42)
 end
 
-function TestPoint.test_tostring_integer()
+function TestPoint.test_tostring()
   local point = Point:new(23, 42)
   local text = tostring(point)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "{ 23, 42 }")
-end
-
-function TestPoint.test_tostring_real()
-  local point = Point:new(2.3, 4.2)
-  local text = tostring(point)
-
-  luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "{ 2.3, 4.2 }")
+  luaunit.assert_equals(text, "{x = 23,y = 42}")
 end
 
 function TestPoint.test_translate()
