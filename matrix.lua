@@ -9,13 +9,9 @@ local matrix = {}
 ---
 -- @tparam Field field
 -- @treturn Field
--- @raise * "rotation of the non-square matrix"
 function matrix.rotate(field)
   assert(field:isInstanceOf(Field))
-
-  if field.size.width ~= field.size.height then
-    error("rotation of the non-square matrix")
-  end
+  assert(field.size.width == field.size.height)
 
   -- make an empty field copy (i.e. without cells)
   -- and detect the field offset

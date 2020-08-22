@@ -8,17 +8,6 @@ local matrix = require("lualife.matrix")
 -- luacheck: globals TestMatrix
 TestMatrix = {}
 
-function TestMatrix.test_rotate_nonsquare()
-  local field = Field:new(Size:new(2, 3))
-
-  luaunit.assert_error_msg_contains(
-    "rotation of the non-square matrix",
-    function()
-      matrix.rotate(field)
-    end
-  )
-end
-
 function TestMatrix.test_rotate_odd()
   local field = Field:new(Size:new(3, 3))
   field:set(Point:new(0, 0))
