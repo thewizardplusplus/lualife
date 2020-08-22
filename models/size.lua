@@ -3,9 +3,11 @@
 
 local middleclass = require("middleclass")
 local inspect = require("inspect")
+local Stringifiable = require("lualife.models.stringifiable")
 local Point = require("lualife.models.point")
 
 local Size = middleclass("Size")
+Size:include(Stringifiable)
 
 ---
 -- @table instance
@@ -25,10 +27,12 @@ function Size:initialize(width, height)
   self.height = height
 end
 
----
--- @treturn string e.g. "{ 23, 42 }"
-function Size:__tostring()
-  return inspect({self.width, self.height})
+-- @treturn tab
+function Size:__data()
+  return {
+    width = self.width,
+    height = self.height,
+  }
 end
 
 ---
