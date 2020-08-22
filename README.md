@@ -8,6 +8,7 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
   - size:
     - supporting of checking if a point is inside;
     - supporting of checking if an other size with offset fits inside;
+    - supporting of textual representation;
   - point:
     - supporting of translation;
     - supporting of scaling;
@@ -20,12 +21,14 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
       - ignore outside points;
     - supporting of checking if an other field fits inside;
     - supporting of mapping;
+    - supporting of textual representation;
   - placed field:
     - extends the field model;
     - storing a field offset;
     - working with cells taking into account the field offset;
     - supporting of checking if an other field with offset fits inside;
     - supporting of copying the existing field with setting an offset;
+    - supporting of textual representation;
 - generating of a random field:
   - customizable filling factor;
   - limiting by a cell count:
