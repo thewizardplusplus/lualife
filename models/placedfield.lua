@@ -3,11 +3,13 @@
 
 local middleclass = require("middleclass")
 local inspect = require("inspect")
+local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
 local PlacedField = middleclass("PlacedField", Field)
+PlacedField:include(Stringifiable)
 
 ---
 -- @table instance
@@ -50,28 +52,12 @@ function PlacedField:initialize(size, offset)
   self.offset = offset
 end
 
----
--- @treturn string
---   e.g. "{cells = { { 27, 44 }, { 25, 45 } },offset = { 23, 42 },size = { 5, 12 }}"
-function PlacedField:__tostring()
-  local cells = {}
-  self:map(function(point, contains)
-    if contains then
-      table.insert(cells, {point.x, point.y})
-    end
-  end)
+-- @treturn tab
+function PlacedField:__data()
+  local data = Field.__data(self)
+  data.offset = self.offset:__data()
 
-  return inspect(
-    {
-      size = {self.size.width, self.size.height},
-      offset = {self.offset.x, self.offset.y},
-      cells = cells,
-    },
-    {
-      indent = "",
-      newline = "",
-    }
-  )
+  return data
 end
 
 ---
