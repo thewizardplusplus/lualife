@@ -1,6 +1,6 @@
 rockspec_format = "3.0"
 package = "lualife"
-version = "1.5.1-1"
+version = "1.5.2-1"
 description = {
   license = "MIT",
   maintainer = "thewizardplusplus <thewizardplusplus@yandex.ru>",
@@ -8,11 +8,12 @@ description = {
 }
 source = {
   url = "git+https://github.com/thewizardplusplus/lualife.git",
-  tag = "v1.5.1",
+  tag = "v1.5.2",
 }
 dependencies = {
   "lua >= 5.2, < 5.4",
   "middleclass >= 4.1.1, < 5.0",
+  "inspect >= 3.1.1, < 4.0",
 }
 test_dependencies = {
   "luaunit >= 3.3, < 4.0",
@@ -28,6 +29,8 @@ build = {
     ["matrix_test"] = "matrix_test.lua",
     ["life"] = "life.lua",
     ["life_test"] = "life_test.lua",
+    ["models.stringifiable"] = "models/stringifiable.lua",
+    ["models.stringifiable_test"] = "models/stringifiable_test.lua",
     ["models.size"] = "models/size.lua",
     ["models.size_test"] = "models/size_test.lua",
     ["models.point"] = "models/point.lua",
