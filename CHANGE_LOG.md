@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.5.2](https://github.com/thewizardplusplus/lualife/tree/v1.5.2) (2020-08-22)
+
+- models:
+  - size:
+    - supporting of textual representation;
+  - field:
+    - supporting of textual representation;
+  - placed field:
+    - supporting of textual representation;
+- refactoring:
+  - extract the implementation of textual representations for models to a separate mixin;
+  - improve error handling.
+
 ## [v1.5.1](https://github.com/thewizardplusplus/lualife/tree/v1.5.1) (2020-08-19)
 
 - models:
