@@ -2,7 +2,6 @@
 -- @classmod Field
 
 local middleclass = require("middleclass")
-local inspect = require("inspect")
 local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")

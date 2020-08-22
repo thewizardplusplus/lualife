@@ -24,10 +24,10 @@ function TestField.test_tostring_empty()
   local text = tostring(field)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(
-    text,
-    "{cells = {},size = {height = 42,width = 23}}"
-  )
+  luaunit.assert_equals(text, "{" ..
+    "cells = {}," ..
+    "size = {height = 42,width = 23}" ..
+  "}")
 end
 
 function TestField.test_tostring_nonempty()
@@ -38,10 +38,10 @@ function TestField.test_tostring_nonempty()
   local text = tostring(field)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(
-    text,
-    "{cells = { {x = 4,y = 2}, {x = 2,y = 3} },size = {height = 42,width = 23}}"
-  )
+  luaunit.assert_equals(text, "{" ..
+    "cells = { {x = 4,y = 2}, {x = 2,y = 3} }," ..
+    "size = {height = 42,width = 23}" ..
+  "}")
 end
 
 function TestField.test_count_empty()
