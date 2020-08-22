@@ -70,7 +70,7 @@ local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 local function print_field(field)
-  assert(field:isInstanceOf(PlacedField))
+  assert(field.isInstanceOf and field:isInstanceOf(PlacedField))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
@@ -114,7 +114,7 @@ local Field = require("lualife.models.field")
 local matrix = require("lualife.matrix")
 
 local function print_field(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
@@ -145,7 +145,7 @@ local Field = require("lualife.models.field")
 local life = require("lualife.life")
 
 local function print_field(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
@@ -184,7 +184,7 @@ local random = require("lualife.random")
 local life = require("lualife.life")
 
 local function print_field(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")

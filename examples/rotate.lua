@@ -4,7 +4,7 @@ local Field = require("lualife.models.field")
 local matrix = require("lualife.matrix")
 
 local function print_field(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")

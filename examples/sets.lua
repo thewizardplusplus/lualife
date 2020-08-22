@@ -4,7 +4,7 @@ local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 local function print_field(field)
-  assert(field:isInstanceOf(PlacedField))
+  assert(field.isInstanceOf and field:isInstanceOf(PlacedField))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
