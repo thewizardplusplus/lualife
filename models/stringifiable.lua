@@ -6,7 +6,7 @@ local inspect = require("inspect")
 local Stringifiable = {}
 
 ---
--- @treturn string
+-- @treturn string stringified result of the __data() metamethod
 function Stringifiable:__tostring()
   local metatable = getmetatable(self)
   assert(metatable and metatable.__data)

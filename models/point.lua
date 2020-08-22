@@ -25,13 +25,19 @@ function Point:initialize(x, y)
   self.y = y
 end
 
--- @treturn tab
+---
+-- @treturn tab table with instance fields
 function Point:__data()
   return {
     x = self.x,
     y = self.y,
   }
 end
+
+---
+-- @function __tostring
+-- @treturn string stringified table with instance fields
+-- @see Stringifiable
 
 ---
 -- @tparam Point point

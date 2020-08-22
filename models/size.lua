@@ -26,13 +26,19 @@ function Size:initialize(width, height)
   self.height = height
 end
 
--- @treturn tab
+---
+-- @treturn tab table with instance fields
 function Size:__data()
   return {
     width = self.width,
     height = self.height,
   }
 end
+
+---
+-- @function __tostring
+-- @treturn string stringified table with instance fields
+-- @see Stringifiable
 
 ---
 -- @tparam Point point
@@ -46,16 +52,16 @@ end
 
 ---
 -- @tparam Size other
--- @tparam[opt=(0 0)] Point offset
+-- @tparam[opt=(0 0)] Point self_offset
 -- @treturn bool
-function Size:_fits(other, offset)
-  offset = offset or Point:new(0, 0)
+function Size:_fits(other, self_offset)
+  self_offset = self_offset or Point:new(0, 0)
 
   assert(other.isInstanceOf and other:isInstanceOf(Size))
-  assert(offset.isInstanceOf and offset:isInstanceOf(Point))
+  assert(self_offset.isInstanceOf and self_offset:isInstanceOf(Point))
 
-  return offset.x >= 0 and offset.x <= other.width - self.width
-    and offset.y >= 0 and offset.y <= other.height - self.height
+  return self_offset.x >= 0 and self_offset.x <= other.width - self.width
+    and self_offset.y >= 0 and self_offset.y <= other.height - self.height
 end
 
 return Size

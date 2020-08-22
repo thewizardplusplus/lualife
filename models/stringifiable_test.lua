@@ -6,7 +6,6 @@ local Stringifiable = require("lualife.models.stringifiable")
 -- @tfield number number
 -- @tfield string text
 local MockClass = middleclass("MockClass")
--- include the Stringifiable mixin
 MockClass:include(Stringifiable)
 
 -- @function MockClass:new
@@ -22,7 +21,7 @@ function MockClass:initialize(number, text)
 end
 
 -- @function MockClass:__data
--- @treturn tab
+-- @treturn tab table with instance fields
 function MockClass:__data()
   return {
     number = self.number,

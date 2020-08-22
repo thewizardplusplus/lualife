@@ -4,6 +4,7 @@ file = {
   "sets.lua",
   "matrix.lua",
   "life.lua",
+  "models/stringifiable.lua",
   "models/size.lua",
   "models/point.lua",
   "models/field.lua",

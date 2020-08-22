@@ -51,13 +51,19 @@ function PlacedField:initialize(size, offset)
   self.offset = offset
 end
 
--- @treturn tab
+---
+-- @treturn tab table with instance fields
 function PlacedField:__data()
   local data = Field.__data(self)
   data.offset = self.offset:__data()
 
   return data
 end
+
+---
+-- @function __tostring
+-- @treturn string stringified table with instance fields
+-- @see Stringifiable
 
 ---
 -- @function count

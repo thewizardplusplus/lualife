@@ -32,7 +32,8 @@ function Field:initialize(size)
   self._cells = {}
 end
 
--- @treturn tab
+---
+-- @treturn tab table with instance fields
 function Field:__data()
   local cells = {}
   self:map(function(point, contains)
@@ -46,6 +47,11 @@ function Field:__data()
     cells = cells,
   }
 end
+
+---
+-- @function __tostring
+-- @treturn string stringified table with instance fields
+-- @see Stringifiable
 
 ---
 -- @treturn int [0, self.size.width * self.size.height]
