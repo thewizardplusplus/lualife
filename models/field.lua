@@ -3,6 +3,7 @@
 
 local middleclass = require("middleclass")
 local inspect = require("inspect")
+local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 
@@ -13,6 +14,7 @@ local function to_boolean(value)
 end
 
 local Field = middleclass("Field")
+Field:include(Stringifiable)
 
 ---
 -- @table instance
@@ -31,27 +33,19 @@ function Field:initialize(size)
   self._cells = {}
 end
 
----
--- @treturn string
---   e.g. "{cells = { { 4, 2 }, { 2, 3 } },size = { 23, 42 }}"
-function Field:__tostring()
+-- @treturn tab
+function Field:__data()
   local cells = {}
   self:map(function(point, contains)
     if contains then
-      table.insert(cells, {point.x, point.y})
+      table.insert(cells, point:__data())
     end
   end)
 
-  return inspect(
-    {
-      size = {self.size.width, self.size.height},
-      cells = cells,
-    },
-    {
-      indent = "",
-      newline = "",
-    }
-  )
+  return {
+    size = self.size:__data(),
+    cells = cells,
+  }
 end
 
 ---
