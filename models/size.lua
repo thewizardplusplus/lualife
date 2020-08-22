@@ -35,7 +35,7 @@ end
 -- @tparam Point point
 -- @treturn bool
 function Size:_contains(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   return point.x >= 0 and point.x <= self.width - 1
     and point.y >= 0 and point.y <= self.height - 1
@@ -48,8 +48,8 @@ end
 function Size:_fits(other, offset)
   offset = offset or Point:new(0, 0)
 
-  assert(other:isInstanceOf(Size))
-  assert(offset:isInstanceOf(Point))
+  assert(other.isInstanceOf and other:isInstanceOf(Size))
+  assert(offset.isInstanceOf and offset:isInstanceOf(Point))
 
   return offset.x >= 0 and offset.x <= other.width - self.width
     and offset.y >= 0 and offset.y <= other.height - self.height

@@ -10,7 +10,7 @@ local random = {}
 -- @tparam number filling [0, 1]
 -- @treturn Field
 function random.generate(sample, filling)
-  assert(sample:isInstanceOf(Field))
+  assert(sample.isInstanceOf and sample:isInstanceOf(Field))
   assert(type(filling) == "number")
 
   return sample:map(function()
@@ -30,7 +30,7 @@ function random.generate_with_limits(
   minimal_count,
   maximal_count
 )
-  assert(sample:isInstanceOf(Field))
+  assert(sample.isInstanceOf and sample:isInstanceOf(Field))
   assert(type(filling) == "number")
   assert(type(minimal_count) == "number")
   assert(type(maximal_count) == "number")

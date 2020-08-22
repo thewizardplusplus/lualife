@@ -10,7 +10,7 @@ local matrix = {}
 -- @tparam Field field
 -- @treturn Field
 function matrix.rotate(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
   assert(field.size.width == field.size.height)
 
   -- make an empty field copy (i.e. without cells)

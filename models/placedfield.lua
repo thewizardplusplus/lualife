@@ -25,8 +25,8 @@ local PlacedField = middleclass("PlacedField", Field)
 function PlacedField.static.place(field, offset)
   offset = offset or Point:new(0, 0)
 
-  assert(field:isInstanceOf(Field))
-  assert(offset:isInstanceOf(Point))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
+  assert(offset.isInstanceOf and offset:isInstanceOf(Point))
 
   local placed_field = PlacedField:new(field.size, offset)
   placed_field._cells = field._cells
@@ -42,8 +42,8 @@ end
 function PlacedField:initialize(size, offset)
   offset = offset or Point:new(0, 0)
 
-  assert(size:isInstanceOf(Size))
-  assert(offset:isInstanceOf(Point))
+  assert(size.isInstanceOf and size:isInstanceOf(Size))
+  assert(offset.isInstanceOf and offset:isInstanceOf(Point))
 
   Field.initialize(self, size)
 
@@ -82,7 +82,7 @@ end
 -- @tparam Point point
 -- @treturn bool
 function PlacedField:contains(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   local local_point = self:_to_local(point)
   return Field.contains(self, local_point)
@@ -92,7 +92,7 @@ end
 -- @tparam PlacedField other
 -- @treturn bool
 function PlacedField:fits(other)
-  assert(other:isInstanceOf(PlacedField))
+  assert(other.isInstanceOf and other:isInstanceOf(PlacedField))
 
   local offsets_difference = self.offset:translate(other:_inverted_offset())
   return self.size:_fits(other.size, offsets_difference)
@@ -101,7 +101,7 @@ end
 ---
 -- @tparam Point point
 function PlacedField:set(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   local local_point = self:_to_local(point)
   Field.set(self, local_point)
@@ -131,7 +131,7 @@ end
 -- @tparam Point point
 -- @treturn Point
 function PlacedField:_to_local(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   return point:translate(self:_inverted_offset())
 end
@@ -140,7 +140,7 @@ end
 -- @tparam Point point
 -- @treturn Point
 function PlacedField:_to_global(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   return point:translate(self.offset)
 end

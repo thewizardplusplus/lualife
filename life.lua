@@ -10,7 +10,7 @@ local life = {}
 -- @tparam Field field
 -- @treturn Field
 function life.populate(field)
-  assert(field:isInstanceOf(Field))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
 
   return field:map(function(point, contains)
     local neighbors = life._neighbors(field, point)
@@ -23,8 +23,8 @@ end
 -- @tparam Point point
 -- @treturn int [0, 8]
 function life._neighbors(field, point)
-  assert(field:isInstanceOf(Field))
-  assert(point:isInstanceOf(Point))
+  assert(field.isInstanceOf and field:isInstanceOf(Field))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   local neighbors = 0
   for dy = -1, 1 do

@@ -25,7 +25,7 @@ local Field = middleclass("Field")
 -- @tparam Size size
 -- @treturn Field
 function Field:initialize(size)
-  assert(size:isInstanceOf(Size))
+  assert(size.isInstanceOf and size:isInstanceOf(Size))
 
   self.size = size
   self._cells = {}
@@ -69,7 +69,7 @@ end
 -- @tparam Point point
 -- @treturn bool
 function Field:contains(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   return self.size:_contains(point)
     and to_boolean(self._cells[tostring(point)])
@@ -79,7 +79,7 @@ end
 -- @tparam Field other
 -- @treturn bool
 function Field:fits(other)
-  assert(other:isInstanceOf(Field))
+  assert(other.isInstanceOf and other:isInstanceOf(Field))
 
   return self.size:_fits(other.size)
 end
@@ -87,7 +87,7 @@ end
 ---
 -- @tparam Point point
 function Field:set(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   if self.size:_contains(point) then
     self._cells[tostring(point)] = true

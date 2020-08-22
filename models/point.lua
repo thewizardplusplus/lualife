@@ -34,7 +34,7 @@ end
 -- @tparam Point point
 -- @treturn Point
 function Point:translate(point)
-  assert(point:isInstanceOf(Point))
+  assert(point.isInstanceOf and point:isInstanceOf(Point))
 
   return Point:new(self.x + point.x, self.y + point.y)
 end
