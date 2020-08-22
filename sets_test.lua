@@ -32,7 +32,8 @@ function TestSets.test_union_intersection()
   want_unioned_field:set(Point:new(2, 3))
   want_unioned_field:set(Point:new(3, 3))
 
-  luaunit.assert_true(unioned_field:isInstanceOf(Field))
+  luaunit.assert_true(unioned_field.isInstanceOf
+    and unioned_field:isInstanceOf(Field))
   luaunit.assert_equals(unioned_field, want_unioned_field)
 end
 
@@ -58,7 +59,8 @@ function TestSets.test_union_out_of_size()
   want_unioned_field:set(Point:new(2, 2))
   want_unioned_field:set(Point:new(3, 3))
 
-  luaunit.assert_true(unioned_field:isInstanceOf(Field))
+  luaunit.assert_true(unioned_field.isInstanceOf
+    and unioned_field:isInstanceOf(Field))
   luaunit.assert_equals(unioned_field, want_unioned_field)
 end
 
@@ -83,7 +85,8 @@ function TestSets.test_complement()
   want_complemented_field:set(Point:new(2, 1))
   want_complemented_field:set(Point:new(1, 2))
 
-  luaunit.assert_true(complemented_field:isInstanceOf(Field))
+  luaunit.assert_true(complemented_field.isInstanceOf
+    and complemented_field:isInstanceOf(Field))
   luaunit.assert_equals(complemented_field, want_complemented_field)
 end
 
@@ -106,6 +109,7 @@ function TestSets.test_intersection()
     PlacedField:new(Size:new(3, 3), Point:new(1, 1))
   want_intersected_field:set(Point:new(2, 2))
 
-  luaunit.assert_true(intersected_field:isInstanceOf(Field))
+  luaunit.assert_true(intersected_field.isInstanceOf
+    and intersected_field:isInstanceOf(Field))
   luaunit.assert_equals(intersected_field, want_intersected_field)
 end

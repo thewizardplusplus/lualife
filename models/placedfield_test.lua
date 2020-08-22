@@ -22,7 +22,8 @@ function TestPlacedField.test_place_full()
   want_placed_field:set(Point:new(23, 43))
   want_placed_field:set(Point:new(24, 43))
 
-  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_true(placed_field.isInstanceOf
+    and placed_field:isInstanceOf(Field))
   luaunit.assert_equals(placed_field, want_placed_field)
 end
 
@@ -41,7 +42,8 @@ function TestPlacedField.test_place_partial()
   want_placed_field:set(Point:new(0, 1))
   want_placed_field:set(Point:new(1, 1))
 
-  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_true(placed_field.isInstanceOf
+    and placed_field:isInstanceOf(Field))
   luaunit.assert_equals(placed_field, want_placed_field)
 end
 
@@ -60,7 +62,8 @@ function TestPlacedField.test_place_placed()
   want_placed_field:set(Point:new(23, 43))
   want_placed_field:set(Point:new(24, 43))
 
-  luaunit.assert_true(placed_field:isInstanceOf(Field))
+  luaunit.assert_true(placed_field.isInstanceOf
+    and placed_field:isInstanceOf(Field))
   luaunit.assert_equals(placed_field, want_placed_field)
 end
 
@@ -69,7 +72,7 @@ function TestPlacedField.test_new_full()
   local offset = Point:new(23, 42)
   local field = PlacedField:new(size, offset)
 
-  luaunit.assert_true(field:isInstanceOf(PlacedField))
+  luaunit.assert_true(field.isInstanceOf and field:isInstanceOf(PlacedField))
 
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, size)
@@ -85,7 +88,7 @@ function TestPlacedField.test_new_partial()
   local size = Size:new(5, 12)
   local field = PlacedField:new(size)
 
-  luaunit.assert_true(field:isInstanceOf(PlacedField))
+  luaunit.assert_true(field.isInstanceOf and field:isInstanceOf(PlacedField))
 
   luaunit.assert_true(field.size:isInstanceOf(Size))
   luaunit.assert_is(field.size, size)
@@ -214,7 +217,8 @@ function TestPlacedField.test_map_point()
   want_next_field:set(Point:new(23, 43))
   want_next_field:set(Point:new(24, 43))
 
-  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_true(next_field.isInstanceOf
+    and next_field:isInstanceOf(Field))
   luaunit.assert_equals(next_field, want_next_field)
 end
 
@@ -236,6 +240,7 @@ function TestPlacedField.test_map_contains()
   want_next_field:set(Point:new(24, 44))
   want_next_field:set(Point:new(25, 44))
 
-  luaunit.assert_true(next_field:isInstanceOf(Field))
+  luaunit.assert_true(next_field.isInstanceOf
+    and next_field:isInstanceOf(Field))
   luaunit.assert_equals(next_field, want_next_field)
 end

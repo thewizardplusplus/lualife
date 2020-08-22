@@ -8,7 +8,7 @@ TestSize = {}
 function TestSize.test_new()
   local size = Size:new(23, 42)
 
-  luaunit.assert_true(size:isInstanceOf(Size))
+  luaunit.assert_true(size.isInstanceOf and size:isInstanceOf(Size))
 
   luaunit.assert_is_number(size.width)
   luaunit.assert_equals(size.width, 23)
