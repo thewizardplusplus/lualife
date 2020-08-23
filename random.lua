@@ -7,9 +7,11 @@ local random = {}
 
 ---
 -- @tparam Field sample
--- @tparam number filling [0, 1]
+-- @tparam[opt=0.5] number filling [0, 1]
 -- @treturn Field
 function random.generate(sample, filling)
+  filling = filling or 0.5
+
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
   assert(type(filling) == "number")
 
@@ -20,9 +22,9 @@ end
 
 ---
 -- @tparam Field sample
--- @tparam number filling [0, 1]
--- @tparam int minimal_count [0, sample.size.width * sample.size.height]
--- @tparam int maximal_count [0, sample.size.width * sample.size.height]
+-- @tparam[opt=0.5] number filling [0, 1]
+-- @tparam[optchain=0] int minimal_count [0, sample.size.width * sample.size.height]
+-- @tparam[optchain=math.huge] int maximal_count [minimal_count, ∞)
 -- @treturn Field
 function random.generate_with_limits(
   sample,
@@ -30,6 +32,10 @@ function random.generate_with_limits(
   minimal_count,
   maximal_count
 )
+  filling = filling or 0.5
+  minimal_count = minimal_count or 0
+  maximal_count = maximal_count or math.huge
+
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
   assert(type(filling) == "number")
   assert(type(minimal_count) == "number")
