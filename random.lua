@@ -13,7 +13,7 @@ function random.generate(sample, filling)
   filling = filling or 0.5
 
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
-  assert(type(filling) == "number")
+  assert(type(filling) == "number" and filling >= 0 and filling <= 1)
 
   return sample:map(function()
     return math.random() < filling
@@ -37,9 +37,11 @@ function random.generate_with_limits(
   maximal_count = maximal_count or math.huge
 
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
-  assert(type(filling) == "number")
-  assert(type(minimal_count) == "number")
-  assert(type(maximal_count) == "number")
+  assert(type(filling) == "number" and filling >= 0 and filling <= 1)
+
+  local size = sample.size.width * sample.size.height
+  assert(type(minimal_count) == "number" and minimal_count >= 0 and minimal_count <= size)
+  assert(type(maximal_count) == "number" and maximal_count >= minimal_count)
 
   local field
   repeat

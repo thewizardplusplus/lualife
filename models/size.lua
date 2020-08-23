@@ -19,8 +19,8 @@ Size:include(Stringifiable)
 -- @tparam int height [0, ∞)
 -- @treturn Size
 function Size:initialize(width, height)
-  assert(type(width) == "number")
-  assert(type(height) == "number")
+  assert(type(width) == "number" and width >= 0)
+  assert(type(height) == "number" and height >= 0)
 
   self.width = width
   self.height = height
