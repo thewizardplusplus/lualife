@@ -1,5 +1,14 @@
 # Change Log
 
+## [v1.5.3](https://github.com/thewizardplusplus/lualife/tree/v1.5.3) (2020-08-24)
+
+- generating of a random field:
+  - supporting of default values for parameters:
+    - filling factor;
+    - cell count:
+      - lower limit;
+      - upper limit.
+
 ## [v1.5.2](https://github.com/thewizardplusplus/lualife/tree/v1.5.2) (2020-08-22)
 
 - models:
