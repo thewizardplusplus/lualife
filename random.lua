@@ -1,6 +1,7 @@
 ---
 -- @module random
 
+local types = require("lualife.types")
 local Field = require("lualife.models.field")
 
 local random = {}
@@ -13,7 +14,7 @@ function random.generate(sample, filling)
   filling = filling or 0.5
 
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
-  assert(type(filling) == "number" and filling >= 0 and filling <= 1)
+  assert(types.is_positive(filling, 0, 1))
 
   return sample:map(function()
     return math.random() < filling
@@ -38,11 +39,9 @@ function random.generate_with_limits(
   maximal_count = maximal_count or math.huge
 
   assert(sample.isInstanceOf and sample:isInstanceOf(Field))
-  assert(type(filling) == "number" and filling >= 0 and filling <= 1)
-  assert(type(minimal_count) == "number"
-    and minimal_count >= 0
-    and minimal_count <= sample.size.width * sample.size.height)
-  assert(type(maximal_count) == "number" and maximal_count >= minimal_count)
+  assert(types.is_positive(filling, 0, 1))
+  assert(types.is_positive(minimal_count, 0, sample.size.width * sample.size.height))
+  assert(types.is_positive(maximal_count, minimal_count))
 
   local field
   repeat

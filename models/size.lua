@@ -2,6 +2,7 @@
 -- @classmod Size
 
 local middleclass = require("middleclass")
+local types = require("lualife.types")
 local Stringifiable = require("lualife.models.stringifiable")
 local Point = require("lualife.models.point")
 
@@ -19,8 +20,8 @@ Size:include(Stringifiable)
 -- @tparam int height [0, ∞)
 -- @treturn Size
 function Size:initialize(width, height)
-  assert(type(width) == "number" and width >= 0)
-  assert(type(height) == "number" and height >= 0)
+  assert(types.is_positive(width))
+  assert(types.is_positive(height))
 
   self.width = width
   self.height = height

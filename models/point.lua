@@ -2,6 +2,7 @@
 -- @classmod Point
 
 local middleclass = require("middleclass")
+local types = require("lualife.types")
 local Stringifiable = require("lualife.models.stringifiable")
 
 local Point = middleclass("Point")
@@ -18,8 +19,8 @@ Point:include(Stringifiable)
 -- @tparam number y
 -- @treturn Point
 function Point:initialize(x, y)
-  assert(type(x) == "number")
-  assert(type(y) == "number")
+  assert(types.is_positive(x, -math.huge))
+  assert(types.is_positive(y, -math.huge))
 
   self.x = x
   self.y = y
@@ -52,7 +53,7 @@ end
 -- @tparam number factor
 -- @treturn Point
 function Point:scale(factor)
-  assert(type(factor) == "number")
+  assert(types.is_positive(factor, -math.huge))
 
   return Point:new(self.x * factor, self.y * factor)
 end
