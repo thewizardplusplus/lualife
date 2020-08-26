@@ -11,14 +11,7 @@ function TestTypes.test_is_number_with_limits_false_not_number()
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_number_with_limits_false_minimum_default()
-  local result = types.is_number_with_limits(-1)
-
-  luaunit.assert_is_boolean(result)
-  luaunit.assert_false(result)
-end
-
-function TestTypes.test_is_number_with_limits_false_minimum_not_default()
+function TestTypes.test_is_number_with_limits_false_minimum()
   local result = types.is_number_with_limits(22, 23)
 
   luaunit.assert_is_boolean(result)
@@ -40,7 +33,7 @@ function TestTypes.test_is_number_with_limits_true_number()
 end
 
 function TestTypes.test_is_number_with_limits_true_minimum_default()
-  local result = types.is_number_with_limits(0)
+  local result = types.is_number_with_limits(-math.huge)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)

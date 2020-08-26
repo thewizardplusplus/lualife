@@ -15,15 +15,15 @@ end
 
 ---
 -- @tparam number number
--- @tparam[opt=0] number minimum
--- @tparam[optchain=math.huge] number maximum
+-- @tparam[opt=-math.huge] number minimum
+-- @tparam[optchain=math.huge] number maximum [minimum, ∞)
 -- @treturn bool
 function types.is_number_with_limits(number, minimum, maximum)
-  minimum = minimum or 0
+  minimum = minimum or -math.huge
   maximum = maximum or math.huge
 
   assert(type(minimum) == "number")
-  assert(type(maximum) == "number")
+  assert(type(maximum) == "number" and maximum >= minimum)
 
   return type(number) == "number"
     and number >= minimum
