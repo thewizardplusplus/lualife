@@ -18,7 +18,7 @@ end
 -- @tparam[opt=0] number minimum
 -- @tparam[optchain=math.huge] number maximum
 -- @treturn bool
-function types.is_positive(number, minimum, maximum)
+function types.is_number_with_limits(number, minimum, maximum)
   minimum = minimum or 0
   maximum = maximum or math.huge
 

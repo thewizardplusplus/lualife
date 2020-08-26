@@ -4,65 +4,65 @@ local types = require("lualife.types")
 -- luacheck: globals TestTypes
 TestTypes = {}
 
-function TestTypes.test_is_positive_false_not_number()
-  local is_positive = types.is_positive(nil)
+function TestTypes.test_is_number_with_limits_false_not_number()
+  local result = types.is_number_with_limits(nil)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_false(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_positive_false_minimum_default()
-  local is_positive = types.is_positive(-1)
+function TestTypes.test_is_number_with_limits_false_minimum_default()
+  local result = types.is_number_with_limits(-1)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_false(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_positive_false_minimum_not_default()
-  local is_positive = types.is_positive(22, 23)
+function TestTypes.test_is_number_with_limits_false_minimum_not_default()
+  local result = types.is_number_with_limits(22, 23)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_false(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_positive_false_maximum()
-  local is_positive = types.is_positive(43, 23, 42)
+function TestTypes.test_is_number_with_limits_false_maximum()
+  local result = types.is_number_with_limits(43, 23, 42)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_false(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_positive_true_number()
-  local is_positive = types.is_positive(23)
+function TestTypes.test_is_number_with_limits_true_number()
+  local result = types.is_number_with_limits(23)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_true(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_positive_true_minimum_default()
-  local is_positive = types.is_positive(0)
+function TestTypes.test_is_number_with_limits_true_minimum_default()
+  local result = types.is_number_with_limits(0)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_true(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_positive_true_minimum_not_default()
-  local is_positive = types.is_positive(23, 23)
+function TestTypes.test_is_number_with_limits_true_minimum_not_default()
+  local result = types.is_number_with_limits(23, 23)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_true(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_positive_true_maximum_default()
-  local is_positive = types.is_positive(math.huge)
+function TestTypes.test_is_number_with_limits_true_maximum_default()
+  local result = types.is_number_with_limits(math.huge)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_true(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_positive_true_maximum_not_default()
-  local is_positive = types.is_positive(42, 23, 42)
+function TestTypes.test_is_number_with_limits_true_maximum_not_default()
+  local result = types.is_number_with_limits(42, 23, 42)
 
-  luaunit.assert_is_boolean(is_positive)
-  luaunit.assert_true(is_positive)
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
 end
