@@ -1,6 +1,7 @@
 ---
 -- @module matrix
 
+local types = require("lualife.types")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 
@@ -10,7 +11,7 @@ local matrix = {}
 -- @tparam Field field
 -- @treturn Field
 function matrix.rotate(field)
-  assert(field.isInstanceOf and field:isInstanceOf(Field))
+  assert(types.is_instance(field, Field))
   assert(field.size.width == field.size.height)
 
   -- make an empty field copy (i.e. without cells)

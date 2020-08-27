@@ -2,6 +2,7 @@
 -- @classmod Field
 
 local middleclass = require("middleclass")
+local types = require("lualife.types")
 local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
@@ -26,7 +27,7 @@ Field:include(Stringifiable)
 -- @tparam Size size
 -- @treturn Field
 function Field:initialize(size)
-  assert(size.isInstanceOf and size:isInstanceOf(Size))
+  assert(types.is_instance(size, Size))
 
   self.size = size
   self._cells = {}
@@ -68,7 +69,7 @@ end
 -- @tparam Point point
 -- @treturn bool
 function Field:contains(point)
-  assert(point.isInstanceOf and point:isInstanceOf(Point))
+  assert(types.is_instance(point, Point))
 
   return self.size:_contains(point)
     and to_boolean(self._cells[tostring(point)])
@@ -78,7 +79,7 @@ end
 -- @tparam Field other
 -- @treturn bool
 function Field:fits(other)
-  assert(other.isInstanceOf and other:isInstanceOf(Field))
+  assert(types.is_instance(other, Field))
 
   return self.size:_fits(other.size)
 end
@@ -86,7 +87,7 @@ end
 ---
 -- @tparam Point point
 function Field:set(point)
-  assert(point.isInstanceOf and point:isInstanceOf(Point))
+  assert(types.is_instance(point, Point))
 
   if self.size:_contains(point) then
     self._cells[tostring(point)] = true
