@@ -1,4 +1,5 @@
 local luaunit = require("luaunit")
+local types = require("lualife.types")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
@@ -10,9 +11,9 @@ function TestField.test_new()
   local size = Size:new(23, 42)
   local field = Field:new(size)
 
-  luaunit.assert_true(field.isInstanceOf and field:isInstanceOf(Field))
+  luaunit.assert_true(types.is_instance(field, Field))
 
-  luaunit.assert_true(field.size:isInstanceOf(Size))
+  luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, size)
 
   luaunit.assert_is_table(field._cells)
@@ -156,8 +157,7 @@ function TestField.test_map_point()
   want_next_field:set(Point:new(0, 1))
   want_next_field:set(Point:new(1, 1))
 
-  luaunit.assert_true(next_field.isInstanceOf
-    and next_field:isInstanceOf(Field))
+  luaunit.assert_true(types.is_instance(next_field, Field))
   luaunit.assert_equals(next_field, want_next_field)
 end
 
@@ -179,7 +179,6 @@ function TestField.test_map_contains()
   want_next_field:set(Point:new(1, 2))
   want_next_field:set(Point:new(2, 2))
 
-  luaunit.assert_true(next_field.isInstanceOf
-    and next_field:isInstanceOf(Field))
+  luaunit.assert_true(types.is_instance(next_field, Field))
   luaunit.assert_equals(next_field, want_next_field)
 end
