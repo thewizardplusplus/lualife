@@ -1,5 +1,6 @@
 local luaunit = require("luaunit")
 local types = require("lualife.types")
+local MockClass = require("lualife.models.mockclass")
 
 -- luacheck: globals TestTypes
 TestTypes = {}
@@ -36,12 +37,20 @@ function TestTypes.test_is_instance_false_by_check()
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_instance_true()
+function TestTypes.test_is_instance_true_by_check()
   local result = types.is_instance({
     isInstanceOf = function()
       return true
     end
   })
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
+function TestTypes.test_is_instance_true_real_class()
+  local mock = MockClass:new(2.3, "test")
+  local result = types.is_instance(mock, MockClass)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
