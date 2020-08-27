@@ -19,8 +19,8 @@ Point:include(Stringifiable)
 -- @tparam number y
 -- @treturn Point
 function Point:initialize(x, y)
-  assert(types.is_number_with_limits(x, -math.huge))
-  assert(types.is_number_with_limits(y, -math.huge))
+  assert(types.is_number_with_limits(x))
+  assert(types.is_number_with_limits(y))
 
   self.x = x
   self.y = y
@@ -53,7 +53,7 @@ end
 -- @tparam number factor
 -- @treturn Point
 function Point:scale(factor)
-  assert(types.is_number_with_limits(factor, -math.huge))
+  assert(types.is_number_with_limits(factor))
 
   return Point:new(self.x * factor, self.y * factor)
 end

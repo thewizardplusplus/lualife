@@ -20,8 +20,8 @@ Size:include(Stringifiable)
 -- @tparam int height [0, ∞)
 -- @treturn Size
 function Size:initialize(width, height)
-  assert(types.is_number_with_limits(width))
-  assert(types.is_number_with_limits(height))
+  assert(types.is_number_with_limits(width, 0))
+  assert(types.is_number_with_limits(height, 0))
 
   self.width = width
   self.height = height
