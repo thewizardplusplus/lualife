@@ -4,6 +4,49 @@ local types = require("lualife.types")
 -- luacheck: globals TestTypes
 TestTypes = {}
 
+function TestTypes.test_is_instance_false_not_table()
+  local result = types.is_instance(nil)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_instance_false_missed_method()
+  local result = types.is_instance({})
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_instance_false_incorrect_method()
+  local result = types.is_instance({isInstanceOf = 23})
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_instance_false_by_check()
+  local result = types.is_instance({
+    isInstanceOf = function()
+      return false
+    end
+  })
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_instance_true()
+  local result = types.is_instance({
+    isInstanceOf = function()
+      return true
+    end
+  })
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
 function TestTypes.test_is_number_with_limits_false_not_number()
   local result = types.is_number_with_limits(nil)
 
