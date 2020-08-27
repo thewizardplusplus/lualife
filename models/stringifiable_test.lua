@@ -1,33 +1,5 @@
 local luaunit = require("luaunit")
-local middleclass = require("middleclass")
-local Stringifiable = require("lualife.models.stringifiable")
-
--- @class MockClass
--- @tfield number number
--- @tfield string text
-local MockClass = middleclass("MockClass")
-MockClass:include(Stringifiable)
-
--- @function MockClass:new
--- @tparam number number
--- @tparam string text
--- @treturn MockClass
-function MockClass:initialize(number, text)
-  assert(type(number) == "number")
-  assert(type(text) == "string")
-
-  self.number = number
-  self.text = text
-end
-
--- @function MockClass:__data
--- @treturn tab table with instance fields
-function MockClass:__data()
-  return {
-    number = self.number,
-    text = self.text,
-  }
-end
+local MockClass = require("lualife.models.mockclass")
 
 -- luacheck: globals TestStringifiable
 TestStringifiable = {}
