@@ -5,6 +5,56 @@ local MockClass = require("lualife.models.mockclass")
 -- luacheck: globals TestTypes
 TestTypes = {}
 
+function TestTypes.test_is_callable_false_missed_metatable()
+  local result = types.is_callable({})
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_callable_false_missed_metamethod()
+  local value = {}
+  setmetatable(value, {})
+
+  local result = types.is_callable(value)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_callable_false_incorrect_metamethod()
+  local value = {}
+  setmetatable(value, {__call = 23})
+
+  local result = types.is_callable(value)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_callable_true_function()
+  local value = function()
+  end
+
+  local result = types.is_callable(value)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
+function TestTypes.test_is_callable_true_metatable()
+  local value = {}
+  setmetatable(value, {
+    __call = function()
+    end,
+  })
+
+  local result = types.is_callable(value)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
 function TestTypes.test_is_instance_false_not_table()
   local result = types.is_instance(nil)
 
@@ -30,7 +80,7 @@ function TestTypes.test_is_instance_false_by_check()
   local result = types.is_instance({
     isInstanceOf = function()
       return false
-    end
+    end,
   })
 
   luaunit.assert_is_boolean(result)
@@ -41,7 +91,7 @@ function TestTypes.test_is_instance_true_by_check()
   local result = types.is_instance({
     isInstanceOf = function()
       return true
-    end
+    end,
   })
 
   luaunit.assert_is_boolean(result)

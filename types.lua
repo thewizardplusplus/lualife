@@ -12,8 +12,8 @@ function types.is_callable(value)
   end
 
   local metatable = getmetatable(value)
-  return metatable
-    and metatable.__call
+  return metatable ~= nil
+    and metatable.__call ~= nil
     and type(metatable.__call) == "function"
 end
 
