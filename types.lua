@@ -4,6 +4,20 @@
 local types = {}
 
 ---
+-- @tparam any value
+-- @treturn bool
+function types.is_callable(value)
+  if type(value) == "function" then
+    return true
+  end
+
+  local metatable = getmetatable(value)
+  return metatable
+    and metatable.__call
+    and type(metatable.__call) == "function"
+end
+
+---
 -- @tparam any instance
 -- @tparam tab class class created via the middleclass library
 -- @treturn bool
