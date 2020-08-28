@@ -1,10 +1,11 @@
+local types = require("lualife.types")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 local function print_field(field)
-  assert(field.isInstanceOf and field:isInstanceOf(PlacedField))
+  assert(types.is_instance(field, PlacedField))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")

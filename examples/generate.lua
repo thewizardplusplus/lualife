@@ -1,10 +1,11 @@
+local types = require("lualife.types")
 local Size = require("lualife.models.size")
 local Field = require("lualife.models.field")
 local random = require("lualife.random")
 local life = require("lualife.life")
 
 local function print_field(field)
-  assert(field.isInstanceOf and field:isInstanceOf(Field))
+  assert(types.is_instance(field, Field))
 
   field:map(function(point, contains)
     io.write(contains and "O" or ".")
@@ -16,7 +17,7 @@ local function print_field(field)
 end
 
 local function sleep(seconds)
-  assert(type(seconds) == "number")
+  assert(types.is_number_with_limits(seconds))
 
   local start = os.clock()
   while os.clock() - start < seconds do end
