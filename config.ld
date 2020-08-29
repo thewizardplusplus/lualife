@@ -1,5 +1,6 @@
 project = "lualife"
 file = {
+  "types.lua",
   "random.lua",
   "sets.lua",
   "matrix.lua",
