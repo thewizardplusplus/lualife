@@ -37,7 +37,7 @@ end
 -- @treturn bool
 function types.is_instance(instance, class)
   return type(instance) == "table"
-    and type(instance.isInstanceOf) == "function"
+    and types.is_callable(instance.isInstanceOf)
     and instance:isInstanceOf(class)
 end
 
