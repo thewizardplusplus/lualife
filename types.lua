@@ -12,16 +12,23 @@ end
 
 ---
 -- @tparam any value
+-- @tparam string metamethod
+-- @treturn bool
+function types.has_metamethod(value, metamethod)
+  local metatable = getmetatable(value)
+  return types.to_boolean(metatable)
+    and types.is_callable(metatable[metamethod])
+end
+
+---
+-- @tparam any value
 -- @treturn bool
 function types.is_callable(value)
   if type(value) == "function" then
     return true
   end
 
-  local metatable = getmetatable(value)
-  return types.to_boolean(metatable)
-    and types.to_boolean(metatable.__call)
-    and type(metatable.__call) == "function"
+  return types.has_metamethod(value, "__call")
 end
 
 ---
