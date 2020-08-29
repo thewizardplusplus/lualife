@@ -5,69 +5,57 @@ local MockClass = require("lualife.models.mockclass")
 -- luacheck: globals TestTypes
 TestTypes = {}
 
-function TestTypes.test_to_boolean_false()
-  local result = types.to_boolean(false)
+function TestTypes.test_is_number_with_limits_false_not_number()
+  local result = types.is_number_with_limits(nil)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_to_boolean_false_analog()
-  local result = types.to_boolean(nil)
+function TestTypes.test_is_number_with_limits_false_minimum()
+  local result = types.is_number_with_limits(22, 23)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_to_boolean_true()
-  local result = types.to_boolean(true)
+function TestTypes.test_is_number_with_limits_false_maximum()
+  local result = types.is_number_with_limits(43, 23, 42)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_is_number_with_limits_true_number()
+  local result = types.is_number_with_limits(23)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
 end
 
-function TestTypes.test_to_boolean_true_analog()
-  local result = types.to_boolean(23)
+function TestTypes.test_is_number_with_limits_true_minimum_default()
+  local result = types.is_number_with_limits(-math.huge)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
 end
 
-function TestTypes.test_has_metamethod_false_missed_metatable()
-  local result = types.has_metamethod({}, "__test")
+function TestTypes.test_is_number_with_limits_true_minimum_not_default()
+  local result = types.is_number_with_limits(23, 23)
 
   luaunit.assert_is_boolean(result)
-  luaunit.assert_false(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_has_metamethod_false_missed_metamethod()
-  local value = {}
-  setmetatable(value, {})
-
-  local result = types.has_metamethod(value, "__test")
+function TestTypes.test_is_number_with_limits_true_maximum_default()
+  local result = types.is_number_with_limits(math.huge)
 
   luaunit.assert_is_boolean(result)
-  luaunit.assert_false(result)
+  luaunit.assert_true(result)
 end
 
-function TestTypes.test_has_metamethod_false_incorrect_metamethod()
-  local value = {}
-  setmetatable(value, {__test = 23})
-
-  local result = types.has_metamethod(value, "__test")
-
-  luaunit.assert_is_boolean(result)
-  luaunit.assert_false(result)
-end
-
-function TestTypes.test_has_metamethod_true()
-  local value = {}
-  setmetatable(value, {
-    __test = function()
-    end,
-  })
-
-  local result = types.has_metamethod(value, "__test")
+function TestTypes.test_is_number_with_limits_true_maximum_not_default()
+  local result = types.is_number_with_limits(42, 23, 42)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
@@ -174,57 +162,69 @@ function TestTypes.test_is_instance_true_real_class()
   luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_number_with_limits_false_not_number()
-  local result = types.is_number_with_limits(nil)
+function TestTypes.test_has_metamethod_false_missed_metatable()
+  local result = types.has_metamethod({}, "__test")
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_number_with_limits_false_minimum()
-  local result = types.is_number_with_limits(22, 23)
+function TestTypes.test_has_metamethod_false_missed_metamethod()
+  local value = {}
+  setmetatable(value, {})
+
+  local result = types.has_metamethod(value, "__test")
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_number_with_limits_false_maximum()
-  local result = types.is_number_with_limits(43, 23, 42)
+function TestTypes.test_has_metamethod_false_incorrect_metamethod()
+  local value = {}
+  setmetatable(value, {__test = 23})
+
+  local result = types.has_metamethod(value, "__test")
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_false(result)
 end
 
-function TestTypes.test_is_number_with_limits_true_number()
-  local result = types.is_number_with_limits(23)
+function TestTypes.test_has_metamethod_true()
+  local value = {}
+  setmetatable(value, {
+    __test = function()
+    end,
+  })
+
+  local result = types.has_metamethod(value, "__test")
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_number_with_limits_true_minimum_default()
-  local result = types.is_number_with_limits(-math.huge)
+function TestTypes.test_to_boolean_false()
+  local result = types.to_boolean(false)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_to_boolean_false_analog()
+  local result = types.to_boolean(nil)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_to_boolean_true()
+  local result = types.to_boolean(true)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)
 end
 
-function TestTypes.test_is_number_with_limits_true_minimum_not_default()
-  local result = types.is_number_with_limits(23, 23)
-
-  luaunit.assert_is_boolean(result)
-  luaunit.assert_true(result)
-end
-
-function TestTypes.test_is_number_with_limits_true_maximum_default()
-  local result = types.is_number_with_limits(math.huge)
-
-  luaunit.assert_is_boolean(result)
-  luaunit.assert_true(result)
-end
-
-function TestTypes.test_is_number_with_limits_true_maximum_not_default()
-  local result = types.is_number_with_limits(42, 23, 42)
+function TestTypes.test_to_boolean_true_analog()
+  local result = types.to_boolean(23)
 
   luaunit.assert_is_boolean(result)
   luaunit.assert_true(result)

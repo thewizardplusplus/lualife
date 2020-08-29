@@ -4,20 +4,20 @@
 local types = {}
 
 ---
--- @tparam any value
+-- @tparam number number
+-- @tparam[opt=-math.huge] number minimum
+-- @tparam[optchain=math.huge] number maximum [minimum, ∞)
 -- @treturn bool
-function types.to_boolean(value)
-  return value and true or false
-end
+function types.is_number_with_limits(number, minimum, maximum)
+  minimum = minimum or -math.huge
+  maximum = maximum or math.huge
 
----
--- @tparam any value
--- @tparam string metamethod
--- @treturn bool
-function types.has_metamethod(value, metamethod)
-  local metatable = getmetatable(value)
-  return types.to_boolean(metatable)
-    and types.is_callable(metatable[metamethod])
+  assert(type(minimum) == "number")
+  assert(type(maximum) == "number" and maximum >= minimum)
+
+  return type(number) == "number"
+    and number >= minimum
+    and number <= maximum
 end
 
 ---
@@ -42,20 +42,20 @@ function types.is_instance(instance, class)
 end
 
 ---
--- @tparam number number
--- @tparam[opt=-math.huge] number minimum
--- @tparam[optchain=math.huge] number maximum [minimum, ∞)
+-- @tparam any value
+-- @tparam string metamethod
 -- @treturn bool
-function types.is_number_with_limits(number, minimum, maximum)
-  minimum = minimum or -math.huge
-  maximum = maximum or math.huge
+function types.has_metamethod(value, metamethod)
+  local metatable = getmetatable(value)
+  return types.to_boolean(metatable)
+    and types.is_callable(metatable[metamethod])
+end
 
-  assert(type(minimum) == "number")
-  assert(type(maximum) == "number" and maximum >= minimum)
-
-  return type(number) == "number"
-    and number >= minimum
-    and number <= maximum
+---
+-- @tparam any value
+-- @treturn bool
+function types.to_boolean(value)
+  return value and true or false
 end
 
 return types
