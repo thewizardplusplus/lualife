@@ -33,6 +33,46 @@ function TestTypes.test_to_boolean_true_analog()
   luaunit.assert_true(result)
 end
 
+function TestTypes.test_has_metamethod_false_missed_metatable()
+  local result = types.has_metamethod({}, "__test")
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_has_metamethod_false_missed_metamethod()
+  local value = {}
+  setmetatable(value, {})
+
+  local result = types.has_metamethod(value, "__test")
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_has_metamethod_false_incorrect_metamethod()
+  local value = {}
+  setmetatable(value, {__test = 23})
+
+  local result = types.has_metamethod(value, "__test")
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_has_metamethod_true()
+  local value = {}
+  setmetatable(value, {
+    __test = function()
+    end,
+  })
+
+  local result = types.has_metamethod(value, "__test")
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
 function TestTypes.test_is_callable_false_missed_metatable()
   local result = types.is_callable({})
 
