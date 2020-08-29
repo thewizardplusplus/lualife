@@ -40,7 +40,11 @@ function random.generate_with_limits(
 
   assert(types.is_instance(sample, Field))
   assert(types.is_number_with_limits(filling, 0, 1))
-  assert(types.is_number_with_limits(minimal_count, 0, sample.size.width * sample.size.height))
+  assert(types.is_number_with_limits(
+    minimal_count,
+    0,
+    sample.size.width * sample.size.height
+  ))
   assert(types.is_number_with_limits(maximal_count, minimal_count))
 
   local field

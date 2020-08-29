@@ -2,7 +2,6 @@ local luaunit = require("luaunit")
 local types = require("lualife.types")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
-local Field = require("lualife.models.field")
 local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
