@@ -2,6 +2,7 @@
 -- @classmod Stringifiable
 
 local inspect = require("inspect")
+local types = require("lualife.types")
 
 local Stringifiable = {}
 
@@ -10,7 +11,7 @@ local Stringifiable = {}
 function Stringifiable:__tostring()
   local metatable = getmetatable(self)
   assert(metatable and metatable.__data)
-  assert(type(metatable.__data) == "function")
+  assert(types.is_callable(metatable.__data))
 
   return inspect(self:__data(), {
     indent = "",

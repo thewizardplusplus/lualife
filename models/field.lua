@@ -98,7 +98,7 @@ end
 -- @tparam func mapper func(point: Point, contains: bool): bool
 -- @treturn Field
 function Field:map(mapper)
-  assert(type(mapper) == "function")
+  assert(types.is_callable(mapper))
 
   local field = Field:new(self.size)
   for y = 0, self.size.height - 1 do

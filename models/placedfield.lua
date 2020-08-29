@@ -103,7 +103,7 @@ end
 -- @tparam func mapper func(point: Point, contains: bool): bool
 -- @treturn PlacedField
 function PlacedField:map(mapper)
-  assert(type(mapper) == "function")
+  assert(types.is_callable(mapper))
 
   local field = Field.map(self, function(point)
     local global_point = self:_to_global(point)
