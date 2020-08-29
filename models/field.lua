@@ -7,12 +7,6 @@ local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 
--- @tparam any value
--- @treturn bool
-local function to_boolean(value)
-  return value and true or false
-end
-
 local Field = middleclass("Field")
 Field:include(Stringifiable)
 
@@ -72,7 +66,7 @@ function Field:contains(point)
   assert(types.is_instance(point, Point))
 
   return self.size:_contains(point)
-    and to_boolean(self._cells[tostring(point)])
+    and types.to_boolean(self._cells[tostring(point)])
 end
 
 ---

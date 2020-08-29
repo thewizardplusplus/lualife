@@ -6,14 +6,21 @@ local types = {}
 ---
 -- @tparam any value
 -- @treturn bool
+function types.to_boolean(value)
+  return value and true or false
+end
+
+---
+-- @tparam any value
+-- @treturn bool
 function types.is_callable(value)
   if type(value) == "function" then
     return true
   end
 
   local metatable = getmetatable(value)
-  return metatable ~= nil
-    and metatable.__call ~= nil
+  return types.to_boolean(metatable)
+    and types.to_boolean(metatable.__call)
     and type(metatable.__call) == "function"
 end
 
