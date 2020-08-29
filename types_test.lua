@@ -5,6 +5,34 @@ local MockClass = require("lualife.models.mockclass")
 -- luacheck: globals TestTypes
 TestTypes = {}
 
+function TestTypes.test_to_boolean_false()
+  local result = types.to_boolean(false)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_to_boolean_false_analog()
+  local result = types.to_boolean(nil)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_false(result)
+end
+
+function TestTypes.test_to_boolean_true()
+  local result = types.to_boolean(true)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
+function TestTypes.test_to_boolean_true_analog()
+  local result = types.to_boolean(23)
+
+  luaunit.assert_is_boolean(result)
+  luaunit.assert_true(result)
+end
+
 function TestTypes.test_is_callable_false_missed_metatable()
   local result = types.is_callable({})
 
