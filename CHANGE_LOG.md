@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.5.4](https://github.com/thewizardplusplus/lualife/tree/v1.5.4) (2020-08-30)
+
+- adding of improved asserts:
+  - checking of numbers:
+    - with optional checking of a number range;
+  - checking of callable values:
+    - functions;
+    - tables with the `__call()` metamethod;
+  - checking of classes inheritance:
+    - supporting of the [middleclass](https://github.com/kikito/middleclass) library.
+
 ## [v1.5.3](https://github.com/thewizardplusplus/lualife/tree/v1.5.3) (2020-08-24)
 
 - generating of a random field:
