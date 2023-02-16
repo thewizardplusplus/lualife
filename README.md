@@ -1,5 +1,6 @@
 # lualife
 
+[![lint](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml)
 [![test](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml)
 
 The library that implements [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
