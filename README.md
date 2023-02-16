@@ -4,8 +4,11 @@
 [![doc:link](https://img.shields.io/badge/doc%3Alink-link-blue?logo=github)](https://thewizardplusplus.github.io/lualife/)
 [![lint](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml)
 [![test](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml)
+[![luarocks](https://img.shields.io/badge/luarocks-link-blue?logo=lua)](https://luarocks.org/modules/thewizardplusplus/lualife)
 
 The library that implements [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
+
+_**Disclaimer:** this library was written directly on an Android smartphone with the [QLua](https://play.google.com/store/apps/details?id=com.quseit.qlua5pro2) IDE._
 
 ## Features
 
@@ -54,17 +57,8 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
 
 ## Installation
 
-Clone this repository:
-
 ```
-$ git clone https://github.com/thewizardplusplus/lualife.git
-$ cd lualife
-```
-
-Install the library with the [LuaRocks](https://luarocks.org/) tool:
-
-```
-$ luarocks make
+$ luarocks install lualife
 ```
 
 ## Examples
