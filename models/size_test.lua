@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local types = require("lualife.types")
+local checks = require("luatypechecks.checks")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 
@@ -9,7 +9,7 @@ TestSize = {}
 function TestSize.test_new()
   local size = Size:new(23, 42)
 
-  luaunit.assert_true(types.is_instance(size, Size))
+  luaunit.assert_true(checks.is_instance(size, Size))
 
   luaunit.assert_is_number(size.width)
   luaunit.assert_equals(size.width, 23)
