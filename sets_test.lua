@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local types = require("lualife.types")
+local checks = require("luatypechecks.checks")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local PlacedField = require("lualife.models.placedfield")
@@ -32,7 +32,7 @@ function TestSets.test_union_intersection()
   want_unioned_field:set(Point:new(2, 3))
   want_unioned_field:set(Point:new(3, 3))
 
-  luaunit.assert_true(types.is_instance(unioned_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(unioned_field, PlacedField))
   luaunit.assert_equals(unioned_field, want_unioned_field)
 end
 
@@ -58,7 +58,7 @@ function TestSets.test_union_out_of_size()
   want_unioned_field:set(Point:new(2, 2))
   want_unioned_field:set(Point:new(3, 3))
 
-  luaunit.assert_true(types.is_instance(unioned_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(unioned_field, PlacedField))
   luaunit.assert_equals(unioned_field, want_unioned_field)
 end
 
@@ -83,7 +83,7 @@ function TestSets.test_complement()
   want_complemented_field:set(Point:new(2, 1))
   want_complemented_field:set(Point:new(1, 2))
 
-  luaunit.assert_true(types.is_instance(complemented_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(complemented_field, PlacedField))
   luaunit.assert_equals(complemented_field, want_complemented_field)
 end
 
@@ -106,6 +106,6 @@ function TestSets.test_intersection()
     PlacedField:new(Size:new(3, 3), Point:new(1, 1))
   want_intersected_field:set(Point:new(2, 2))
 
-  luaunit.assert_true(types.is_instance(intersected_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(intersected_field, PlacedField))
   luaunit.assert_equals(intersected_field, want_intersected_field)
 end
