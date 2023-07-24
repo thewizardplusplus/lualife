@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local types = require("lualife.types")
+local checks = require("luatypechecks.checks")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
@@ -28,7 +28,7 @@ function TestMatrix.test_rotate_odd()
   want_rotated_field:set(Point:new(2, 1))
   want_rotated_field:set(Point:new(2, 2))
 
-  luaunit.assert_true(types.is_instance(rotated_field, Field))
+  luaunit.assert_true(checks.is_instance(rotated_field, Field))
   luaunit.assert_equals(rotated_field, want_rotated_field)
 end
 
@@ -59,7 +59,7 @@ function TestMatrix.test_rotate_even()
   want_rotated_field:set(Point:new(3, 2))
   want_rotated_field:set(Point:new(3, 3))
 
-  luaunit.assert_true(types.is_instance(rotated_field, Field))
+  luaunit.assert_true(checks.is_instance(rotated_field, Field))
   luaunit.assert_equals(rotated_field, want_rotated_field)
 end
 
@@ -82,7 +82,7 @@ function TestMatrix.test_rotate_placed_odd()
   want_rotated_field:set(Point:new(25, 43))
   want_rotated_field:set(Point:new(25, 44))
 
-  luaunit.assert_true(types.is_instance(rotated_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(rotated_field, PlacedField))
   luaunit.assert_equals(rotated_field, want_rotated_field)
 end
 
@@ -113,6 +113,6 @@ function TestMatrix.test_rotate_placed_even()
   want_rotated_field:set(Point:new(26, 44))
   want_rotated_field:set(Point:new(26, 45))
 
-  luaunit.assert_true(types.is_instance(rotated_field, PlacedField))
+  luaunit.assert_true(checks.is_instance(rotated_field, PlacedField))
   luaunit.assert_equals(rotated_field, want_rotated_field)
 end
