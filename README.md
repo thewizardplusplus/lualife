@@ -66,16 +66,19 @@ $ luarocks install lualife
 `lualife.sets`:
 
 ```lua
-local types = require("lualife.types")
+local assertions = require("luatypechecks.assertions")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local PlacedField = require("lualife.models.placedfield")
 local sets = require("lualife.sets")
 
 local function print_field(field)
-  assert(types.is_instance(field, PlacedField))
+  assertions.is_instance(field, PlacedField)
 
   field:map(function(point, contains)
+    assertions.is_instance(point, Point)
+    assertions.is_boolean(contains)
+
     io.write(contains and "O" or ".")
 
     if point.x - field.offset.x == field.size.width - 1 then
@@ -111,16 +114,19 @@ print_field(intersected_field)
 `lualife.matrix.rotate()`:
 
 ```lua
-local types = require("lualife.types")
+local assertions = require("luatypechecks.assertions")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local matrix = require("lualife.matrix")
 
 local function print_field(field)
-  assert(types.is_instance(field, Field))
+  assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
+    assertions.is_instance(point, Point)
+    assertions.is_boolean(contains)
+
     io.write(contains and "O" or ".")
 
     if point.x == field.size.width - 1 then
@@ -143,16 +149,19 @@ print_field(rotated_field)
 `lualife.life.populate()`:
 
 ```lua
-local types = require("lualife.types")
+local assertions = require("luatypechecks.assertions")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local life = require("lualife.life")
 
 local function print_field(field)
-  assert(types.is_instance(field, Field))
+  assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
+    assertions.is_instance(point, Point)
+    assertions.is_boolean(contains)
+
     io.write(contains and "O" or ".")
 
     if point.x == field.size.width - 1 then
@@ -162,7 +171,7 @@ local function print_field(field)
 end
 
 local function sleep(seconds)
-  assert(types.is_number_with_limits(seconds))
+  assertions.is_number(seconds)
 
   local start = os.clock()
   while os.clock() - start < seconds do end
@@ -183,16 +192,20 @@ end
 `lualife.random.generate()`:
 
 ```lua
-local types = require("lualife.types")
+local assertions = require("luatypechecks.assertions")
 local Size = require("lualife.models.size")
+local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
 local random = require("lualife.random")
 local life = require("lualife.life")
 
 local function print_field(field)
-  assert(types.is_instance(field, Field))
+  assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
+    assertions.is_instance(point, Point)
+    assertions.is_boolean(contains)
+
     io.write(contains and "O" or ".")
 
     if point.x == field.size.width - 1 then
@@ -202,7 +215,7 @@ local function print_field(field)
 end
 
 local function sleep(seconds)
-  assert(types.is_number_with_limits(seconds))
+  assertions.is_number(seconds)
 
   local start = os.clock()
   while os.clock() - start < seconds do end
