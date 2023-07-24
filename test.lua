@@ -1,7 +1,6 @@
 local luaunit = require("luaunit")
 
 for _, module in ipairs({
-  "types",
   "random",
   "sets",
   "matrix" ,

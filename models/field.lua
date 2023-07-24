@@ -2,7 +2,6 @@
 -- @classmod Field
 
 local middleclass = require("middleclass")
-local types = require("lualife.types")
 local assertions = require("luatypechecks.assertions")
 local Stringifiable = require("lualife.models.stringifiable")
 local Size = require("lualife.models.size")
@@ -69,8 +68,7 @@ end
 function Field:contains(point)
   assertions.is_instance(point, Point)
 
-  return self.size:_contains(point)
-    and types.to_boolean(self._cells[tostring(point)])
+  return self.size:_contains(point) and self._cells[tostring(point)] == true
 end
 
 ---
