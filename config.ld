@@ -7,7 +7,6 @@ full_description = [[
   For more details, see topic @{README.md}.
 ]]
 file = {
-  "types.lua",
   "random.lua",
   "sets.lua",
   "matrix.lua",
