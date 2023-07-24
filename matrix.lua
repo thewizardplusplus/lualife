@@ -8,11 +8,15 @@ local Field = require("lualife.models.field")
 local matrix = {}
 
 ---
--- @tparam Field field
+-- @tparam Field field field whose width equals its height
 -- @treturn Field
+-- @raise "field must be square"
 function matrix.rotate(field)
   assertions.is_instance(field, Field)
-  assert(field.size.width == field.size.height)
+
+  if field.size.width ~= field.size.height then
+    error("field must be square")
+  end
 
   -- make an empty field copy (i.e. without cells)
   -- and detect the field offset

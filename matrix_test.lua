@@ -116,3 +116,11 @@ function TestMatrix.test_rotate_placed_even()
   luaunit.assert_true(checks.is_instance(rotated_field, PlacedField))
   luaunit.assert_equals(rotated_field, want_rotated_field)
 end
+
+function TestMatrix.test_rotate_non_square_field()
+  local field = Field:new(Size:new(3, 4))
+
+  luaunit.assert_error_msg_content_equals("field must be square", function()
+    matrix.rotate(field)
+  end)
+end
