@@ -1,5 +1,5 @@
 local luaunit = require("luaunit")
-local types = require("lualife.types")
+local checks = require("luatypechecks.checks")
 local Size = require("lualife.models.size")
 local Point = require("lualife.models.point")
 local Field = require("lualife.models.field")
@@ -39,9 +39,9 @@ function TestRandom.test_generate_small()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
@@ -98,9 +98,9 @@ function TestRandom.test_generate_large()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
@@ -157,12 +157,12 @@ function TestRandom.test_generate_placed()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, PlacedField))
+  luaunit.assert_true(checks.is_instance(field, PlacedField))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_true(types.is_instance(field.offset, Point))
+  luaunit.assert_true(checks.is_instance(field.offset, Point))
   luaunit.assert_is(field.offset, sample.offset)
 
   luaunit.assert_is_table(field._cells)
@@ -211,9 +211,9 @@ function TestRandom.test_generate_partial()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
@@ -241,9 +241,9 @@ function TestRandom.test_generate_with_limits_small()
     }
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
@@ -305,9 +305,9 @@ function TestRandom.test_generate_with_limits_large()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
@@ -369,12 +369,12 @@ function TestRandom.test_generate_with_limits_placed()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, PlacedField))
+  luaunit.assert_true(checks.is_instance(field, PlacedField))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
-  luaunit.assert_true(types.is_instance(field.offset, Point))
+  luaunit.assert_true(checks.is_instance(field.offset, Point))
   luaunit.assert_is(field.offset, sample.offset)
 
   luaunit.assert_is_table(field._cells)
@@ -423,9 +423,9 @@ function TestRandom.test_generate_with_limits_partial()
     end
   end
 
-  luaunit.assert_true(types.is_instance(field, Field))
+  luaunit.assert_true(checks.is_instance(field, Field))
 
-  luaunit.assert_true(types.is_instance(field.size, Size))
+  luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
