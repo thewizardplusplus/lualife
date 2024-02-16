@@ -15,15 +15,37 @@ function TestRandom.test_generate_small()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate(sample, 0.2)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 1,y = 1}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 2,y = 1}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 2,y = 1}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 1,y = 1}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_large()
@@ -32,22 +54,57 @@ function TestRandom.test_generate_large()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate(sample, 0.8)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 0}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 2,y = 1}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 0}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 1,y = 0}"] = true,
-    ["{x = 2,y = 0}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 2,y = 1}"] = true,
-    ["{x = 0,y = 2}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 2}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_placed()
@@ -56,6 +113,50 @@ function TestRandom.test_generate_placed()
   local sample = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
   local field = random.generate(sample, 0.8)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 0}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 2,y = 1}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 0}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, PlacedField))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
@@ -65,16 +166,7 @@ function TestRandom.test_generate_placed()
   luaunit.assert_is(field.offset, sample.offset)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 1,y = 0}"] = true,
-    ["{x = 2,y = 0}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 2,y = 1}"] = true,
-    ["{x = 0,y = 2}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 2}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_partial()
@@ -83,18 +175,49 @@ function TestRandom.test_generate_partial()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate(sample)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 1}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 2,y = 1}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 1}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_with_limits_small()
@@ -103,15 +226,28 @@ function TestRandom.test_generate_with_limits_small()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate_with_limits(sample, 0.5, 1, 1)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 1}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 1,y = 1}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    wanted_cells = {
+      ["{x = 2,y = 1}"] = true,
+    }
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 1,y = 1}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_with_limits_large()
@@ -120,22 +256,62 @@ function TestRandom.test_generate_with_limits_large()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate_with_limits(sample, 0.5, 8, 8)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 0}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 0}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 2,y = 0}"] = true,
-    ["{x = 0,y = 1}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 2,y = 1}"] = true,
-    ["{x = 0,y = 2}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 2}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_with_limits_placed()
@@ -143,6 +319,55 @@ function TestRandom.test_generate_with_limits_placed()
 
   local sample = PlacedField:new(Size:new(3, 3), Point:new(23, 42))
   local field = random.generate_with_limits(sample, 0.5, 8, 8)
+
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 0}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 1}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 0}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 1,y = 2}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
 
   luaunit.assert_true(types.is_instance(field, PlacedField))
 
@@ -153,16 +378,7 @@ function TestRandom.test_generate_with_limits_placed()
   luaunit.assert_is(field.offset, sample.offset)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 2,y = 0}"] = true,
-    ["{x = 0,y = 1}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 2,y = 1}"] = true,
-    ["{x = 0,y = 2}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 2}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
 
 function TestRandom.test_generate_with_limits_partial()
@@ -171,16 +387,47 @@ function TestRandom.test_generate_with_limits_partial()
   local sample = Field:new(Size:new(3, 3))
   local field = random.generate_with_limits(sample)
 
+  local wanted_cells
+  if _VERSION == "Lua 5.4" then
+    wanted_cells = {
+      ["{x = 0,y = 1}"] = true,
+      ["{x = 0,y = 2}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 0}"] = true,
+      ["{x = 2,y = 2}"] = true,
+    }
+  elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
+    wanted_cells = {
+      ["{x = 0,y = 0}"] = true,
+      ["{x = 1,y = 1}"] = true,
+      ["{x = 1,y = 2}"] = true,
+      ["{x = 2,y = 1}"] = true,
+    }
+  elseif _VERSION == "Lua 5.1" then
+    if type(jit) == "table" then -- check for LuaJIT
+      wanted_cells = {
+        ["{x = 0,y = 0}"] = true,
+        ["{x = 0,y = 1}"] = true,
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 1,y = 1}"] = true,
+        ["{x = 2,y = 1}"] = true,
+      }
+    else
+      wanted_cells = {
+        ["{x = 0,y = 2}"] = true,
+        ["{x = 1,y = 0}"] = true,
+        ["{x = 2,y = 1}"] = true,
+        ["{x = 2,y = 2}"] = true,
+      }
+    end
+  end
+
   luaunit.assert_true(types.is_instance(field, Field))
 
   luaunit.assert_true(types.is_instance(field.size, Size))
   luaunit.assert_is(field.size, sample.size)
 
   luaunit.assert_is_table(field._cells)
-  luaunit.assert_equals(field._cells, {
-    ["{x = 0,y = 0}"] = true,
-    ["{x = 1,y = 1}"] = true,
-    ["{x = 1,y = 2}"] = true,
-    ["{x = 2,y = 1}"] = true,
-  })
+  luaunit.assert_equals(field._cells, wanted_cells)
 end
