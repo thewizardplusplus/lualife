@@ -194,8 +194,8 @@ function TestPlacedField.test_set()
   field:set(Point:new(27, 44))
 
   luaunit.assert_equals(field._cells, {
-    ["{x = 2,y = 3}"] = true,
-    ["{x = 4,y = 2}"] = true,
+    ["{__name = \"Point\",x = 2,y = 3}"] = true,
+    ["{__name = \"Point\",x = 4,y = 2}"] = true,
   })
 end
 
