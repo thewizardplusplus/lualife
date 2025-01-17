@@ -23,7 +23,7 @@ function TestSize.test_tostring()
   local text = tostring(size)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "{height = 42,width = 23}")
+  luaunit.assert_equals(text, "{__name = \"Size\",height = 42,width = 23}")
 end
 
 function TestSize.test_contains_false_top_left()
