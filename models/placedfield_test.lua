@@ -105,9 +105,10 @@ function TestPlacedField.test_tostring_empty()
 
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
+    "__name = \"PlacedField\"," ..
     "cells = {}," ..
-    "offset = {x = 23,y = 42}," ..
-    "size = {height = 12,width = 5}" ..
+    "offset = {__name = \"Point\",x = 23,y = 42}," ..
+    "size = {__name = \"Size\",height = 12,width = 5}" ..
   "}")
 end
 
@@ -120,9 +121,13 @@ function TestPlacedField.test_tostring_nonempty()
 
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
-    "cells = { {x = 27,y = 44}, {x = 25,y = 45} }," ..
-    "offset = {x = 23,y = 42}," ..
-    "size = {height = 12,width = 5}" ..
+    "__name = \"PlacedField\"," ..
+    "cells = { " ..
+      "{__name = \"Point\",x = 27,y = 44}, " ..
+      "{__name = \"Point\",x = 25,y = 45} " ..
+    "}," ..
+    "offset = {__name = \"Point\",x = 23,y = 42}," ..
+    "size = {__name = \"Size\",height = 12,width = 5}" ..
   "}")
 end
 
