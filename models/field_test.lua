@@ -27,8 +27,9 @@ function TestField.test_tostring_empty()
 
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
+    "__name = \"Field\"," ..
     "cells = {}," ..
-    "size = {height = 42,width = 23}" ..
+    "size = {__name = \"Size\",height = 42,width = 23}" ..
   "}")
 end
 
@@ -41,8 +42,12 @@ function TestField.test_tostring_nonempty()
 
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
-    "cells = { {x = 4,y = 2}, {x = 2,y = 3} }," ..
-    "size = {height = 42,width = 23}" ..
+    "__name = \"Field\"," ..
+    "cells = { " ..
+      "{__name = \"Point\",x = 4,y = 2}, " ..
+      "{__name = \"Point\",x = 2,y = 3} " ..
+    "}," ..
+    "size = {__name = \"Size\",height = 42,width = 23}" ..
   "}")
 end
 
