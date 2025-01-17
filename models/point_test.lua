@@ -22,7 +22,7 @@ function TestPoint.test_tostring()
   local text = tostring(point)
 
   luaunit.assert_is_string(text)
-  luaunit.assert_equals(text, "{x = 23,y = 42}")
+  luaunit.assert_equals(text, "{__name = \"Point\",x = 23,y = 42}")
 end
 
 function TestPoint.test_translate()

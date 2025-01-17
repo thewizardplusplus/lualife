@@ -18,23 +18,23 @@ function TestRandom.test_generate_small()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     end
   end
@@ -57,43 +57,43 @@ function TestRandom.test_generate_large()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 0}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 0}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
@@ -116,43 +116,43 @@ function TestRandom.test_generate_placed()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 0}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 0}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
@@ -178,35 +178,35 @@ function TestRandom.test_generate_partial()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
@@ -229,15 +229,15 @@ function TestRandom.test_generate_with_limits_small()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     wanted_cells = {
-      ["{x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
     }
   end
 
@@ -259,48 +259,48 @@ function TestRandom.test_generate_with_limits_large()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 0}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 0}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
@@ -323,48 +323,48 @@ function TestRandom.test_generate_with_limits_placed()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 0}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 1}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 0}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 1,y = 2}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 1,y = 2}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
@@ -390,35 +390,35 @@ function TestRandom.test_generate_with_limits_partial()
   local wanted_cells
   if _VERSION == "Lua 5.4" then
     wanted_cells = {
-      ["{x = 0,y = 1}"] = true,
-      ["{x = 0,y = 2}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 0}"] = true,
-      ["{x = 2,y = 2}"] = true,
+      ["{__name = \"Point\",x = 0,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 2}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 0}"] = true,
+      ["{__name = \"Point\",x = 2,y = 2}"] = true,
     }
   elseif _VERSION == "Lua 5.3" or _VERSION == "Lua 5.2" then
     wanted_cells = {
-      ["{x = 0,y = 0}"] = true,
-      ["{x = 1,y = 1}"] = true,
-      ["{x = 1,y = 2}"] = true,
-      ["{x = 2,y = 1}"] = true,
+      ["{__name = \"Point\",x = 0,y = 0}"] = true,
+      ["{__name = \"Point\",x = 1,y = 1}"] = true,
+      ["{__name = \"Point\",x = 1,y = 2}"] = true,
+      ["{__name = \"Point\",x = 2,y = 1}"] = true,
     }
   elseif _VERSION == "Lua 5.1" then
     if type(jit) == "table" then -- check for LuaJIT
       wanted_cells = {
-        ["{x = 0,y = 0}"] = true,
-        ["{x = 0,y = 1}"] = true,
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 1,y = 1}"] = true,
-        ["{x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 0}"] = true,
+        ["{__name = \"Point\",x = 0,y = 1}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 1,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
       }
     else
       wanted_cells = {
-        ["{x = 0,y = 2}"] = true,
-        ["{x = 1,y = 0}"] = true,
-        ["{x = 2,y = 1}"] = true,
-        ["{x = 2,y = 2}"] = true,
+        ["{__name = \"Point\",x = 0,y = 2}"] = true,
+        ["{__name = \"Point\",x = 1,y = 0}"] = true,
+        ["{__name = \"Point\",x = 2,y = 1}"] = true,
+        ["{__name = \"Point\",x = 2,y = 2}"] = true,
       }
     end
   end
