@@ -15,6 +15,7 @@ dependencies = {
   "lua >= 5.1",
   "middleclass >= 4.1.1, < 5.0",
   "inspect >= 3.1.1, < 4.0",
+  "compat53 >= 0.13, < 1.0",
   "luatypechecks >= 1.3.4, < 2.0",
   "luaserialization >= 1.3.0, < 2.0",
   "luamath >= 1.2.1, < 2.0",
