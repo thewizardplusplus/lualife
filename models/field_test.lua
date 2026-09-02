@@ -1,8 +1,9 @@
 local luaunit = require("luaunit")
 local checks = require("luatypechecks.checks")
 local assertions = require("luatypechecks.assertions")
-local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Size = require("luamath.models.size")
+local BoundingBox = require("luamath.models.boundingbox")
 local Field = require("lualife.models.field")
 
 -- luacheck: globals TestField
@@ -17,6 +18,12 @@ function TestField.test_new()
   luaunit.assert_true(checks.is_instance(field.size, Size))
   luaunit.assert_is(field.size, size)
 
+  luaunit.assert_true(checks.is_instance(field.bounds, BoundingBox))
+  luaunit.assert_equals(field.bounds, BoundingBox:new(
+    Vector2D:new(0, 0),
+    Vector2D:new(22, 41)
+  ))
+
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {})
 end
@@ -28,6 +35,11 @@ function TestField.test_tostring_empty()
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
     "__name = \"Field\"," ..
+    "bounds = {" ..
+      "__name = \"BoundingBox\"," ..
+      "max = {__name = \"Vector2D\",x = 22,y = 41}," ..
+      "min = {__name = \"Vector2D\",x = 0,y = 0}" ..
+    "}," ..
     "cells = {}," ..
     "size = {__name = \"Size\",height = 42,width = 23}" ..
   "}")
@@ -35,17 +47,22 @@ end
 
 function TestField.test_tostring_nonempty()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(4, 2))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(4, 2))
 
   local text = tostring(field)
 
   luaunit.assert_is_string(text)
   luaunit.assert_equals(text, "{" ..
     "__name = \"Field\"," ..
+    "bounds = {" ..
+      "__name = \"BoundingBox\"," ..
+      "max = {__name = \"Vector2D\",x = 22,y = 41}," ..
+      "min = {__name = \"Vector2D\",x = 0,y = 0}" ..
+    "}," ..
     "cells = { " ..
-      "{__name = \"Point\",x = 4,y = 2}, " ..
-      "{__name = \"Point\",x = 2,y = 3} " ..
+      "{__name = \"Vector2D\",x = 4,y = 2}, " ..
+      "{__name = \"Vector2D\",x = 2,y = 3} " ..
     "}," ..
     "size = {__name = \"Size\",height = 42,width = 23}" ..
   "}")
@@ -61,8 +78,8 @@ end
 
 function TestField.test_count_nonempty()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(4, 2))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(4, 2))
 
   local count = field:count()
 
@@ -72,10 +89,10 @@ end
 
 function TestField.test_contains_false_inside()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(4, 2))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(4, 2))
 
-  local contains = field:contains(Point:new(1, 2))
+  local contains = field:contains(Vector2D:new(1, 2))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_false(contains)
@@ -84,11 +101,11 @@ end
 function TestField.test_contains_false_outside()
   local field = Field:new(Size:new(23, 42))
   field._cells = {
-    ["{__name = \"Point\",x = 2,y = 3}"] = true,
-    ["{__name = \"Point\",x = 100,y = 100}"] = true,
+    ["{__name = \"Vector2D\",x = 2,y = 3}"] = true,
+    ["{__name = \"Vector2D\",x = 100,y = 100}"] = true,
   }
 
-  local contains = field:contains(Point:new(100, 100))
+  local contains = field:contains(Vector2D:new(100, 100))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_false(contains)
@@ -96,10 +113,10 @@ end
 
 function TestField.test_contains_true()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(4, 2))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(4, 2))
 
-  local contains = field:contains(Point:new(2, 3))
+  local contains = field:contains(Vector2D:new(2, 3))
 
   luaunit.assert_is_boolean(contains)
   luaunit.assert_true(contains)
@@ -127,43 +144,43 @@ end
 
 function TestField.test_set_inside()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(4, 2))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(4, 2))
 
   luaunit.assert_equals(field._cells, {
-    ["{__name = \"Point\",x = 2,y = 3}"] = true,
-    ["{__name = \"Point\",x = 4,y = 2}"] = true,
+    ["{__name = \"Vector2D\",x = 2,y = 3}"] = true,
+    ["{__name = \"Vector2D\",x = 4,y = 2}"] = true,
   })
 end
 
 function TestField.test_set_outside()
   local field = Field:new(Size:new(23, 42))
-  field:set(Point:new(2, 3))
-  field:set(Point:new(100, 100))
+  field:set(Vector2D:new(2, 3))
+  field:set(Vector2D:new(100, 100))
 
   luaunit.assert_equals(field._cells, {
-    ["{__name = \"Point\",x = 2,y = 3}"] = true,
+    ["{__name = \"Vector2D\",x = 2,y = 3}"] = true,
   })
 end
 
 function TestField.test_map_point()
   local field = Field:new(Size:new(3, 3))
-  field:set(Point:new(0, 1))
-  field:set(Point:new(1, 1))
-  field:set(Point:new(2, 1))
+  field:set(Vector2D:new(0, 1))
+  field:set(Vector2D:new(1, 1))
+  field:set(Vector2D:new(2, 1))
 
   local next_field = field:map(function(point)
-    assertions.is_instance(point, Point)
+    assertions.is_instance(point, Vector2D)
 
     return point.x <= field.size.width / 2
       and point.y <= field.size.height / 2
   end)
 
   local want_next_field = Field:new(Size:new(3, 3))
-  want_next_field:set(Point:new(0, 0))
-  want_next_field:set(Point:new(1, 0))
-  want_next_field:set(Point:new(0, 1))
-  want_next_field:set(Point:new(1, 1))
+  want_next_field:set(Vector2D:new(0, 0))
+  want_next_field:set(Vector2D:new(1, 0))
+  want_next_field:set(Vector2D:new(0, 1))
+  want_next_field:set(Vector2D:new(1, 1))
 
   luaunit.assert_true(checks.is_instance(next_field, Field))
   luaunit.assert_equals(next_field, want_next_field)
@@ -171,9 +188,9 @@ end
 
 function TestField.test_map_contains()
   local field = Field:new(Size:new(3, 3))
-  field:set(Point:new(0, 1))
-  field:set(Point:new(1, 1))
-  field:set(Point:new(2, 1))
+  field:set(Vector2D:new(0, 1))
+  field:set(Vector2D:new(1, 1))
+  field:set(Vector2D:new(2, 1))
 
   local next_field = field:map(function(_, contains)
     assertions.is_boolean(contains)
@@ -182,12 +199,12 @@ function TestField.test_map_contains()
   end)
 
   local want_next_field = Field:new(Size:new(3, 3))
-  want_next_field:set(Point:new(0, 0))
-  want_next_field:set(Point:new(1, 0))
-  want_next_field:set(Point:new(2, 0))
-  want_next_field:set(Point:new(0, 2))
-  want_next_field:set(Point:new(1, 2))
-  want_next_field:set(Point:new(2, 2))
+  want_next_field:set(Vector2D:new(0, 0))
+  want_next_field:set(Vector2D:new(1, 0))
+  want_next_field:set(Vector2D:new(2, 0))
+  want_next_field:set(Vector2D:new(0, 2))
+  want_next_field:set(Vector2D:new(1, 2))
+  want_next_field:set(Vector2D:new(2, 2))
 
   luaunit.assert_true(checks.is_instance(next_field, Field))
   luaunit.assert_equals(next_field, want_next_field)
