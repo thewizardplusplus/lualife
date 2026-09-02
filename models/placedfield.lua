@@ -5,30 +5,37 @@
 
 local middleclass = require("middleclass")
 local assertions = require("luatypechecks.assertions")
-local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Matrix3x3 = require("luamath.matrix3x3")
+local Size = require("luamath.models.size")
 local Field = require("lualife.models.field")
+local _ENV = require("compat53.module")
+if _VERSION == "Lua 5.1" then
+  setfenv(1, _ENV)
+end
 
 local PlacedField = middleclass("PlacedField", Field)
 
 ---
 -- @table instance
 -- @tfield Size size
--- @tfield Point offset
+-- @tfield BoundingBox local_bounds bounds in local coordinates
+-- @tfield BoundingBox bounds bounds in global coordinates
+-- @tfield Vector2D offset
 -- @tfield tab _cells
---   map[string, bool]; key - stringified Point, value - always true
+--   map[string, bool]; key - stringified Vector2D, value - always true
 
 ---
 -- @function place
 -- @static
 -- @tparam Field field
--- @tparam[opt=(0 0)] Point offset
+-- @tparam[opt=Vector2D:new(0, 0)] Vector2D offset
 -- @treturn PlacedField
 function PlacedField.static.place(field, offset)
-  offset = offset or Point:new(0, 0)
+  offset = offset or Vector2D:new(0, 0)
 
   assertions.is_instance(field, Field)
-  assertions.is_instance(offset, Point)
+  assertions.is_instance(offset, Vector2D)
 
   local placed_field = PlacedField:new(field.size, offset)
   placed_field._cells = field._cells
@@ -39,16 +46,18 @@ end
 ---
 -- @function new
 -- @tparam Size size
--- @tparam[opt=(0 0)] Point offset
+-- @tparam[opt=Vector2D:new(0, 0)] Vector2D offset
 -- @treturn PlacedField
 function PlacedField:initialize(size, offset)
-  offset = offset or Point:new(0, 0)
+  offset = offset or Vector2D:new(0, 0)
 
   assertions.is_instance(size, Size)
-  assertions.is_instance(offset, Point)
+  assertions.is_instance(offset, Vector2D)
 
   Field.initialize(self, size)
 
+  self.local_bounds = self.bounds
+  self.bounds = self.bounds + offset
   self.offset = offset
 end
 
@@ -57,6 +66,7 @@ end
 --   (see the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library)
 function PlacedField:__data()
   local data = Field.__data(self)
+  data.local_bounds = self.local_bounds
   data.offset = self.offset
 
   return data
@@ -72,13 +82,13 @@ end
 -- @treturn int [0, self.size.width * self.size.height]
 
 ---
--- @tparam Point point
+-- @tparam Vector2D point
 -- @treturn bool
 function PlacedField:contains(point)
-  assertions.is_instance(point, Point)
+  assertions.is_instance(point, Vector2D)
 
   local local_point = self:_to_local(point)
-  return Field.contains(self, local_point)
+  return self:_call_with_local_bounds(Field.contains, local_point)
 end
 
 ---
@@ -87,27 +97,26 @@ end
 function PlacedField:fits(other)
   assertions.is_instance(other, PlacedField)
 
-  local offsets_difference = self.offset:translate(other:_inverted_offset())
-  return self.size:_fits(other.size, offsets_difference)
+  return Field.fits(self, other)
 end
 
 ---
--- @tparam Point point
+-- @tparam Vector2D point
 function PlacedField:set(point)
-  assertions.is_instance(point, Point)
+  assertions.is_instance(point, Vector2D)
 
   local local_point = self:_to_local(point)
-  Field.set(self, local_point)
+  self:_call_with_local_bounds(Field.set, local_point)
 end
 
 ---
--- @tparam func mapper func(point: Point, contains: bool): bool
+-- @tparam func mapper func(point: Vector2D, contains: bool): bool
 -- @treturn PlacedField
 function PlacedField:map(mapper)
   assertions.is_callable(mapper)
 
   local field = Field.map(self, function(point)
-    assertions.is_instance(point, Point)
+    assertions.is_instance(point, Vector2D)
 
     local global_point = self:_to_global(point)
     local contains = self:contains(global_point)
@@ -117,27 +126,50 @@ function PlacedField:map(mapper)
 end
 
 ---
--- @treturn Point
+-- @treturn Vector2D
 function PlacedField:_inverted_offset()
-  return self.offset:scale(-1)
+  return -self.offset
 end
 
 ---
--- @tparam Point point
--- @treturn Point
+-- @tparam Vector2D point
+-- @treturn Vector2D
 function PlacedField:_to_local(point)
-  assertions.is_instance(point, Point)
+  assertions.is_instance(point, Vector2D)
 
-  return point:translate(self:_inverted_offset())
+  return point * Matrix3x3.translate(self:_inverted_offset())
 end
 
 ---
--- @tparam Point point
--- @treturn Point
+-- @tparam Vector2D point
+-- @treturn Vector2D
 function PlacedField:_to_global(point)
-  assertions.is_instance(point, Point)
+  assertions.is_instance(point, Vector2D)
 
-  return point:translate(self.offset)
+  return point * Matrix3x3.translate(self.offset)
+end
+
+---
+-- @tparam func method method of Field
+-- @param ... method arguments
+-- @return ... method results
+function PlacedField:_call_with_local_bounds(method, ...)
+  assertions.is_callable(method)
+
+  local global_bounds = self.bounds
+  self.bounds = self.local_bounds
+
+  local arguments = table.pack(...)
+  local results = table.pack(pcall(function()
+    return method(self, table.unpack(arguments, 1, arguments.n))
+  end))
+  self.bounds = global_bounds
+
+  if not results[1] then
+    error(results[2], 0)
+  end
+
+  return table.unpack(results, 2, results.n)
 end
 
 return PlacedField
