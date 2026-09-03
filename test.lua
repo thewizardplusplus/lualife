@@ -6,7 +6,6 @@ for _, module in ipairs({
   "matrix" ,
   "life",
   "models.size",
-  "models.point",
   "models.field",
   "models.placedfield",
 }) do
