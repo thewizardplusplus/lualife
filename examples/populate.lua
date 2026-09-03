@@ -1,6 +1,6 @@
 local assertions = require("luatypechecks.assertions")
-local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Size = require("luamath.models.size")
 local Field = require("lualife.models.field")
 local life = require("lualife.life")
 
@@ -8,7 +8,7 @@ local function print_field(field)
   assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
-    assertions.is_instance(point, Point)
+    assertions.is_instance(point, Vector2D)
     assertions.is_boolean(contains)
 
     io.write(contains and "O" or ".")
@@ -27,9 +27,9 @@ local function sleep(seconds)
 end
 
 local field = Field:new(Size:new(3, 3))
-field:set(Point:new(0, 1))
-field:set(Point:new(1, 1))
-field:set(Point:new(2, 1))
+field:set(Vector2D:new(0, 1))
+field:set(Vector2D:new(1, 1))
+field:set(Vector2D:new(2, 1))
 
 while true do
   field = life.populate(field)

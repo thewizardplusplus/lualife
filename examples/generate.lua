@@ -1,6 +1,6 @@
 local assertions = require("luatypechecks.assertions")
-local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Size = require("luamath.models.size")
 local Field = require("lualife.models.field")
 local random = require("lualife.random")
 local life = require("lualife.life")
@@ -9,7 +9,7 @@ local function print_field(field)
   assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
-    assertions.is_instance(point, Point)
+    assertions.is_instance(point, Vector2D)
     assertions.is_boolean(contains)
 
     io.write(contains and "O" or ".")
