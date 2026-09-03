@@ -2,6 +2,7 @@
 -- @module random
 
 local assertions = require("luatypechecks.assertions")
+local Range = require("luamath.models.range")
 local Field = require("lualife.models.field")
 
 local random = {}
@@ -24,29 +25,20 @@ end
 ---
 -- @tparam Field sample
 -- @tparam[opt=0.5] number filling [0, 1]
--- @tparam[optchain=0] int minimal_count
---   [0, sample.size.width * sample.size.height]
--- @tparam[optchain=math.huge] int maximal_count [minimal_count, ∞)
+-- @tparam[optchain=Range:new(0, math.huge)] Range count_range
 -- @treturn Field
-function random.generate_with_limits(
-  sample,
-  filling,
-  minimal_count,
-  maximal_count
-)
+function random.generate_with_limits(sample, filling, count_range)
   filling = filling or 0.5
-  minimal_count = minimal_count or 0
-  maximal_count = maximal_count or math.huge
+  count_range = count_range or Range:new(0, math.huge)
 
   assertions.is_instance(sample, Field)
   assertions.is_number(filling)
-  assertions.is_integer(minimal_count)
-  assertions.is_integer(maximal_count)
+  assertions.is_instance(count_range, Range)
 
   local field
   repeat
     field = random.generate(sample, filling)
-  until field:count() >= minimal_count and field:count() <= maximal_count
+  until count_range:contains(field:count())
 
   return field
 end
