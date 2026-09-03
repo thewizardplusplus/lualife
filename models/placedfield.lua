@@ -72,7 +72,17 @@ function PlacedField.static.place(field, offset)
   assertions.is_instance(offset, Vector2D)
 
   local placed_field = PlacedField:new(field.size, offset)
-  placed_field._cells = field._cells
+  field:map(function(point, contains)
+    assertions.is_instance(point, Vector2D)
+    assertions.is_boolean(contains)
+
+    if not contains then
+      return
+    end
+
+    local local_point = point - field.bounds:position()
+    placed_field:set(placed_field:_to_global(local_point))
+  end)
 
   return placed_field
 end
@@ -92,7 +102,7 @@ function PlacedField:initialize(size, offset)
 
   self.local_bounds = self.bounds
   self.bounds = self.bounds + offset
-  self.offset = offset
+  self.offset = Vector2D:new(offset.x, offset.y)
 end
 
 ---

@@ -114,6 +114,26 @@ function TestPlacedField.test_from_json_error()
   )
 end
 
+function TestPlacedField.test_from_options_copies_inputs()
+  local options = {
+    size = Size:new(3, 3),
+    offset = Vector2D:new(23, 42),
+    cells = {Vector2D:new(23, 43), Vector2D:new(25, 43)},
+  }
+  local field = PlacedField.from_options(options)
+
+  options.size.height = 4
+  options.offset.y = 50
+  options.cells[1].y = 50
+  options.cells[2] = Vector2D:new(43, 25)
+
+  local want_field = PlacedField:new(Size:new(3, 3), Vector2D:new(23, 42))
+  want_field:set(Vector2D:new(23, 43))
+  want_field:set(Vector2D:new(25, 43))
+
+  luaunit.assert_equals(field, want_field)
+end
+
 function TestPlacedField.test_place_full()
   local field = Field:new(Size:new(3, 3))
   field:set(Vector2D:new(0, 0))
@@ -173,6 +193,26 @@ function TestPlacedField.test_place_placed()
   luaunit.assert_equals(placed_field, want_placed_field)
 end
 
+function TestPlacedField.test_place_copies_inputs()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Vector2D:new(0, 0))
+  field:set(Vector2D:new(1, 0))
+
+  local offset = Vector2D:new(23, 42)
+  local placed_field = PlacedField.place(field, offset)
+
+  field.size.height = 4
+  field:set(Vector2D:new(1, 1))
+  offset.x = 24
+
+  local want_placed_field =
+    PlacedField:new(Size:new(3, 3), Vector2D:new(23, 42))
+  want_placed_field:set(Vector2D:new(23, 42))
+  want_placed_field:set(Vector2D:new(24, 42))
+
+  luaunit.assert_equals(placed_field, want_placed_field)
+end
+
 function TestPlacedField.test_new_full()
   local size = Size:new(5, 12)
   local offset = Vector2D:new(23, 42)
@@ -228,6 +268,26 @@ function TestPlacedField.test_new_partial()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {})
+end
+
+function TestPlacedField.test_new_copies_inputs()
+  local size = Size:new(5, 12)
+  local offset = Vector2D:new(23, 42)
+  local field = PlacedField:new(size, offset)
+
+  size.height = 20
+  offset.y = 50
+
+  luaunit.assert_equals(field.size, Size:new(5, 12))
+  luaunit.assert_equals(field.local_bounds, BoundingBox:new(
+    Vector2D:new(0, 0),
+    Vector2D:new(4, 11)
+  ))
+  luaunit.assert_equals(field.bounds, BoundingBox:new(
+    Vector2D:new(23, 42),
+    Vector2D:new(27, 53)
+  ))
+  luaunit.assert_equals(field.offset, Vector2D:new(23, 42))
 end
 
 function TestPlacedField.test_tostring_empty()
@@ -399,5 +459,27 @@ function TestPlacedField.test_map_contains()
   want_next_field:set(Vector2D:new(25, 44))
 
   luaunit.assert_true(checks.is_instance(next_field, PlacedField))
+  luaunit.assert_equals(next_field, want_next_field)
+end
+
+function TestPlacedField.test_map_copies_inputs()
+  local field = PlacedField:new(Size:new(3, 3), Vector2D:new(23, 42))
+  field:set(Vector2D:new(24, 43))
+  field:set(Vector2D:new(25, 43))
+
+  local next_field = field:map(function(_, contains)
+    assertions.is_boolean(contains)
+
+    return contains
+  end)
+
+  field.size.height = 4
+  field.offset.y = 50
+  field:set(Vector2D:new(25, 44))
+
+  local want_next_field = PlacedField:new(Size:new(3, 3), Vector2D:new(23, 42))
+  want_next_field:set(Vector2D:new(24, 43))
+  want_next_field:set(Vector2D:new(25, 43))
+
   luaunit.assert_equals(next_field, want_next_field)
 end
