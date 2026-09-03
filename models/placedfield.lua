@@ -8,6 +8,7 @@ local assertions = require("luatypechecks.assertions")
 local Vector2D = require("luamath.vector2d")
 local Matrix3x3 = require("luamath.matrix3x3")
 local Size = require("luamath.models.size")
+local BoundingBox = require("luamath.models.boundingbox")
 local Field = require("lualife.models.field")
 local _ENV = require("compat53.module")
 if _VERSION == "Lua 5.1" then
@@ -15,6 +16,39 @@ if _VERSION == "Lua 5.1" then
 end
 
 local PlacedField = middleclass("PlacedField", Field)
+
+---
+-- @function schema
+-- @static
+-- @treturn tab JSON Schema for this class
+--   (see the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library)
+function PlacedField.static.schema()
+  local schema = Field.schema()
+  table.insert(schema.required, "local_bounds")
+  table.insert(schema.required, "offset")
+  schema.properties.local_bounds = BoundingBox.schema()
+  schema.properties.offset = Vector2D.schema()
+
+  return schema
+end
+
+---
+-- @function from_options
+-- @static
+-- @tparam tab options constructor options conforming to the JSON Schema
+--   returned by @{PlacedField.schema|PlacedField.schema()}
+--   (see the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library)
+-- @treturn PlacedField
+function PlacedField.static.from_options(options)
+  assertions.is_table(options)
+
+  local field = PlacedField:new(options.size, options.offset)
+  for _, point in ipairs(options.cells) do
+    field:set(point)
+  end
+
+  return field
+end
 
 ---
 -- @table instance

@@ -1,6 +1,7 @@
 local luaunit = require("luaunit")
 local checks = require("luatypechecks.checks")
 local assertions = require("luatypechecks.assertions")
+local json = require("luaserialization.json")
 local Vector2D = require("luamath.vector2d")
 local Size = require("luamath.models.size")
 local BoundingBox = require("luamath.models.boundingbox")
@@ -9,6 +10,109 @@ local PlacedField = require("lualife.models.placedfield")
 
 -- luacheck: globals TestPlacedField
 TestPlacedField = {}
+
+function TestPlacedField.test_from_json_success()
+  local field, err = json.from_json(
+    [=[{
+      "__name": "PlacedField",
+      "size": {"__name": "Size", "width": 3, "height": 3},
+      "bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 23, "y": 42},
+        "max": {"__name": "Vector2D", "x": 25, "y": 44}
+      },
+      "cells": [
+        {"__name": "Vector2D", "x": 23, "y": 43},
+        {"__name": "Vector2D", "x": 25, "y": 43}
+      ],
+      "local_bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 0, "y": 0},
+        "max": {"__name": "Vector2D", "x": 2, "y": 2}
+      },
+      "offset": {"__name": "Vector2D", "x": 23, "y": 42}
+    }]=],
+    PlacedField.schema(),
+    {
+      Vector2D = Vector2D.from_options,
+      Size = Size.from_options,
+      BoundingBox = BoundingBox.from_options,
+      PlacedField = PlacedField.from_options,
+    }
+  )
+
+  luaunit.assert_true(checks.is_instance(field, PlacedField))
+
+  luaunit.assert_true(checks.is_instance(field.size, Size))
+  luaunit.assert_is(field.size, Size:new(3, 3))
+
+  luaunit.assert_true(checks.is_instance(field.local_bounds, BoundingBox))
+  luaunit.assert_equals(field.local_bounds, BoundingBox:new(
+    Vector2D:new(0, 0),
+    Vector2D:new(2, 2)
+  ))
+
+  luaunit.assert_true(checks.is_instance(field.bounds, BoundingBox))
+  luaunit.assert_equals(field.bounds, BoundingBox:new(
+    Vector2D:new(23, 42),
+    Vector2D:new(25, 44)
+  ))
+
+  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
+  luaunit.assert_is(field.offset, Vector2D:new(23, 42))
+
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
+    ["{__name = \"Vector2D\",x = 0,y = 1}"] = true,
+    ["{__name = \"Vector2D\",x = 2,y = 1}"] = true,
+  })
+
+  luaunit.assert_nil(err)
+end
+
+function TestPlacedField.test_from_json_error()
+  local field, err = json.from_json(
+    [=[{
+      "__name": "PlacedField",
+      "size": {"__name": "Size", "width": 3, "height": 3},
+      "bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 23, "y": 42},
+        "max": {"__name": "Vector2D", "x": 25, "y": 44}
+      },
+      "cells": [
+        {"__name": "Vector2D", "x": "invalid", "y": 43},
+        {"__name": "Vector2D", "x": 25, "y": 43}
+      ],
+      "local_bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 0, "y": 0},
+        "max": {"__name": "Vector2D", "x": 2, "y": 2}
+      },
+      "offset": {"__name": "Vector2D", "x": 23, "y": 42}
+    }]=],
+    PlacedField.schema(),
+    {
+      Vector2D = Vector2D.from_options,
+      Size = Size.from_options,
+      BoundingBox = BoundingBox.from_options,
+      PlacedField = PlacedField.from_options,
+    }
+  )
+
+  luaunit.assert_nil(field)
+
+  luaunit.assert_is_string(err)
+  luaunit.assert_str_matches(
+    err,
+    "^invalid data: " ..
+      [[property "cells" validation failed: ]] ..
+      "failed to validate item 1: " ..
+      [[property "x" validation failed: ]] ..
+      "wrong type: " ..
+      "expected number, got string$"
+  )
+end
 
 function TestPlacedField.test_place_full()
   local field = Field:new(Size:new(3, 3))
