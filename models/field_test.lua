@@ -92,6 +92,24 @@ function TestField.test_from_json_error()
   )
 end
 
+function TestField.test_from_options_copies_inputs()
+  local options = {
+    size = Size:new(3, 3),
+    cells = {Vector2D:new(0, 1), Vector2D:new(2, 1)},
+  }
+  local field = Field.from_options(options)
+
+  options.size.height = 4
+  options.cells[1].y = 2
+  options.cells[2] = Vector2D:new(1, 2)
+
+  local want_field = Field:new(Size:new(3, 3))
+  want_field:set(Vector2D:new(0, 1))
+  want_field:set(Vector2D:new(2, 1))
+
+  luaunit.assert_equals(field, want_field)
+end
+
 function TestField.test_new()
   local size = Size:new(23, 42)
   local field = Field:new(size)
@@ -109,6 +127,19 @@ function TestField.test_new()
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {})
+end
+
+function TestField.test_new_copies_inputs()
+  local size = Size:new(23, 42)
+  local field = Field:new(size)
+
+  size.height = 50
+
+  luaunit.assert_equals(field.size, Size:new(23, 42))
+  luaunit.assert_equals(field.bounds, BoundingBox:new(
+    Vector2D:new(0, 0),
+    Vector2D:new(22, 41)
+  ))
 end
 
 function TestField.test_tostring_empty()
@@ -290,5 +321,26 @@ function TestField.test_map_contains()
   want_next_field:set(Vector2D:new(2, 2))
 
   luaunit.assert_true(checks.is_instance(next_field, Field))
+  luaunit.assert_equals(next_field, want_next_field)
+end
+
+function TestField.test_map_copies_inputs()
+  local field = Field:new(Size:new(3, 3))
+  field:set(Vector2D:new(1, 1))
+  field:set(Vector2D:new(2, 1))
+
+  local next_field = field:map(function(_, contains)
+    assertions.is_boolean(contains)
+
+    return contains
+  end)
+
+  field.size.height = 4
+  field:set(Vector2D:new(2, 2))
+
+  local want_next_field = Field:new(Size:new(3, 3))
+  want_next_field:set(Vector2D:new(1, 1))
+  want_next_field:set(Vector2D:new(2, 1))
+
   luaunit.assert_equals(next_field, want_next_field)
 end
