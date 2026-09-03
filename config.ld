@@ -11,7 +11,6 @@ file = {
   "sets.lua",
   "matrix.lua",
   "life.lua",
-  "models/size.lua",
   "models/field.lua",
   "models/placedfield.lua",
 }
