@@ -64,7 +64,7 @@ end
 function Field:initialize(size)
   assertions.is_instance(size, Size)
 
-  self.size = size
+  self.size = Size:new(size.width, size.height)
   self.bounds = BoundingBox:new(
     Vector2D:new(0, 0),
     Vector2D:new(size.width - 1, size.height - 1)
