@@ -1,9 +1,19 @@
+-- luacheck: no max comment line length
+
 ---
 -- @module matrix
 
 local assertions = require("luatypechecks.assertions")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Matrix3x3 = require("luamath.matrix3x3")
+local utils = require("luamath.utils")
 local Field = require("lualife.models.field")
+
+local function _snap_to_integer_grid(point)
+  assertions.is_instance(point, Vector2D)
+
+  return Vector2D:new(utils.round(point.x), utils.round(point.y))
+end
 
 local matrix = {}
 
@@ -18,49 +28,25 @@ function matrix.rotate(field)
     error("field must be square")
   end
 
-  -- make an empty field copy (i.e. without cells)
-  -- and detect the field offset
-  local offset = nil
-  local rotated_field = field:map(function(point)
-    assertions.is_instance(point, Point)
+  local offset = field.bounds.min
+  local transformation = Matrix3x3.translate(offset)
+    -- shift the rotated X range from [-(width - 1), 0] back to [0, width - 1]
+    * Matrix3x3.translate(Vector2D:new(field.size.width - 1, 0))
+    * Matrix3x3.rotate(math.pi / 2)
+    * Matrix3x3.translate(-offset)
 
-    if not offset then
-      offset = point
-    end
+  -- create an empty field of the same concrete class
+  local rotated_field = field:map(function() return false end)
 
-    return false
-  end)
-
-  local last_index = field.size.width - 1
-  for x = 0, field.size.width / 2 - 1 do
-    for y = x, last_index - x - 1 do
-      local top_left = Point:new(x, y):translate(offset)
-      local top_right = Point:new(last_index - y, x):translate(offset)
-      local bottom_left = Point:new(y, last_index - x):translate(offset)
-      local bottom_right = Point
-        :new(last_index - x, last_index - y)
-        :translate(offset)
-
-      if field:contains(bottom_left) then
-        rotated_field:set(top_left)
+  local x_range, y_range = field.bounds:x_range(), field.bounds:y_range()
+  for y = y_range.min, y_range.max do
+    for x = x_range.min, x_range.max do
+      local point = Vector2D:new(x, y)
+      if field:contains(point) then
+        -- trigonometric matrices may produce values such as `1.0000000000000002`;
+        -- cell coordinates must remain integers
+        rotated_field:set(_snap_to_integer_grid(point * transformation))
       end
-      if field:contains(bottom_right) then
-        rotated_field:set(bottom_left)
-      end
-      if field:contains(top_right) then
-        rotated_field:set(bottom_right)
-      end
-      if field:contains(top_left) then
-        rotated_field:set(top_right)
-      end
-    end
-  end
-
-  if field.size.width % 2 ~= 0 then
-    local x = math.floor(field.size.width / 2)
-    local center = Point:new(x, x):translate(offset)
-    if field:contains(center) then
-      rotated_field:set(center)
     end
   end
 
