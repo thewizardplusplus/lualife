@@ -5,7 +5,6 @@ for _, module in ipairs({
   "sets",
   "matrix" ,
   "life",
-  "models.size",
   "models.field",
   "models.placedfield",
 }) do
