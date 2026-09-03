@@ -1,6 +1,6 @@
 local assertions = require("luatypechecks.assertions")
-local Size = require("lualife.models.size")
-local Point = require("lualife.models.point")
+local Vector2D = require("luamath.vector2d")
+local Size = require("luamath.models.size")
 local Field = require("lualife.models.field")
 local matrix = require("lualife.matrix")
 
@@ -8,7 +8,7 @@ local function print_field(field)
   assertions.is_instance(field, Field)
 
   field:map(function(point, contains)
-    assertions.is_instance(point, Point)
+    assertions.is_instance(point, Vector2D)
     assertions.is_boolean(contains)
 
     io.write(contains and "O" or ".")
@@ -20,11 +20,11 @@ local function print_field(field)
 end
 
 local field = Field:new(Size:new(3, 3))
-field:set(Point:new(1, 0))
-field:set(Point:new(2, 1))
-field:set(Point:new(0, 2))
-field:set(Point:new(1, 2))
-field:set(Point:new(2, 2))
+field:set(Vector2D:new(1, 0))
+field:set(Vector2D:new(2, 1))
+field:set(Vector2D:new(0, 2))
+field:set(Vector2D:new(1, 2))
+field:set(Vector2D:new(2, 2))
 
 local rotated_field = matrix.rotate(field)
 print_field(rotated_field)
