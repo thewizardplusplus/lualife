@@ -16,6 +16,41 @@ Field:include(Nameable)
 Field:include(Stringifiable)
 
 ---
+-- @function schema
+-- @static
+-- @treturn tab JSON Schema for this class
+--   (see the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library)
+function Field.static.schema()
+  return {
+    type = "object",
+    required = {"size", "bounds", "cells"},
+    properties = {
+      size = Size.schema(),
+      bounds = BoundingBox.schema(),
+      cells = { type = "array", items = Vector2D.schema() },
+    },
+  }
+end
+
+---
+-- @function from_options
+-- @static
+-- @tparam tab options constructor options conforming to the JSON Schema
+--   returned by @{Field.schema|Field.schema()}
+--   (see the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library)
+-- @treturn Field
+function Field.static.from_options(options)
+  assertions.is_table(options)
+
+  local field = Field:new(options.size)
+  for _, point in ipairs(options.cells) do
+    field:set(point)
+  end
+
+  return field
+end
+
+---
 -- @table instance
 -- @tfield Size size
 -- @tfield BoundingBox bounds

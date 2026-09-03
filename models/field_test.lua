@@ -1,6 +1,7 @@
 local luaunit = require("luaunit")
 local checks = require("luatypechecks.checks")
 local assertions = require("luatypechecks.assertions")
+local json = require("luaserialization.json")
 local Vector2D = require("luamath.vector2d")
 local Size = require("luamath.models.size")
 local BoundingBox = require("luamath.models.boundingbox")
@@ -8,6 +9,88 @@ local Field = require("lualife.models.field")
 
 -- luacheck: globals TestField
 TestField = {}
+
+function TestField.test_from_json_success()
+  local field, err = json.from_json(
+    [=[{
+      "__name": "Field",
+      "size": {"__name": "Size", "width": 3, "height": 3},
+      "bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 0, "y": 0},
+        "max": {"__name": "Vector2D", "x": 2, "y": 2}
+      },
+      "cells": [
+        {"__name": "Vector2D", "x": 0, "y": 1},
+        {"__name": "Vector2D", "x": 2, "y": 1}
+      ]
+    }]=],
+    Field.schema(),
+    {
+      Vector2D = Vector2D.from_options,
+      Size = Size.from_options,
+      BoundingBox = BoundingBox.from_options,
+      Field = Field.from_options,
+    }
+  )
+
+  luaunit.assert_true(checks.is_instance(field, Field))
+
+  luaunit.assert_true(checks.is_instance(field.size, Size))
+  luaunit.assert_is(field.size, Size:new(3, 3))
+
+  luaunit.assert_true(checks.is_instance(field.bounds, BoundingBox))
+  luaunit.assert_equals(field.bounds, BoundingBox:new(
+    Vector2D:new(0, 0),
+    Vector2D:new(2, 2)
+  ))
+
+  luaunit.assert_is_table(field._cells)
+  luaunit.assert_equals(field._cells, {
+    ["{__name = \"Vector2D\",x = 0,y = 1}"] = true,
+    ["{__name = \"Vector2D\",x = 2,y = 1}"] = true,
+  })
+
+  luaunit.assert_nil(err)
+end
+
+function TestField.test_from_json_error()
+  local field, err = json.from_json(
+    [=[{
+      "__name": "Field",
+      "size": {"__name": "Size", "width": 3, "height": 3},
+      "bounds": {
+        "__name": "BoundingBox",
+        "min": {"__name": "Vector2D", "x": 0, "y": 0},
+        "max": {"__name": "Vector2D", "x": 2, "y": 2}
+      },
+      "cells": [
+        {"__name": "Vector2D", "x": "invalid", "y": 1},
+        {"__name": "Vector2D", "x": 2, "y": 1}
+      ]
+    }]=],
+    Field.schema(),
+    {
+      Vector2D = Vector2D.from_options,
+      Size = Size.from_options,
+      BoundingBox = BoundingBox.from_options,
+      Field = Field.from_options,
+    }
+  )
+
+  luaunit.assert_nil(field)
+
+  luaunit.assert_is_string(err)
+  luaunit.assert_str_matches(
+    err,
+    "^invalid data: " ..
+      [[property "cells" validation failed: ]] ..
+      "failed to validate item 1: " ..
+      [[property "x" validation failed: ]] ..
+      "wrong type: " ..
+      "expected number, got string$"
+  )
+end
 
 function TestField.test_new()
   local size = Size:new(23, 42)
