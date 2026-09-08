@@ -15,6 +15,14 @@ if _VERSION == "Lua 5.1" then
   setfenv(1, _ENV)
 end
 
+---
+-- @table instance
+-- @tfield Size size
+-- @tfield BoundingBox local_bounds bounds in local coordinates
+-- @tfield BoundingBox bounds bounds in global coordinates
+-- @tfield Vector2D offset
+-- @tfield {[string]=bool,...} _cells key - stringified Vector2D, value - always true
+
 local PlacedField = middleclass("PlacedField", Field)
 
 ---
@@ -49,15 +57,6 @@ function PlacedField.static.from_options(options)
 
   return field
 end
-
----
--- @table instance
--- @tfield Size size
--- @tfield BoundingBox local_bounds bounds in local coordinates
--- @tfield BoundingBox bounds bounds in global coordinates
--- @tfield Vector2D offset
--- @tfield tab _cells
---   map[string, bool]; key - stringified Vector2D, value - always true
 
 ---
 -- @function place

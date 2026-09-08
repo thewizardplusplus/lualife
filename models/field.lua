@@ -11,6 +11,12 @@ local Vector2D = require("luamath.vector2d")
 local Size = require("luamath.models.size")
 local BoundingBox = require("luamath.models.boundingbox")
 
+---
+-- @table instance
+-- @tfield Size size
+-- @tfield BoundingBox bounds
+-- @tfield {[string]=bool,...} _cells key - stringified Vector2D, value - always true
+
 local Field = middleclass("Field")
 Field:include(Nameable)
 Field:include(Stringifiable)
@@ -49,13 +55,6 @@ function Field.static.from_options(options)
 
   return field
 end
-
----
--- @table instance
--- @tfield Size size
--- @tfield BoundingBox bounds
--- @tfield tab _cells
---   map[string, bool]; key - stringified Vector2D, value - always true
 
 ---
 -- @function new
