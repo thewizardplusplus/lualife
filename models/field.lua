@@ -54,8 +54,7 @@ end
 -- @table instance
 -- @tfield Size size
 -- @tfield BoundingBox bounds
--- @tfield tab _cells
---   map[string, bool]; key - stringified Vector2D, value - always true
+-- @tfield {[string]=bool,...} _cells key - stringified Vector2D, value - always true
 
 ---
 -- @function new
