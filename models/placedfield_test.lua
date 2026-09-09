@@ -29,8 +29,7 @@ function TestPlacedField.test_from_json_success()
         "__name": "BoundingBox",
         "min": {"__name": "Vector2D", "x": 0, "y": 0},
         "max": {"__name": "Vector2D", "x": 2, "y": 2}
-      },
-      "offset": {"__name": "Vector2D", "x": 23, "y": 42}
+      }
     }]=],
     PlacedField.schema(),
     {
@@ -57,9 +56,6 @@ function TestPlacedField.test_from_json_success()
     Vector2D:new(23, 42),
     Vector2D:new(25, 44)
   ))
-
-  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
-  luaunit.assert_is(field.offset, Vector2D:new(23, 42))
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {
@@ -88,8 +84,7 @@ function TestPlacedField.test_from_json_error()
         "__name": "BoundingBox",
         "min": {"__name": "Vector2D", "x": 0, "y": 0},
         "max": {"__name": "Vector2D", "x": 2, "y": 2}
-      },
-      "offset": {"__name": "Vector2D", "x": 23, "y": 42}
+      }
     }]=],
     PlacedField.schema(),
     {
@@ -117,13 +112,13 @@ end
 function TestPlacedField.test_from_options_copies_inputs()
   local options = {
     size = Size:new(3, 3),
-    offset = Vector2D:new(23, 42),
+    bounds = BoundingBox:new(Vector2D:new(23, 42), Vector2D:new(25, 44)),
     cells = {Vector2D:new(23, 43), Vector2D:new(25, 43)},
   }
   local field = PlacedField.from_options(options)
 
   options.size.height = 4
-  options.offset.y = 50
+  options.bounds.min.y = 50
   options.cells[1].y = 50
   options.cells[2] = Vector2D:new(43, 25)
 
@@ -235,9 +230,6 @@ function TestPlacedField.test_new_full()
     Vector2D:new(27, 53)
   ))
 
-  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
-  luaunit.assert_is(field.offset, offset)
-
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {})
 end
@@ -263,9 +255,6 @@ function TestPlacedField.test_new_partial()
     Vector2D:new(4, 11)
   ))
 
-  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
-  luaunit.assert_equals(field.offset, Vector2D:new(0, 0))
-
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, {})
 end
@@ -287,7 +276,6 @@ function TestPlacedField.test_new_copies_inputs()
     Vector2D:new(23, 42),
     Vector2D:new(27, 53)
   ))
-  luaunit.assert_equals(field.offset, Vector2D:new(23, 42))
 end
 
 function TestPlacedField.test_tostring_empty()
@@ -308,7 +296,6 @@ function TestPlacedField.test_tostring_empty()
       "max = {__name = \"Vector2D\",x = 4,y = 11}," ..
       "min = {__name = \"Vector2D\",x = 0,y = 0}" ..
     "}," ..
-    "offset = {__name = \"Vector2D\",x = 23,y = 42}," ..
     "size = {__name = \"Size\",height = 12,width = 5}" ..
   "}")
 end
@@ -337,7 +324,6 @@ function TestPlacedField.test_tostring_nonempty()
       "max = {__name = \"Vector2D\",x = 4,y = 11}," ..
       "min = {__name = \"Vector2D\",x = 0,y = 0}" ..
     "}," ..
-    "offset = {__name = \"Vector2D\",x = 23,y = 42}," ..
     "size = {__name = \"Size\",height = 12,width = 5}" ..
   "}")
 end
@@ -474,7 +460,7 @@ function TestPlacedField.test_map_copies_inputs()
   end)
 
   field.size.height = 4
-  field.offset.y = 50
+  field.bounds.min.y = 50
   field:set(Vector2D:new(25, 44))
 
   local want_next_field = PlacedField:new(Size:new(3, 3), Vector2D:new(23, 42))
