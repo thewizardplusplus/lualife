@@ -4,21 +4,19 @@
 [![doc:link](https://img.shields.io/badge/doc%3Alink-link-blue?logo=github)](https://thewizardplusplus.github.io/lualife/)
 [![lint](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/lint.yaml)
 [![test](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml/badge.svg)](https://github.com/thewizardplusplus/lualife/actions/workflows/test.yaml)
+[![luarocks](https://img.shields.io/badge/luarocks-link-blue?logo=lua)](https://luarocks.org/modules/thewizardplusplus/lualife)
 
 The library that implements [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
+
+_**Disclaimer:** this library was written directly on an Android smartphone with the [QLua](https://play.google.com/store/apps/details?id=com.quseit.qlua5pro2) IDE._
 
 ## Features
 
 - models:
-  - size:
-    - supporting of checking if a point is inside;
-    - supporting of checking if an other size with offset fits inside;
-    - supporting of textual representation;
-  - point:
-    - supporting of translation;
-    - supporting of scaling;
-    - supporting of textual representation;
   - field:
+    - using the `Vector2D`, `Size`, and `BoundingBox` classes from the
+      [luamath](https://github.com/thewizardplusplus/luamath) library;
+    - storing its cell bounds as a bounding box;
     - storing only of set cells:
       - ignore outside points;
     - supporting of counting of set cells;
@@ -26,19 +24,24 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
       - ignore outside points;
     - supporting of checking if an other field fits inside;
     - supporting of mapping;
-    - supporting of textual representation;
+    - serialization via the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library:
+      - exposing a class name and a stringified representation;
+      - generating a JSON Schema via the `schema()` static method;
+      - constructing an instance from serializable options via the `from_options()` static method;
   - placed field:
     - extends the field model;
     - storing a field offset in its bounds;
     - working with cells taking into account the field offset;
     - supporting of checking if an other field with offset fits inside;
     - supporting of copying the existing field with setting an offset;
-    - supporting of textual representation;
+    - serialization via the [luaserialization](https://github.com/thewizardplusplus/luaserialization) library:
+      - exposing a class name and a stringified representation;
+      - generating a JSON Schema via the `schema()` static method;
+      - constructing an instance from serializable options via the `from_options()` static method;
 - generating of a random field:
   - customizable filling factor;
-  - limiting by a cell count:
-    - lower limit;
-    - upper limit;
+  - limiting the cell count with the `Range` class from the
+    [luamath](https://github.com/thewizardplusplus/luamath) library;
 - operations with fields as with sets:
   - union of fields:
     - supporting an offset for the second operand;
@@ -54,17 +57,8 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
 
 ## Installation
 
-Clone this repository:
-
 ```
-$ git clone https://github.com/thewizardplusplus/lualife.git
-$ cd lualife
-```
-
-Install the library with the [LuaRocks](https://luarocks.org/) tool:
-
-```
-$ luarocks make
+$ luarocks install lualife
 ```
 
 ## Examples
