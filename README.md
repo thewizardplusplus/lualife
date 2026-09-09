@@ -29,7 +29,7 @@ The library that implements [Conway's Game of Life](https://en.wikipedia.org/wik
     - supporting of textual representation;
   - placed field:
     - extends the field model;
-    - storing a field offset;
+    - storing a field offset in its bounds;
     - working with cells taking into account the field offset;
     - supporting of checking if an other field with offset fits inside;
     - supporting of copying the existing field with setting an offset;
@@ -87,7 +87,7 @@ local function print_field(field)
 
     io.write(contains and "O" or ".")
 
-    if point.x - field.offset.x == field.size.width - 1 then
+    if point.x - field.bounds:position().x == field.size.width - 1 then
       io.write("\n")
     end
   end)

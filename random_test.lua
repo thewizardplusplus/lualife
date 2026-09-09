@@ -184,9 +184,6 @@ function TestRandom.test_generate_placed()
     Vector2D:new(25, 44)
   ))
 
-  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
-  luaunit.assert_is(field.offset, sample.offset)
-
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, wanted_cells)
 end
@@ -419,9 +416,6 @@ function TestRandom.test_generate_with_limits_placed()
     Vector2D:new(23, 42),
     Vector2D:new(25, 44)
   ))
-
-  luaunit.assert_true(checks.is_instance(field.offset, Vector2D))
-  luaunit.assert_is(field.offset, sample.offset)
 
   luaunit.assert_is_table(field._cells)
   luaunit.assert_equals(field._cells, wanted_cells)

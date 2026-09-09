@@ -25,9 +25,7 @@ local PlacedField = middleclass("PlacedField", Field)
 function PlacedField.static.schema()
   local schema = Field.schema()
   table.insert(schema.required, "local_bounds")
-  table.insert(schema.required, "offset")
   schema.properties.local_bounds = BoundingBox.schema()
-  schema.properties.offset = Vector2D.schema()
 
   return schema
 end
@@ -42,7 +40,7 @@ end
 function PlacedField.static.from_options(options)
   assertions.is_table(options)
 
-  local field = PlacedField:new(options.size, options.offset)
+  local field = PlacedField:new(options.size, options.bounds:position())
   for _, point in ipairs(options.cells) do
     field:set(point)
   end
@@ -83,7 +81,6 @@ end
 -- @tfield Size size
 -- @tfield BoundingBox local_bounds bounds in local coordinates
 -- @tfield BoundingBox bounds bounds in global coordinates
--- @tfield Vector2D offset
 -- @tfield {[string]=bool,...} _cells key - stringified Vector2D, value - always true
 
 ---
@@ -101,7 +98,6 @@ function PlacedField:initialize(size, offset)
 
   self.local_bounds = self.bounds
   self.bounds = self.bounds + offset
-  self.offset = Vector2D:new(offset.x, offset.y)
 end
 
 ---
@@ -110,7 +106,6 @@ end
 function PlacedField:__data()
   local data = Field.__data(self)
   data.local_bounds = self.local_bounds
-  data.offset = self.offset
 
   return data
 end
@@ -165,13 +160,7 @@ function PlacedField:map(mapper)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
-  return PlacedField.place(field, self.offset)
-end
-
----
--- @treturn Vector2D
-function PlacedField:_inverted_offset()
-  return -self.offset
+  return PlacedField.place(field, self.bounds:position())
 end
 
 ---
@@ -180,7 +169,7 @@ end
 function PlacedField:_to_local(point)
   assertions.is_instance(point, Vector2D)
 
-  return point * Matrix3x3.translate(self:_inverted_offset())
+  return point * Matrix3x3.translate(-self.bounds:position())
 end
 
 ---
@@ -189,7 +178,7 @@ end
 function PlacedField:_to_global(point)
   assertions.is_instance(point, Vector2D)
 
-  return point * Matrix3x3.translate(self.offset)
+  return point * Matrix3x3.translate(self.bounds:position())
 end
 
 ---
