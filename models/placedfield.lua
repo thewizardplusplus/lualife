@@ -120,6 +120,12 @@ end
 -- @treturn int [0, self.size.width * self.size.height]
 
 ---
+-- @treturn Vector2D
+function PlacedField:offset()
+  return self.bounds:position()
+end
+
+---
 -- @tparam Vector2D point
 -- @treturn bool
 function PlacedField:contains(point)
@@ -160,7 +166,7 @@ function PlacedField:map(mapper)
     local contains = self:contains(global_point)
     return mapper(global_point, contains)
   end)
-  return PlacedField.place(field, self.bounds:position())
+  return PlacedField.place(field, self:offset())
 end
 
 ---
@@ -169,7 +175,7 @@ end
 function PlacedField:_to_local(point)
   assertions.is_instance(point, Vector2D)
 
-  return point * Matrix3x3.translate(-self.bounds:position())
+  return point * Matrix3x3.translate(-self:offset())
 end
 
 ---
@@ -178,7 +184,7 @@ end
 function PlacedField:_to_global(point)
   assertions.is_instance(point, Vector2D)
 
-  return point * Matrix3x3.translate(self.bounds:position())
+  return point * Matrix3x3.translate(self:offset())
 end
 
 ---
