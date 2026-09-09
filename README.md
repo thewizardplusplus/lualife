@@ -242,4 +242,4 @@ end
 
 The MIT License (MIT)
 
-Copyright &copy; 2020 thewizardplusplus
+Copyright &copy; 2020, 2026 thewizardplusplus
