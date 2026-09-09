@@ -13,7 +13,7 @@ local function print_field(field)
 
     io.write(contains and "O" or ".")
 
-    if point.x - field.bounds:position().x == field.size.width - 1 then
+    if point.x - field:offset().x == field.size.width - 1 then
       io.write("\n")
     end
   end)

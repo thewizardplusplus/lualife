@@ -328,6 +328,15 @@ function TestPlacedField.test_tostring_nonempty()
   "}")
 end
 
+function TestPlacedField.test_offset()
+  local field = PlacedField:new(Size:new(5, 12), Vector2D:new(23, 42))
+
+  local offset = field:offset()
+
+  luaunit.assert_true(checks.is_instance(offset, Vector2D))
+  luaunit.assert_is(offset, field.bounds:position())
+end
+
 function TestPlacedField.test_contains_false()
   local field = PlacedField:new(Size:new(5, 12), Vector2D:new(23, 42))
   field:set(Vector2D:new(25, 45))
