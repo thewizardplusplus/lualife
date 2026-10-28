@@ -337,6 +337,25 @@ function TestPlacedField.test_offset()
   luaunit.assert_is(offset, field.bounds:position())
 end
 
+function TestPlacedField.test_count_empty()
+  local field = PlacedField:new(Size:new(5, 12), Vector2D:new(23, 42))
+  local count = field:count()
+
+  luaunit.assert_is_number(count)
+  luaunit.assert_equals(count, 0)
+end
+
+function TestPlacedField.test_count_nonempty()
+  local field = PlacedField:new(Size:new(5, 12), Vector2D:new(23, 42))
+  field:set(Vector2D:new(25, 45))
+  field:set(Vector2D:new(27, 44))
+
+  local count = field:count()
+
+  luaunit.assert_is_number(count)
+  luaunit.assert_equals(count, 2)
+end
+
 function TestPlacedField.test_contains_false()
   local field = PlacedField:new(Size:new(5, 12), Vector2D:new(23, 42))
   field:set(Vector2D:new(25, 45))
