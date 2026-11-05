@@ -16,6 +16,7 @@ end
 
 if benchutils.init() then
   for _, module in ipairs({
+    "random",
     "sets",
     "matrix" ,
     "life",
