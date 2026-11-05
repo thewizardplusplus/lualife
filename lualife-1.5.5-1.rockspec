@@ -1,6 +1,6 @@
 rockspec_format = "3.0"
 package = "lualife"
-version = "1.5.4-1"
+version = "1.5.5-1"
 description = {
   summary = "The library that implements Conway's Game of Life.",
   license = "MIT",
@@ -9,7 +9,7 @@ description = {
 }
 source = {
   url = "git+https://github.com/thewizardplusplus/lualife.git",
-  tag = "v1.5.4",
+  tag = "v1.5.5",
 }
 dependencies = {
   "lua >= 5.1",
