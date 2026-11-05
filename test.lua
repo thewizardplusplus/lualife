@@ -16,6 +16,7 @@ end
 
 if benchutils.init() then
   for _, module in ipairs({
+    "sets",
     "matrix" ,
     "life",
     "models.field",
