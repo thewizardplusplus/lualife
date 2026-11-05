@@ -34,6 +34,7 @@ build = {
     ["lualife.benchlocalutils_test"] = "benchlocalutils_test.lua",
     ["lualife.random"] = "random.lua",
     ["lualife.random_test"] = "random_test.lua",
+    ["lualife.random_bench"] = "random_bench.lua",
     ["lualife.sets"] = "sets.lua",
     ["lualife.sets_test"] = "sets_test.lua",
     ["lualife.sets_bench"] = "sets_bench.lua",
