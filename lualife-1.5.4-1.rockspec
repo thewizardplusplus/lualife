@@ -40,6 +40,7 @@ build = {
     ["lualife.matrix_test"] = "matrix_test.lua",
     ["lualife.life"] = "life.lua",
     ["lualife.life_test"] = "life_test.lua",
+    ["lualife.life_bench"] = "life_bench.lua",
     ["lualife.models.field"] = "models/field.lua",
     ["lualife.models.field_test"] = "models/field_test.lua",
     ["lualife.models.field_bench"] = "models/field_bench.lua",
