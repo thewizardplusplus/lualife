@@ -7,6 +7,7 @@ full_description = [[
   For more details, see topic @{README.md}.
 ]]
 file = {
+  "benchutils.lua",
   "random.lua",
   "sets.lua",
   "matrix.lua",
