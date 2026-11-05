@@ -22,10 +22,14 @@ dependencies = {
 }
 test_dependencies = {
   "luaunit >= 3.4, < 4.0",
+  "luamark >= 1.1.2, < 2.0",
+  "chronos >= 0.2, < 1.0",
 }
 build = {
   type = "builtin",
   modules = {
+    ["lualife.benchutils"] = "benchutils.lua",
+    ["lualife.benchutils_test"] = "benchutils_test.lua",
     ["lualife.random"] = "random.lua",
     ["lualife.random_test"] = "random_test.lua",
     ["lualife.sets"] = "sets.lua",
