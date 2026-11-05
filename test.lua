@@ -2,6 +2,7 @@ local luaunit = require("luaunit")
 
 for _, module in ipairs({
   "benchutils",
+  "benchlocalutils",
   "random",
   "sets",
   "matrix" ,

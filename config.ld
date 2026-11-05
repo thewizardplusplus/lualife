@@ -8,6 +8,7 @@ full_description = [[
 ]]
 file = {
   "benchutils.lua",
+  "benchlocalutils.lua",
   "random.lua",
   "sets.lua",
   "matrix.lua",
