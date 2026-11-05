@@ -38,6 +38,7 @@ build = {
     ["lualife.sets_test"] = "sets_test.lua",
     ["lualife.matrix"] = "matrix.lua",
     ["lualife.matrix_test"] = "matrix_test.lua",
+    ["lualife.matrix_bench"] = "matrix_bench.lua",
     ["lualife.life"] = "life.lua",
     ["lualife.life_test"] = "life_test.lua",
     ["lualife.life_bench"] = "life_bench.lua",
