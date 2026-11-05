@@ -42,8 +42,10 @@ build = {
     ["lualife.life_test"] = "life_test.lua",
     ["lualife.models.field"] = "models/field.lua",
     ["lualife.models.field_test"] = "models/field_test.lua",
+    ["lualife.models.field_bench"] = "models/field_bench.lua",
     ["lualife.models.placedfield"] = "models/placedfield.lua",
     ["lualife.models.placedfield_test"] = "models/placedfield_test.lua",
+    ["lualife.models.placedfield_bench"] = "models/placedfield_bench.lua",
   },
   copy_directories = {
     "doc",
